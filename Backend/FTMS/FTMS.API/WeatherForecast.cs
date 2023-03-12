@@ -1,4 +1,4 @@
-namespace FTMS
+namespace FTMS.API
 {
     public class WeatherForecast
     {

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace FTMS.Controllers
+namespace FTMS.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
