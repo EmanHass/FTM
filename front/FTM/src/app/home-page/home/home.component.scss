@@ -1,41 +1,96 @@
-.hero{
+h3{
+    text-align: center;
+    color: var(--primary-color);
+}
+hr{
+    width: 20%;
+    border-radius: 5px;
+    height: 9px;
+    margin-left: auto;
+    margin-right: auto;
     background-color: #ddd;
-
+}
+.hero{
+    background-color: var(--primary-color);;
+    color: var(--content-color);
+    border-radius: 0 0 30% 59%;
     .hero-section{
         padding: 115px 22px;
        p{
-         width: 50%;
+         width: 66%;
+         margin-top: 41px;
         }
     }
     button{
-        margin-left:10px;
+        margin-left:27px;
+        margin-bottom: 10px;
+        padding: 10px;
+    }
+    .login{
+        color: var(--primary-color);
+    }
+    .signup{
+        border: 5px solid var(--content-color);
+        background: none;
+        color: var(--content-color);
+        font-weight: bold;
+    }
+    .navbar{
+     .navbar-nav{
+        align-items: baseline;
+     }
+     .navbar-brand{
+        img{
+            width: 273px;
+            padding-left: 27px;
+        }
+     }
+     .nav-link{
+        padding-left: 30px;
+        padding-right: 0;
+        color: var(--content-color);
+     }
     }
 }
 
 .training-importance{
     margin-top: 30px;
-    h1{
-        text-align: center;
-    }
-    hr{
-        width: 20%;
-        border-radius: 5px;
-        height: 9px;
-        margin-left: auto;
-        margin-right: auto;
-        background-color: #ddd;
-    }
     .col{
         .card{
             margin: 20px;
             border: none;
             padding: 20px 10px;
             border-radius: 9px;
-            color: black;
+            color: var(--primary-color);
         }
         .active{
-            background-color: #7e7676;
-            color: #FFF;
+            background-color: var(--primary-color);
+            color: var(--content-color);
         }
+    }
+}
+
+#training-req{
+    .req-img{
+        width: 327px;
+    }
+    .req-contents{
+        justify-content: space-around;
+        margin:40px 0;
+        P{
+            width: 414px;
+            color: var(--primary-color);
+        }
+    }
+}
+
+footer{
+    border-radius: 60% 60% 0 0;
+    text-align: center;
+    background-color: var(--primary-color);
+
+    div{
+        padding: 90px;
+        color: var(--content-color);
     }
 }

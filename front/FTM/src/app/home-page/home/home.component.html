@@ -1,9 +1,12 @@
+<!-- Hero Section -->
 <section class="hero">
     <div class="container-sm">
         <div class="header">
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
-                <a class="navbar-brand" href="#">Logo</a>
+                <a class="navbar-brand" href="#">
+                  <img src="assets/images/logo.png" />
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -11,10 +14,10 @@
                     <div class="navbar-nav">
                     <a class="nav-link active" aria-current="page" href="#home">الرئيسية</a>
                     <a class="nav-link" href="#importance">أهمية التدريب</a>
-                    <a class="nav-link" href="#">الشركات التدريبية</a>
-                    <a class="nav-link" href="#">متطلبات التدريب</a>
-                    <button type="button" class="btn btn-light">تسجيل الدخول</button>
-                    <button type="button" class="btn btn-dark">تسجيل الاشتراك</button>
+                    <a class="nav-link" href="#company">الشركات التدريبية</a>
+                    <a class="nav-link" href="#training-req">متطلبات التدريب</a>
+                    <button type="button" class="btn btn-light login">تسجيل الدخول</button>
+                    <button type="button" class="btn btn-light signup">تسجيل الاشتراك</button>
                     </div>
                 </div>
                 </div>
@@ -24,16 +27,16 @@
         <section id="home" class="hero-section">
             <div>
                 <h1>التدريب الميداني</h1>
-                <p>هو أحد مقررات الخطط الدراسية فيه يقوم الطالب بالعمل متفرغاً لفترة محددة بإحدى الجهات الحكومية أو العامة المناسبة لتخصصه وذلك لإكسابه الخبرة العملية وإيصاله إلى المعايير الاحترافية المتميزة.
-                </p>
+                <p>هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التطبيق. إذا كنت تحتاج إلى عدد أكبر من الفقرات يتيح لك مولد النص العربى .</p>               
             </div>
         </section>
     </div>
 </section>
 
+<!-- Training Importance -->
 <section id="importance" class="training-importance">
     <div class="container-sm">
-        <h1>أهمية التدريب</h1>
+        <h3>أهمية التدريب</h3>
         <hr>
 
     <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -61,3 +64,44 @@
       </div>
     </div>
 </section>
+
+<!-- Training Comapny -->
+<section id="company">
+  <div class="container-sm">
+    <h3> الشركات التدريبية</h3>
+    <hr>
+  </div>
+</section>
+
+<!-- Training Requirements -->
+<section id="training-req">
+  <div class="container-sm">
+    <h3>متطلبات التدريب</h3>
+    <hr>
+    <div class="req-contents row row-cols-1 row-cols-md-3 g-4" *ngFor="let item of requirements; let index=index">
+      <ng-container *ngIf="index %2 ==0; else elseBlock">
+        <div >
+          <p>{{item.desc}}</p>
+        </div>
+        <div>
+            <img class="req-img" src="{{item.image}}" />
+        </div>
+      </ng-container>
+      <ng-template #elseBlock>
+      <div>
+        <img class="req-img" src="{{item.image}}" />
+      </div>
+      <div>
+        <p>{{item.desc}}</p>
+      </div> 
+    </ng-template> 
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div>
+    <p>جميع الحقوق محفوظة - كلية الهندسة وتكنولوجيا المعلومات</p>
+  </div>
+</footer>
