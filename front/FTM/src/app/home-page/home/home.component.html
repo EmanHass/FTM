@@ -36,9 +36,10 @@
 <!-- Training Importance -->
 <section id="importance" class="training-importance">
     <div class="container-sm">
+      <div class="header-section">
         <h3>أهمية التدريب</h3>
-        <hr>
-
+        <img class="img-bottom" src="assets/images/hr.png"/>
+      </div>
     <div class="row row-cols-1 row-cols-md-3 g-4">
         <div class="col">
           <div class="card">
@@ -68,16 +69,21 @@
 <!-- Training Comapny -->
 <section id="company">
   <div class="container-sm">
-    <h3> الشركات التدريبية</h3>
-    <hr>
+    <div class="header-section">
+      <h3> الشركات التدريبية</h3>
+      <img class="img-bottom" src="assets/images/hr.png"/>
+    </div>
   </div>
 </section>
 
 <!-- Training Requirements -->
 <section id="training-req">
   <div class="container-sm">
-    <h3>متطلبات التدريب</h3>
-    <hr>
+    <div class="header-section">
+      <h3>متطلبات التدريب</h3>
+      <img class="img-bottom" src="assets/images/hr.png"/>
+    </div>
+    <div class = "vertical"></div>
     <div class="req-contents row row-cols-1 row-cols-md-3 g-4" *ngFor="let item of requirements; let index=index">
       <ng-container *ngIf="index %2 ==0; else elseBlock">
         <div >
