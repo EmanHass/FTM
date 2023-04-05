@@ -1,0 +1,66 @@
+<section class="signup">
+    <div class="wrapper">
+        <div class="content">
+            <div class="title">
+                <h3>تسجيل الإشتراك</h3>
+                <img class="hr-img" src="assets/images/hr.png"/>
+            </div>
+
+            <div class="std-info">
+                <p>بيانات الطالب</p>
+
+                <form [formGroup]="registrationFG">
+                    <div class="form-group">
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="البريد الإلكتروني" formControlName="email">
+                    </div>
+                    <div class="form-group">
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="كلمة المرور" formControlName="password">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="تأكيد كلمة المرور" formControlName="confirmPassword">
+                    </div>
+                    <div class="form-group">
+                        <input type="number" class="form-control" placeholder="رقم الهاتف" formControlName="phoneNumber">
+                    </div>
+                </form>
+            </div>
+
+            <div class="training-info">
+                <p>بيانات التدريب</p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="اسم الشركة">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="عنوان الشركة">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control"  placeholder="نوع التدريب">
+                    </div>
+                    <div class="form-group">
+                        <input type="number" class="form-control" placeholder="عدد أيام التدريب">
+                    </div>
+                    <div class="row">
+                        <div class="form-group col">
+                            <label for="start-date">تاريخ بداية التدريب</label>
+                            <input type="date" id="start-date" class="form-control">
+                        </div>
+                        <div class="form-group col">
+                            <label for="end-date">تاريخ نهاية التدريب</label>
+                            <input type="date" id="end-date" class="form-control">                            
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="acceptance-img" class="accept-img">إرفاق صورة الموافقة على التدريب</label>
+                        <div class="form-group">
+                            <input type="file" id="acceptance-img">
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary submit">تسجيل الإشتراك</button>
+                </form>
+            </div>
+         </div>
+    </div>
+</section>

@@ -1,0 +1,57 @@
+.signup{
+    padding: 228px 144px 107px 0;
+    background-image: url("../../../assets/images/auth.png");
+    background-repeat: no-repeat;
+    background-size: 84%;
+    .wrapper{
+        width: 710px;
+        border-radius: 5px;
+        padding: 50px 100px 0 102px;
+        background: rgb(241, 241, 241,0.5);
+        .title{
+            padding: 0 154px;
+            color: var(--primary-color);
+
+        }
+        .hr-img{
+            width: 103%;
+            margin-top: -31px;
+            margin-right: -6px;
+        }
+        .std-info, .training-info{
+            p{
+                color: var(--primary-color);
+                font-size: 19px;
+            }
+        }
+        .form-group{
+            margin-bottom: 30px;
+            input{
+                padding: 14px;
+                
+            }
+            input::placeholder {
+                color: #3D3737;
+            }
+            label{
+                margin-bottom: 10px;
+            }
+
+        }
+        .accept-img{
+            margin-bottom: 17px;
+            color: var(--primary-color);
+            font-size: 19px;
+        }
+        .submit{
+            margin-right: 179px;
+            margin-bottom: 50px;
+            background-color: var(--primary-color);
+            color: var(--content-color);
+            padding: 15px 24px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+    }
+}
