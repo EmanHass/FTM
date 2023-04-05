@@ -1,3 +1,6 @@
+.home{
+background-color: #FBFBFB;
+
 h3{
     text-align: center;
     color: var(--primary-color);
@@ -19,7 +22,7 @@ h3{
     background-position: bottom;
     background-repeat: no-repeat;
     .hero-section{
-        padding: 80px 22px 217px;
+        padding: 200px 22px 217px;
        p{
          width: 66%;
          margin-top: 41px;
@@ -50,10 +53,24 @@ h3{
         }
      }
      .nav-link{
-        padding-left: 30px;
+        padding-left: 19px;
         padding-right: 0;
         color: var(--content-color);
+       &:hover{
+            border-bottom: 2px solid #FFF;
+            // &::after{
+            //     content: "aaaaaaaaa";
+            //     background-image: url("../../../assets/images/hover-img.png");
+            //     width: 10%;
+            //     background-repeat: no-repeat; 
+            //     position: absolute;  
+            //     top: 50%;
+            //     color: var(--primary-color);
+            // }
+            
+        }
      }
+     
     }
 }
 
@@ -79,7 +96,7 @@ h3{
         width: 327px;
     }
     .req-contents{
-        justify-content: space-around;
+        justify-content: space-evenly;
         margin:40px 0;
         P{
             width: 414px;
@@ -111,4 +128,5 @@ footer{
         left: 49%;
       }
 
+}
 }
