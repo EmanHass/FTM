@@ -7,12 +7,17 @@ import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn,
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
-  registrationFG: FormGroup;
+  isStudent:boolean=true;
+  isSupervisor:boolean=false;
+  studentForm: FormGroup;
+  supervisorForm: FormGroup;
+  checkId:boolean=false;
   constructor() {
-    this.initializationFG();
+    if(this.isStudent) this.initializationFGStudent();
+    else this.initializationFGSupervisor();
   }
-  initializationFG(): void {
-    this.registrationFG = new FormGroup({
+  initializationFGStudent(): void {
+    this.studentForm = new FormGroup({
       email: new FormControl('', [
         Validators.required,
         Validators.email,
@@ -21,6 +26,26 @@ export class SignupComponent implements OnInit {
       password: new FormControl('', [Validators.required]),
       confirmPassword: new FormControl('', [Validators.required]),
       phoneNumber: new FormControl('', [Validators.required]),
+      companyName: new FormControl('', [Validators.required]),
+      companyAddress: new FormControl('', [Validators.required]),
+      typeOfTraining: new FormControl('', [Validators.required]),
+      numOfdaysTraining: new FormControl('', [Validators.required]),
+      startTrainingDate: new FormControl('', [Validators.required]),
+      endTrainingDate: new FormControl('', [Validators.required]),
+      acceptancImg: new FormControl('', [Validators.required]),
+    });
+  }
+  initializationFGSupervisor(): void {
+    this.studentForm = new FormGroup({
+      supervisorName: new FormControl('', [Validators.required]),
+      phoneNumber: new FormControl('', [Validators.required]),
+      email: new FormControl('', [
+        Validators.required,
+        Validators.email,
+        this.customEmail(),
+      ]),  
+      password: new FormControl('', [Validators.required]),
+      confirmPassword: new FormControl('', [Validators.required]),
     });
   }
   customEmail(): ValidatorFn {
@@ -34,6 +59,19 @@ export class SignupComponent implements OnInit {
     };
   }
   ngOnInit(): void {
+  }
+
+  showStudentForm(){
+    this.isStudent=true;
+    this.isSupervisor=false;
+
+  }
+  showSupervisorForm(){
+    this.isSupervisor=true;
+    this.isStudent=false;
+  }
+  signup(){
+    this.checkId=true;
   }
 
 }
