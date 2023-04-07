@@ -77,7 +77,7 @@
       </div>
       <swiper [config]="config">
         <div class="swiper-wrapper">
-          <img class="swiper-slide" *ngFor="let img of Images" src="{{img.src}}" alt="{{img.alt}}" style="width: 264px;" (click)="openModal()" />
+          <img class="swiper-slide" *ngFor="let img of sliderImages" src="{{img.src}}" alt="{{img.alt}}" style="width: 264px;" (click)="openModal()" />
         </div>
         <div class="swiper-pagination"></div>
       </swiper>

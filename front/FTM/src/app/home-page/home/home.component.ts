@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
   ];
 
   
-  Images = [
+  sliderImages = [
     {
       src: 'assets/images/req-img.jpg',
       alt: 'Image 1',
