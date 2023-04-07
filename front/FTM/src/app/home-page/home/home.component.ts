@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SwiperOptions } from 'swiper';
 
 @Component({
   selector: 'app-home',
@@ -24,9 +25,62 @@ export class HomeComponent implements OnInit {
       desc:`يلزم الطالب بحضور التدريب بالكامل خلال الفترة المسموحة له و تسليم كشف الحضور ونموذج التقييم  بعد تعبئته في مظروف مغلق مختوم من قبل الشركة التدريبية للمشرف الأكاديمي.  `
     },
   ];
+
+  
+  Images = [
+    {
+      src: 'assets/images/req-img.jpg',
+      alt: 'Image 1',
+    }, {
+      src: 'assets/images/req-img.jpg',
+      alt: 'Image 2'
+    }, {
+      src: 'assets/images/req-img.jpg',
+      alt: 'Image 3'
+    }, {
+      src: 'assets/images/req-img.jpg',
+      alt: 'Image 4'
+    }, {
+      src: 'assets/images/req-img.jpg',
+      alt: 'Image 5'
+    }, {
+      src: 'assets/images/req-img.jpg',
+      alt: 'Image 6'
+    } , {
+      src: 'assets/images/req-img.jpg',
+      alt: 'Image 6'
+    } , {
+      src: 'assets/images/req-img.jpg',
+      alt: 'Image 6'
+    } , {
+      src: 'assets/images/req-img.jpg',
+      alt: 'Image 6'
+    } , {
+      src: 'assets/images/req-img.jpg',
+      alt: 'Image 6'
+    }    
+  ]
+  config: SwiperOptions = {
+    pagination: { 
+      el: '.swiper-pagination', 
+      clickable: true,
+      type: 'bullets',
+    },
+    spaceBetween: 15,
+    slidesPerView: 'auto',
+      autoplay: {
+       delay: 3000,
+      },
+      loop: true,
+  }; 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  openModal(){
+    console.log('modal');
+    
   }
 
 }
