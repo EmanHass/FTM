@@ -94,7 +94,7 @@
       <div class = "vertical"></div>
       <div class="req-contents row row-cols-1 row-cols-md-3 g-4" *ngFor="let item of requirements; let index=index">
         <ng-container *ngIf="index %2 ==0; else elseBlock">
-          <div >
+          <div class="popline">
             <p>{{item.desc}}</p>
           </div>
           <div>
@@ -105,7 +105,7 @@
         <div>
           <img class="req-img" src="{{item.image}}" />
         </div>
-        <div>
+        <div class="popline2" >
           <p>{{item.desc}}</p>
         </div> 
       </ng-template> 
