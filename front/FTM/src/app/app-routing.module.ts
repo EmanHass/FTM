@@ -5,11 +5,6 @@ import { HomeComponent } from './home-page/home/home.component';
 const routes: Routes = [
   {
     path:'',
-    redirectTo:'FTM',
-    pathMatch:'full'
-  },
-  {
-    path: 'FTM',
     component:HomeComponent
   }
 ];
