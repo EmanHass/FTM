@@ -3,7 +3,7 @@
         <div class="content">
             <div class="title">
                 <h3>تسجيل الإشتراك</h3>
-                <img class="hr-img" src="assets/images/hr.png"/>
+                <img class="hr-img" src="assets/images/border-bottom.png"/>
             </div>
 
             <div class="switch row">
@@ -84,10 +84,10 @@
 
             <div *ngIf="isSupervisor">
                 <form [formGroup]="supervisorForm">
-                    <div class="std-info">
+                    <div>
                         <p>بيانات المشرف الأكاديمي</p> 
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="اسم المشرف" formControlName="phoneNumber">
+                                <input type="text" class="form-control" placeholder="اسم المشرف" formControlName="supervisorName">
                             </div>
                             <div class="form-group">
                                 <input type="number" class="form-control" placeholder="رقم الهاتف" formControlName="phoneNumber">

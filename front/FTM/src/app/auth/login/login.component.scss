@@ -1,0 +1,50 @@
+.login{
+    padding: 228px 144px 107px 0;
+    background-image: url("../../../assets/images/auth.png");
+    background-repeat: no-repeat;
+    background-size: 84%;
+    .wrapper{
+        width: 710px;
+        border-radius: 5px;
+        padding: 50px 100px 0 102px;
+        background: rgb(175, 175, 175,0.5);
+        .title{
+            padding: 0 154px;
+            color: var(--content-color);
+        }
+        .hr-img{
+            width: 103%;
+            margin-top: -31px;
+            margin-right: -6px;
+        }
+        .switch{
+            margin-bottom: 20px;
+            button{
+                margin: 10px;
+            }
+        }
+        .form-group{
+            margin-bottom: 23px;
+            input{
+                padding: 14px;
+                
+            }
+            input::placeholder {
+                color: #3D3737;
+            }
+            label{
+                margin-bottom: 10px;
+            }
+
+        }
+        .submit{
+            margin-right: 179px;
+            margin-bottom: 50px;
+            background-color: var(--primary-color);
+            color: var(--content-color);
+            padding: 15px 24px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+    }
+}

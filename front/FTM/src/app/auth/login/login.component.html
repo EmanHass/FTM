@@ -1,0 +1,27 @@
+<section class="login">
+    <div class="wrapper">
+        <div class="content">
+            <div class="title">
+                <h3>تسجيل الدخول</h3>
+                <img class="hr-img" src="assets/images/border-bottom.png"/>
+            </div>
+
+            <div class="switch row">
+                <button class="btn btn-primary col" (click)="showStudentForm()">الطالب</button>
+                <button class="btn btn-primary col" (click)="showSupervisorForm()">المشرف الأكاديمي</button>
+            </div>
+
+            <div *ngIf="isStudent || isSupervisor" class="login-form">
+                <form [formGroup]="loginForm">                 
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="البريد الإلكتروني" formControlName="email">
+                        </div>
+                        <div class="form-group col">
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="كلمة المرور" formControlName="password">
+                        </div> 
+                        <button class="btn btn-primary submit" (click)="submit()">تسجيل الدخول</button>                 
+                </form>
+            </div>
+        </div>
+    </div>  
+</section>         
