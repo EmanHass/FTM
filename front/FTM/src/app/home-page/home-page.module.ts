@@ -4,9 +4,8 @@ import { CommonModule } from '@angular/common';
 import { HomePageRoutingModule } from './home-page-routing.module';
 import { HomeComponent } from './home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
-
-
+import { SharedModulesModule } from '../shared-modules/shared-modules.module';
+import { LayoutModule } from '../layout/layout.module';
 @NgModule({
   declarations: [
     HomeComponent
@@ -14,8 +13,9 @@ import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
   imports: [
     CommonModule,
     HomePageRoutingModule,
+    SharedModulesModule,
     ReactiveFormsModule,
-    NgxUsefulSwiperModule
+    LayoutModule
   ],
   exports:[
     HomeComponent

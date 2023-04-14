@@ -75,44 +75,75 @@ h3{
 }
 
 .training-importance{
-    margin-top: 30px;
+    margin: 40px 0;
     .col{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
         .card{
-            margin: 20px;
+            width: 79%;
             border: none;
-            padding: 38px 32px;
+            padding: 35px 8px;
             border-radius: 9px;
             color: var(--primary-color);
+            
+            &:hover{
+                background-color: var(--primary-color);
+                color: var(--content-color);
+                cursor: pointer;
+                transition: background-color 0.5s ease-out;
+            }
+        }
+        .card-icon{
+            background-color: var(--primary-color);
+            width: 69px;
+            height: 71px;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            top: 5%;
+            z-index: 9999999999;
+            box-shadow: 3px 3px 6px 0px;
+            border-radius: 5px;
+            img{
+                width: 83%;
+            }
         }
         .active{
             background-color: var(--primary-color);
             color: var(--content-color);
+            font-weight: bold;
+        }
+        .icon-active{
+            background-color: var(--content-color);
         }
     }
 }
 
 #training-req{
-    margin-top: 50px;
+    margin: 50px 0;
     .req-img{
-        width: 327px;
+        width: 100%;
+        height: 70%;
+        border-radius: 10px;
     }
     .req-contents{
         justify-content: space-evenly;
-        margin:40px 0;
+        margin-top:10px;
+        margin-bottom: -77px;
         P{
-            width: 414px;
+            width: 409px;
             color: var(--primary-color);
         }
     }
     @media only screen and (min-width: 1200px) {
-        .vertical {
-            
+        .vertical {           
                 border-left: 6px solid var(--primary-color);
-                height: 860px;
+                height: 823px;
                 position:absolute;
                 border-radius: 10px;
-                left: 49%;
-
+                left: 50%;
             }
             .popline,.popline2{
                 position: relative;
@@ -125,7 +156,7 @@ h3{
                 height: 30px;
                 border-radius: 50%;
                 background-color: #AFAFAF;
-                left: -88px;
+                left: -76px;
                 top: 0;
             }
             
@@ -136,31 +167,10 @@ h3{
                 height: 30px;
                 border-radius: 50%;
                 background-color: #AFAFAF;
-                right: -66px;
+                right: -83px;
                 top: 0;
             }
     }
     
 }
-
-footer{
-    background-image: url("../../../assets/images/footer.png");
-    background-size: cover;
-    background-repeat: no-repeat;   
-    text-align: center;
-    
-    @media screen and (max-width: 1200px) {
-            background-position: center; 
-    } 
-    div{
-        padding: 90px;
-        color: var(--content-color);
-    }
 }
-    
-
-
-}
-  .swiper-pagination{
-    position: unset;
-  }

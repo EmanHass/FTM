@@ -1,38 +1,6 @@
-<!-- Hero Section -->
 <div class="home">
-  <section class="hero">
-      <div class="container-sm">
-          <div class="header">
-              <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                  <div class="container-fluid">
-                  <a class="navbar-brand" href="#">
-                    <img src="assets/images/logo.png" />
-                  </a>
-                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                      <span class="navbar-toggler-icon"></span>
-                  </button>
-                  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                      <div class="navbar-nav">
-                      <a class="nav-link active" aria-current="page" href="#home">الرئيسية</a>
-                      <a class="nav-link" href="#importance">أهمية التدريب</a>
-                      <a class="nav-link" href="#company">الشركات التدريبية</a>
-                      <a class="nav-link" href="#training-req">متطلبات التدريب</a>
-                      <button type="button" class="btn btn-light login" routerLink="/login">تسجيل الدخول</button>
-                      <button type="button" class="btn btn-light signup" routerLink="/signup">تسجيل الاشتراك</button>
-                      </div>
-                  </div>
-                  </div>
-              </nav>
-          </div>
-
-          <section id="home" class="hero-section">
-              <div>
-                  <h1>التدريب الميداني</h1>
-                  <p>تدريب الطلاب خلال الإجازة الصيفية يعتبر أحد أشكال التدريب الهادفة إلى تعريف الطلاب بواقع البيئة العملية وما تحتاج إليه من جد وانضباط كما أنه من جهة أخرى يتيح الفرصة لمؤسسات القطاع العام والخاص للتعرف على امكانيات الطلاب ومهاراتهم ، كما تساعد الطالب في ترسيخ المعلومات النظرية التي تلقاها أثناء دراسته وتفتح أمامه أفاقا جديدة للحياة العملية.</p>
-                </div>
-          </section>
-      </div>
-  </section>
+  <!-- Hero Section -->
+  <app-header></app-header>
 
   <!-- Training Importance -->
   <section id="importance" class="training-importance">
@@ -43,14 +11,19 @@
         </div>
       <div class="row row-cols-1 row-cols-md-3 g-4">
           <div class="col">
+            <div class="card-icon">
+              <img src="assets/icons/train-importance1.png"/>
+            </div>
             <div class="card">
               <div class="card-body">
-                <p class="card-text">إتاحة الفرصة للطلاب لكسب الخبرة العملية والتدريب والتعرف على سوق العمل قبل التخرج وتوجيه الطلاب على تحمل المسئولية والالتزام بالمواعيد وفقا لدوام المؤسسات الحكومية والخاصة. </p>
-             
+                <p class="card-text">إتاحة الفرصة للطلاب لكسب الخبرة العملية والتدريب والتعرف على سوق العمل قبل التخرج وتوجيه الطلاب على تحمل المسئولية والالتزام بالمواعيد وفقا لدوام المؤسسات الحكومية والخاصة. </p>            
               </div>
             </div>
           </div>
           <div class="col">
+            <div class="card-icon icon-active">
+              <img src="assets/icons/train-importance2.png"/>
+            </div>
             <div class="card active">
               <div class="card-body">
                 <p class="card-text">توجيه الطلاب على التعامل مع أفراد المجتمع والاستماع إلى آرائهم خارج الجامعة . تهيئة الطالب على إعداد وكتابة التقارير الفنية وتطوير مهاراته العلمية وتهيئته للعمل الميداني .</p>
@@ -58,6 +31,9 @@
             </div>
           </div>
           <div class="col">
+            <div class="card-icon">
+              <img src="assets/icons/train-importance3.png"/>
+            </div>
             <div class="card">
               <div class="card-body">
                 <p class="card-text">تزويد المؤسسات بالمعلومات عن نوعية الموارد البشرية المتوفرة التى ستساهم في تنمية المجتمع. إتاحة الفرصة لتلك المؤسسات تقويم أداء الطالب أثناء فترة التدريب ومعرفة مدى الاستفادة منه.</p>
@@ -75,12 +51,8 @@
         <h3> الشركات التدريبية</h3>
         <img class="img-bottom" src="assets/images/hr.png"/>
       </div>
-      <swiper [config]="config">
-        <div class="swiper-wrapper">
-          <img class="swiper-slide" *ngFor="let img of sliderImages" src="{{img.src}}" alt="{{img.alt}}" style="width: 264px;" (click)="openModal()" />
-        </div>
-        <div class="swiper-pagination"></div>
-      </swiper>
+      <app-slider (companyId)="takeID($event)" (modalStatus)="showModal($event)"></app-slider>
+      <app-modal *ngIf="modalStatus" [id]="idImg" (closedModal)="closedModel($event)"></app-modal>
     </div>
   </section>
 
@@ -112,11 +84,5 @@
       </div>
     </div>
   </section>
-
-  <!-- Footer -->
-  <footer>
-    <div>
-      <p>جميع الحقوق محفوظة - كلية الهندسة وتكنولوجيا المعلومات</p>
-    </div>
-  </footer>
+  <app-footer></app-footer>
 </div>

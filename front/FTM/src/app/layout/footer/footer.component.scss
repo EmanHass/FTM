@@ -1,0 +1,14 @@
+footer{
+    background-image: url("../../../assets/images/footer.png");
+    background-size: cover;
+    background-repeat: no-repeat;   
+    text-align: center;
+    
+    @media screen and (max-width: 1200px) {
+            background-position: center; 
+    } 
+    div{
+        padding: 90px;
+        color: var(--content-color);
+    }
+}
