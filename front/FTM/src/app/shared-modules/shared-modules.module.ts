@@ -6,7 +6,7 @@ import { AgendaComponent } from './components/agenda/agenda.component';
 import { EditComponent } from './components/agenda/edit/edit.component';
 import { AddComponent } from './components/agenda/add/add.component';
 import { ModalComponent } from './components/modal/modal.component';
-
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,8 @@ import { ModalComponent } from './components/modal/modal.component';
   ],
   imports: [
     CommonModule,
-    SharedModulesRoutingModule
+    SharedModulesRoutingModule,
+    HttpClientModule
   ],
   exports:[
     ModalComponent

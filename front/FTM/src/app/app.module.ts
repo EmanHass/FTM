@@ -14,7 +14,7 @@ import { AuthModule } from './auth/auth.module';
     BrowserModule,
     AppRoutingModule,
     HomePageModule,
-    AuthModule
+    AuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
