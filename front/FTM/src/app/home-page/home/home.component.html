@@ -10,7 +10,18 @@
           <img class="img-bottom" src="assets/images/hr.png"/>
         </div>
       <div class="row row-cols-1 row-cols-md-3 g-4">
-          <div class="col">
+          <div class="col" *ngFor="let data of trainingImportanceDtos; let i=index">
+            <div class="card-icon">
+              <img src="assets/icons/train-importance1.png"/>
+            </div>
+            <div [className]="i==1?'card active':'card'">
+              <div class="card-body">
+                <p class="card-text">{{data.description}}</p>            
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="col">
             <div class="card-icon">
               <img src="assets/icons/train-importance1.png"/>
             </div>
@@ -39,7 +50,7 @@
                 <p class="card-text">تزويد المؤسسات بالمعلومات عن نوعية الموارد البشرية المتوفرة التى ستساهم في تنمية المجتمع. إتاحة الفرصة لتلك المؤسسات تقويم أداء الطالب أثناء فترة التدريب ومعرفة مدى الاستفادة منه.</p>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
   </section>

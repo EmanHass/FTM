@@ -28,13 +28,15 @@ export class HomeComponent implements OnInit {
   //   },
   // ]; 
   requirements:any;
+  trainingImportanceDtos:any;
   constructor(private homeService:HomePageService) { }
 
   ngOnInit(): void {
     this.homeService.getAll().subscribe(
       (res:any)=>{
        console.log(res.trainingRequirementDtos);
-       this.requirements= res.trainingRequirementDtos;       
+       this.requirements= res.trainingRequirementDtos; 
+       this.trainingImportanceDtos= res.trainingImportanceDtos;          
       }
     );   
   }
