@@ -15,64 +15,6 @@ h3{
         right: 42%;
     }
 }
-.hero{
-    background-image: url("../../../assets/images/hero-background.png");
-    color: var(--content-color);
-    background-size: cover;
-    background-position: bottom;
-    background-repeat: no-repeat;
-    .hero-section{
-        padding: 200px 22px 217px;
-       p{
-         width: 66%;
-         margin-top: 41px;
-        }
-    }
-    button{
-        margin-left:27px;
-        margin-bottom: 10px;
-        padding: 10px;
-    }
-    .login{
-        color: var(--primary-color);
-    }
-    .signup{
-        border: 5px solid var(--content-color);
-        background: none;
-        color: var(--content-color);
-        font-weight: bold;
-    }
-    .navbar{
-     .navbar-nav{
-        align-items: baseline;
-     }
-     .navbar-brand{
-        img{
-            width: 273px;
-            padding-left: 27px;
-        }
-     }
-     .nav-link{
-        padding-left: 19px;
-        padding-right: 0;
-        color: var(--content-color);
-       &:hover{
-            border-bottom: 2px solid #FFF;
-            // &::after{
-            //     content: "aaaaaaaaa";
-            //     background-image: url("../../../assets/images/hover-img.png");
-            //     width: 10%;
-            //     background-repeat: no-repeat; 
-            //     position: absolute;  
-            //     top: 50%;
-            //     color: var(--primary-color);
-            // }
-            
-        }
-     }
-     
-    }
-}
 
 .training-importance{
     margin: 40px 0;

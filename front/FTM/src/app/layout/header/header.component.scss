@@ -1,58 +1,66 @@
-.header-section{
-    margin-bottom: 50px;
-
-    .img-bottom{
-        width: 16%;
-        margin: auto;
-        position: absolute;
-        right: 42%;
+.hero {
+  background-image: url("../../../assets/images/hero-background.png");
+  color: var(--content-color);
+  background-size: cover;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  .hero-section {
+    padding: 150px 22px 217px;
+    p {
+      width: 66%;
+      margin-top: 41px;
     }
-}
-.hero{
-    background-image: url("../../../assets/images/hero-background.png");
+  }
+  button {
+    margin-left: 27px;
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+  .login {
+    color: var(--primary-color);
+  }
+  .signup {
+    border: 5px solid var(--content-color);
+    background: none;
     color: var(--content-color);
-    background-size: cover;
-    background-position: bottom;
-    background-repeat: no-repeat;
-    .hero-section{
-        padding: 150px 22px 217px;
-       p{
-         width: 66%;
-         margin-top: 41px;
-        }
-    }
-    button{
-        margin-left:27px;
-        margin-bottom: 10px;
-        padding: 10px;
-    }
-    .login{
-        color: var(--primary-color);
-    }
-    .signup{
-        border: 5px solid var(--content-color);
-        background: none;
-        color: var(--content-color);
-        font-weight: bold;
-    }
-    .navbar{
-     .navbar-nav{
+    font-weight: bold;
+  }
+  .navbar {
+    .navbar-nav {
+      @media only screen and (min-width: 1200px) {
         align-items: baseline;
-     }
-     .navbar-brand{
-        img{
-            width: 273px;
-            padding-left: 27px;
-        }
-     }
-     .nav-link{
-        padding-left: 19px;
-        padding-right: 0;
-        color: var(--content-color);
-       &:hover{
-            border-bottom: 2px solid #FFF;           
-        }
-     }
-     
+      }
+
+      .hover-image {
+        display: none;
+      }
+      .home {
+        width: 9%;
+      }
+      .home:hover .hover-image {
+        display: block;
+        width: 95%;
+      }
+      .importance:hover .hover-image {
+        display: block;
+      }
+      .company:hover .hover-image {
+        display: block;
+      }
+      .training-req:hover .hover-image {
+        display: block;
+      }
     }
+    .navbar-brand {
+      img {
+        width: 273px;
+        padding-left: 27px;
+      }
+    }
+    .nav-link {
+      padding-left: 18px;
+      padding-right: 0;
+      color: var(--content-color);
+    }
+  }
 }
