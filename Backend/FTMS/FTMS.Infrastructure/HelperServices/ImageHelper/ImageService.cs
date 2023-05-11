@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace FTMS.Infrastructure.HelperServices.ImageHelper
 {
-    public class ImageService
+    public class ImageService:IImageService
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
 
