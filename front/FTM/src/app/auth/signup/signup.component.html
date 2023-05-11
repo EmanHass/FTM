@@ -6,9 +6,18 @@
                 <img class="hr-img" src="assets/images/border-bottom.png"/>
             </div>
 
-            <div class="switch row">
-                <button class="btn btn-primary col" (click)="showStudentForm()">الطالب</button>
-                <button class="btn btn-primary col" (click)="showSupervisorForm()">المشرف الأكاديمي</button>
+            <div class="switch">
+                <div class="student" (click)="showStudentForm()">
+                    <img [src]="isStudent?'assets/icons/read.png':'assets/icons/read-std.png'" [style]="{ 'background-image': isStudent? 'url(../../../assets/icons/bg-blue.png)' : 'url(../../../assets/icons/bg-white.png)', 'background-size':'contain', 'background-repeat': 'no-repeat'}"/>
+                    <p>الطالب</p>
+                </div>
+                <div>
+                    <img src="assets/images/dotted-line.png" class="line-auth" />
+                </div>
+                <div class="supervisor" (click)="showSupervisorForm()">
+                    <img [src]="isStudent?'assets/icons/supervisor-2.png':'assets/icons/supervisor.png'" [style]="{ 'background-image': isStudent? 'url(../../../assets/icons/bg-white.png)' : 'url(../../../assets/icons/bg-blue.png)', 'background-size':'contain', 'background-repeat': 'no-repeat'}"/>
+                    <p>المشرف الأكاديمي</p>
+                </div>
             </div>
 
             <div *ngIf="isStudent">
@@ -33,7 +42,7 @@
                                     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="كلمة المرور" formControlName="password">
                                 </div>
                                 <div class="form-group col">
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="تأكيد كلمة المرور" formControlName="confirmPassword">
+                                    <input type="password" class="form-control" id="exampleInputPassword" placeholder="تأكيد كلمة المرور" formControlName="confirmPassword">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -99,7 +108,7 @@
                             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="كلمة المرور" formControlName="password">
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="تأكيد كلمة المرور" formControlName="confirmPassword">
+                                <input type="password" class="form-control" id="exampleInputPassword" placeholder="تأكيد كلمة المرور" formControlName="confirmPassword">
                             </div>
                             <button class="btn btn-primary submit">تسجيل الإشتراك</button>
                     </div>

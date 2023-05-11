@@ -18,9 +18,32 @@
             margin-right: -6px;
         }
         .switch{
+            display: flex;
+            justify-content: center;
             margin-bottom: 20px;
-            button{
-                margin: 10px;
+            font-weight: bold;
+            .student, .supervisor{               
+                width: 19%;
+                cursor: pointer;
+                color: var(--content-color);
+                img{
+                    width: 91px;
+                    padding: 20px;
+                }
+            }
+            .student{
+                p{
+                    margin-right: 10px;
+                }
+            }
+            .supervisor{
+                margin-top: 40px;
+                p{
+                    width: 135%;
+                }
+            }
+            .line-auth{
+                margin-top: 44px;
             }
         }
         .form-group{

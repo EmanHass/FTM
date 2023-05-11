@@ -1,0 +1,19 @@
+.modal{
+    display: block;
+    background: var(--bg-opacity);
+    cursor: pointer;
+
+    .modal-dialog{
+        top: 15%;
+        max-width:800px
+    }
+    .company-info{
+        .name{
+            text-align: center;
+        }
+    }
+    .company-img{
+        display: flex;
+        justify-content: center;
+    }
+}

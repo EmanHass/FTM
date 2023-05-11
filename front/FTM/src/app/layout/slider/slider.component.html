@@ -1,0 +1,6 @@
+<swiper [config]="config">
+    <div class="swiper-wrapper">
+      <img src="{{img.src}}" alt="{{img.alt}}" class="swiper-slide" *ngFor="let img of sliderImages; let i=index;" (click)="openModal(img.id)" />
+    </div>
+    <div class="swiper-pagination"></div>
+  </swiper>
