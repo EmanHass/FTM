@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TrainingImportance } from 'src/app/shared-modules/model-interface/homePage/training-importance';
+import { TrainingRequirement } from 'src/app/shared-modules/model-interface/homePage/training-req';
 import { HomePageService } from 'src/app/shared-modules/services/home-page.service';
 
 @Component({
@@ -27,14 +29,15 @@ export class HomeComponent implements OnInit {
   //     description:`يلزم الطالب بحضور التدريب بالكامل خلال الفترة المسموحة له و تسليم كشف الحضور ونموذج التقييم  بعد تعبئته في مظروف مغلق مختوم من قبل الشركة التدريبية للمشرف الأكاديمي.  `
   //   },
   // ]; 
-  requirements:any;
+  requirements:TrainingRequirement[];
+  trainingImportanceDtos:TrainingImportance[];
   constructor(private homeService:HomePageService) { }
 
   ngOnInit(): void {
     this.homeService.getAll().subscribe(
       (res:any)=>{
-       console.log(res.trainingRequirementDtos);
        this.requirements= res.trainingRequirementDtos;       
+       this.trainingImportanceDtos= res.trainingImportanceDtos;          
       }
     );   
   }

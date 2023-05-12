@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Training } from 'src/app/shared-modules/model-interface/homePage/training';
+import { HomePageService } from 'src/app/shared-modules/services/home-page.service';
 
 @Component({
   selector: 'app-header',
@@ -6,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
-  constructor() { }
+  trainingHeader:Training;
+  constructor(private homeService:HomePageService) { }
 
   ngOnInit(): void {
+    this.homeService.getAll().subscribe(
+      (res:any)=>{
+        this.trainingHeader=res.trainingDtos;
+      }
+    );
   }
 
 }
