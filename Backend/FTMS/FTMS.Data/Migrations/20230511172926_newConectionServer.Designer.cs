@@ -4,6 +4,7 @@ using FTMS.Data.DataLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FTMS.Data.Migrations
 {
     [DbContext(typeof(FTMSDbContext))]
-    partial class FTMSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230511172926_newConectionServer")]
+    partial class newConectionServer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -328,13 +331,6 @@ namespace FTMS.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("FTMS.Data.Model.FieldTraining", b =>
-                {
-                    b.HasBaseType("FTMS.Data.Model.Training");
-
-                    b.HasDiscriminator().HasValue("FieldTraining");
                 });
 
             modelBuilder.Entity("FTMS.Data.Model.TrainingImportance", b =>

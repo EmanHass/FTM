@@ -5,9 +5,9 @@ namespace FTMS.Infrastructure.Managers.Interfaces
 {
     public interface ITrainingRepository
     {
-        Task<Training> Add(CreateTrainingDto trainingDto);
+        Task<FieldTraining> Add(CreateTrainingDto trainingDto);
         Task<bool> Delete(int id);
         Task<List<TrainingDto>> GetTraining();
-        Task<Training> Update(UpdateTrainingDto updateTraining);
+        Task<FieldTraining> Update(UpdateTrainingDto updateTraining);
     }
 }

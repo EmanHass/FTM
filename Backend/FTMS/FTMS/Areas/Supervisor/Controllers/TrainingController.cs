@@ -3,13 +3,12 @@ using FTMS.Core.DTOS.Training;
 using FTMS.Core.DTOS.TrainingImportance;
 using FTMS.Core.DTOS.TrainingRequirement;
 using FTMS.Infrastructure.Managers.Interfaces;
-using FTMS.Infrastructure.Managers.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FTMS.Areas.Supervisor.Controllers
 {
-   
+
     public class TrainingController : BaseController
     {
         private readonly ITrainingRepository _trainingRepository;

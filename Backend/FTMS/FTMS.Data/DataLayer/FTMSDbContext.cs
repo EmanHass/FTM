@@ -20,12 +20,13 @@ namespace FTMS.Data.DataLayer
             base.OnModelCreating(builder);
             builder.Entity<Training>()
                         .HasDiscriminator<string>("TrainingType")
-                        .HasValue<Training>("Training")
+                        .HasValue< FieldTraining > ("FieldTraining")
                         .HasValue<TrainingImportance>("TrainingImportance")
                         .HasValue<TrainingRequirement>("TrainingRequirement");
         }
 
         public DbSet<Training> Informations { get; set; }
+        public DbSet<FieldTraining> FieldTrainings { get; set; }    
         public DbSet<TrainingImportance> TrainingImportances { get; set; }
         public DbSet<TrainingRequirement> TrainingRequirements { get; set; }
         public DbSet<TrainingCompany> TrainingCompanys { get; set; }

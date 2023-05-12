@@ -25,7 +25,7 @@ namespace FTMS.Infrastructure.Managers.Repositories
         {
 
             //Training
-            var getTraining = _context.Informations.FirstOrDefault(x => x.Id == 1);
+            var getTraining = _context.FieldTrainings.FirstOrDefault(x => x.Id == 1);
             var trainings = _mapper.Map<TrainingDto>(getTraining);
 
             var Importances = await _context.TrainingImportances.AsNoTracking().ToListAsync();
