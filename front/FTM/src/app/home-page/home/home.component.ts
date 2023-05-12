@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TrainingImportance } from 'src/app/shared-modules/model-interface/homePage/training-importance';
 import { TrainingRequirement } from 'src/app/shared-modules/model-interface/homePage/training-req';
 import { HomePageService } from 'src/app/shared-modules/services/home-page.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +12,7 @@ import { HomePageService } from 'src/app/shared-modules/services/home-page.servi
 export class HomeComponent implements OnInit {
   idImg:any;
   modalStatus=false;
+  imageSrc=`${environment.apiImage}/images/`;
   // requirements=[
   //   { 
   //     image:'assets/images/req-training1.jpg',

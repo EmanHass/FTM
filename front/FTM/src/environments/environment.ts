@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiLink: "http://mohammedalattar-001-site1.ctempurl.com/api"
+  apiLink: "http://mohammedalattar-001-site1.ctempurl.com/api",
+  apiImage: "http://mohammedalattar-001-site1.ctempurl.com/"
 };
 
 /*
