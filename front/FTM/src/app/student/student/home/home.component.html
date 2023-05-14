@@ -1,1 +1,22 @@
-<p>home works!</p>
+<section class="home">
+    <div class="header">
+        <h3>أجندة التدريب</h3>
+        <h3>الفصل الدراسي الثاني 2021/2022</h3>
+    </div>
+    <div class="content">
+        <div class="row">
+            <div class="col start-training">
+                <div *ngFor="let data of startAgenda">
+                    <h6>{{data.title}}</h6>
+                    <p><img src="assets/images/calender.png"/>{{data.date}}</p>
+                </div>
+            </div>
+            <div class="col end-training">
+                <div *ngFor="let data of endAgenda">
+                    <h6>{{data.title}}</h6>
+                    <p><img src="assets/images/calender.png"/>{{data.date}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
