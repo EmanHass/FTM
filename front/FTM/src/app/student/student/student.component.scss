@@ -1,0 +1,23 @@
+.page{
+    background-color: var(--content-color);
+}
+.container{
+    max-width: 867px;
+.header{
+    .navbar-brand{
+        margin: 0 0 0 18px;
+    }
+    .navbar-nav a{
+        color: var(--primary-color);
+        font-weight: 500;
+    }
+    .signout{
+        margin-right: 27px;
+        button{
+            background-color: var(--primary-color);
+            color: var(--content-color);
+            font-weight: 500;
+        }
+    }
+}
+}

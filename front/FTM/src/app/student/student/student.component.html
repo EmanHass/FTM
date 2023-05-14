@@ -1,30 +1,50 @@
-<div class="header">
+<div class="page">
+<section class="container">
+  <div class="header">
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
+      <div class="container-fluid">
         <a class="navbar-brand" href="#">
           <img src="assets/logo/logo.png" />
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
+          <div class="navbar-nav">
             <div class="home">
-                <a class="nav-link" aria-current="page" routerLink="home">الرئيسية</a>
+              <a
+                class="nav-link"
+                aria-current="page"
+                routerLink="home"
+                routerLinkActive="active"
+                >الرئيسية</a
+              >
             </div>
             <div class="importance">
-                <a class="nav-link" routerLink="profile">الملف الشخصي</a>
+              <a class="nav-link" routerLink="profile" routerLinkActive="active">الملف الشخصي</a>
             </div>
             <div class="company">
-                <a class="nav-link" routerLink="trainingdata"> بيانات التدريب</a>
+              <a class="nav-link" routerLink="trainingdata" routerLinkActive="active"> بيانات التدريب</a>
             </div>
             <div class="training-req">
-                <a class="nav-link" routerLink="report"> تقرير نهاية التدريب</a>
+              <a class="nav-link" routerLink="report" routerLinkActive="active"> تقرير نهاية التدريب</a>
             </div>
-            <button type="button" class="btn btn-light">تسجيل الخروج</button>
+            <div class="signout">
+                <button type="button" class="btn btn-light">تسجيل الخروج</button>
             </div>
+          </div>
         </div>
-        </div>
+      </div>
     </nav>
+  </div>
+  <router-outlet></router-outlet>
+</section>
 </div>
-<router-outlet></router-outlet>
