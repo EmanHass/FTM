@@ -3,12 +3,26 @@
       <div class="modal-content">
         <div class="modal-body">
           <div class="company-img">
-            <img src="{{companyInfo.src}}"/>
+            <img src="{{imageSrc}}/{{companyInfo.logoCompany}}"/>
           </div>
           <div class="company-info">
             <h5 class="name">{{companyInfo.name}}</h5>
-            <p>هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التطبيق.
-              إذا كنت تحتاج إلى عدد أكبر من الفقرات يتيح لك مولد النص العربى زيادة عدد الفقرات كما تريد، النص لن يبدو مقسما ولا يحوي أخطاء لغوية، مولد النص العربى مفيد لمصممي المواقع على وجه الخصوص، حيث يحتاج العميل فى كثير من الأحيان أن يطلع على صورة حقيقية لتصميم الموقع.</p>
+            <p>{{companyInfo.description}}</p>
+            <h5>عن الشركة:</h5><br>
+            <div class="address">
+              <div>
+                <h6>الإيميل:</h6><p>{{companyInfo.email}}</p>
+              </div>
+              <div>
+                <h6>رقم التواصل:</h6><p>{{companyInfo.phoneNumber}}</p>
+              </div>
+              <div>
+                <h6>عنوان الشركة:</h6><p> {{companyInfo.address}}</p>
+              </div>
+            </div>
+            <div>
+              <h6>مجالات التدريب:</h6><p> {{companyInfo.fieldsOfTrainings}}</p>
+            </div>
           </div>
         </div>
       </div>

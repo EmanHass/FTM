@@ -8,8 +8,13 @@
         max-width:800px
     }
     .company-info{
+        padding-right: 20px;
         .name{
             text-align: center;
+        }
+        .address{
+            display: flex;
+            justify-content: space-between;
         }
     }
     .company-img{

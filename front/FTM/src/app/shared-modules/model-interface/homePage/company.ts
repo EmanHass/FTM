@@ -7,5 +7,6 @@ export interface Company{
     address:string,
     logoCompany:string,
     companyCapacity:number,
-    fieldsOfTrainings:string
+    fieldsOfTrainings:string,
+    id:number
 }

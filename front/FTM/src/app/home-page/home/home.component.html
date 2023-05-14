@@ -11,8 +11,11 @@
         </div>
       <div class="row row-cols-1 row-cols-md-3 g-4">
           <div class="col" *ngFor="let data of trainingImportanceDtos; let i=index">
-            <div class="card-icon">
-              <img src="assets/icons/train-importance1.png"/>
+            <div class="card-icon" [class]="i==1?'icon-active':''">
+              <img *ngIf="i==0" src="{{imageSrc}}/{{data.image}}"/>
+              <img *ngIf="i==1" src="{{imageSrc}}/{{trainingImportanceDtos[2].image}}">
+              <img *ngIf="i==2" src="{{imageSrc}}/{{trainingImportanceDtos[1].image}}"/>
+              
             </div>
             <div [className]="i==1?'card active':'card'">
               <div class="card-body">
@@ -62,8 +65,8 @@
         <h3> الشركات التدريبية</h3>
         <img class="img-bottom" src="assets/images/hr.png"/>
       </div>
-      <app-slider (companyId)="takeID($event)" (modalStatus)="showModal($event)"></app-slider>
-      <app-modal *ngIf="modalStatus" [id]="idImg" (closedModal)="closedModel($event)"></app-modal>
+      <app-slider *ngIf="isLoading" [companyArr]="company" (companyId)="takeID($event)" (modalStatus)="showModal($event)"></app-slider>
+      <app-modal  *ngIf="modalStatus && isLoading" [companyArr]="company" [id]="idImg" (closedModal)="closedModel($event)"></app-modal>
     </div>
   </section>
 
@@ -81,12 +84,12 @@
             <p>{{item.description}}</p>
           </div>
           <div>
-               <img class="req-img" [src]="imageSrc + '/'+item.image" /><!-- src="{{item.image}}" -->
+               <img class="req-img" [src]="imageSrc + '/'+item.image" />
           </div>
         </ng-container>
         <ng-template #elseBlock>
         <div>
-          <img class="req-img" [src]="imageSrc + '/'+item.image" />
+          <img class="req-img" src="{{imageSrc}}/{{item.image}}" />
         </div>
         <div class="popline2" >
           <p>{{item.description}}</p>

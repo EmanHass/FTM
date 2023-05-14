@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { SwiperOptions } from 'swiper';
 
 @Component({
@@ -8,31 +9,11 @@ import { SwiperOptions } from 'swiper';
 })
 export class SliderComponent implements OnInit {
   id:number;
+  @Input() companyArr:any;
   @Output() companyId:EventEmitter<number>=new EventEmitter<number>;
-  @Output() modalStatus:EventEmitter<boolean>=new EventEmitter<boolean>;;
-  sliderImages = [
-    {
-      src: 'assets/logo/unitone.png',
-      alt: 'Unit One',
-      id:1
-    }, {
-      src: 'assets/logo/Newsol.png',
-      alt: 'New Solution',
-      id:2
-    }, {
-      src: 'assets/logo/Jawal.png',
-      alt: 'Jawal',
-      id:3
-    }, {
-      src: 'assets/logo/NewLine.png',
-      alt: 'New Line',
-      id:4
-    }, {
-      src: 'assets/logo/toopoptech.png',
-      alt: 'Too Pop Tech',
-      id:5
-    }  
-  ]
+  @Output() modalStatus:EventEmitter<boolean>=new EventEmitter<boolean>;
+  imageSrc=`${environment.apiImage}/images/`;
+
   config: SwiperOptions = {
     pagination: { 
       el: '.swiper-pagination', 
@@ -48,7 +29,7 @@ export class SliderComponent implements OnInit {
   };
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
   }
 
   openModal(idImg:number){
