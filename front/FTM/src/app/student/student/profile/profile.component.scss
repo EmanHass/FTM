@@ -1,0 +1,18 @@
+.profile{
+    margin-top: 100px;
+    h2, h6{
+        color: var(--primary-color);
+    }
+    .content{
+        margin-right: 15px;
+        margin-top: 30px;
+        p{
+            margin-top: 15px;
+        }
+        button{
+            background-color: var(--primary-color);
+            color: var(--content-color);
+            font-weight: 500;
+        }
+    }
+}
