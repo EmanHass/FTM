@@ -8,6 +8,7 @@ import { HomeComponent } from './student/home/home.component';
 import { TrainingDataComponent } from './student/training-data/training-data.component';
 import { ReportComponent } from './student/report/report.component';
 import { SharedModulesModule } from '../shared-modules/shared-modules.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -21,7 +22,9 @@ import { SharedModulesModule } from '../shared-modules/shared-modules.module';
   imports: [
     CommonModule,
     StudentRoutingModule,
-    SharedModulesModule
+    SharedModulesModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class StudentModule { }

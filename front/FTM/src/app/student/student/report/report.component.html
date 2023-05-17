@@ -1,1 +1,19 @@
-<p>report works!</p>
+<section class="report">
+    <h2>تقرير نهاية التدريب</h2>
+    <div class="formReport">
+        <form [formGroup]="reportForm" id="ratingForm">
+            <h6>عدد المهام المنجزة بالتدريب</h6>
+            <div class="form-group numTasks">
+                <input type="text" class="form-control" formControlName="NumTasks">
+            </div>
+            <h6>تقييم التدريب ووصفه</h6>
+            <div class="form-group">
+                <textarea form="ratingForm" rows="4" cols="52"></textarea>
+            </div> 
+            
+            <div class="submit">
+                <app-button [label]="labelBtn"></app-button>
+            </div>
+        </form>
+    </div>
+</section>
