@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-
+  passwordLabel:string='تغيير كلمة المرور';
+  phoneLabel:string='تغيير رقم الهاتف';
   constructor() { }
 
   ngOnInit(): void {

@@ -9,10 +9,8 @@
         p{
             margin-top: 15px;
         }
-        button{
-            background-color: var(--primary-color);
-            color: var(--content-color);
-            font-weight: 500;
+        .changePass, .changePhone{
+            text-align: left;
         }
     }
 }

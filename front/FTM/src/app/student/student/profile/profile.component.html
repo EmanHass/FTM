@@ -11,8 +11,9 @@
 
                 <h6>كلمة المرور</h6>
                 <p>********</p>
-                <button type="button" class="btn btn-light">تغيير كلمة المرور</button>
-
+                <div class="changePass">
+                    <app-button [label]="passwordLabel"></app-button>
+                </div>
             </div>
             <div class="col">
                 <h6>الرقم الجامعي</h6>
@@ -20,8 +21,9 @@
 
                 <h6>رقم الهاتف</h6>
                 <p>0592894843</p>
-
-                <button type="button" class="btn btn-light">تغيير رقم الهاتف</button>
+                <div class="changePhone">
+                    <app-button [label]="phoneLabel"></app-button>
+                </div>
             </div>
         </div>
     </div>

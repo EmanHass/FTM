@@ -7,6 +7,7 @@ import { ProfileComponent } from './student/profile/profile.component';
 import { HomeComponent } from './student/home/home.component';
 import { TrainingDataComponent } from './student/training-data/training-data.component';
 import { ReportComponent } from './student/report/report.component';
+import { SharedModulesModule } from '../shared-modules/shared-modules.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ReportComponent } from './student/report/report.component';
   ],
   imports: [
     CommonModule,
-    StudentRoutingModule
+    StudentRoutingModule,
+    SharedModulesModule
   ]
 })
 export class StudentModule { }
