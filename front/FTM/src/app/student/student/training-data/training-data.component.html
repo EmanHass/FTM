@@ -1,1 +1,46 @@
-<p>training-data works!</p>
+<section class="training-data">
+    <h2>بيانات التدريب</h2>
+    <div class="row">
+        <div class="col supervisor-data">
+            <h5>بيانات المشرف الأكاديمي</h5>
+            <div class="data">
+                <h6>اسم المشرف الأكاديمي</h6>
+                <p>{{supervisorData.name}}</p>
+
+                <h6>البريد الإلكتروني</h6>
+                <p>{{supervisorData.email}}</p>
+
+                <h6>رقم الهاتف</h6>
+                <p>{{supervisorData.phone}}</p>
+            </div>
+        </div>
+        <div class="col company-data">
+            <h5>بيانات الشركة التدريبية</h5>
+            <div class="data">
+                <h6>اسم الشركة</h6>
+                <p>{{companyData.name}}</p>
+
+                <h6>مجال الشركة</h6>
+                <p>{{companyData.field}}</p>
+
+                <h6>عدد أيام التدريب</h6>
+                <p>{{companyData.numDaysTraining}}</p>
+
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h6>تاريخ بداية التدريب</h6>
+                    <p><img src="assets/images/calender.png"/> {{companyData.startTraining}}</p>
+                </div>
+                <div class="col">
+                    <h6>تاريخ نهاية التدريب</h6>
+                    <p><img src="assets/images/calender.png"/> {{companyData.endTraining}}</p>
+                </div>
+            </div>
+
+            <div class="changeCompany">
+                <app-button [label]="labelBtn"></app-button>
+            </div>
+        </div>
+    </div>
+</section>
