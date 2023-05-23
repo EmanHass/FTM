@@ -12,7 +12,7 @@
                 <h6>كلمة المرور</h6>
                 <p>********</p>
                 <div class="changePass">
-                    <app-button [label]="passwordLabel"></app-button>
+                    <app-button [label]="passwordLabel" (onClick)="editPassword()"></app-button>
                 </div>
             </div>
             <div class="col">
@@ -22,9 +22,65 @@
                 <h6>رقم الهاتف</h6>
                 <p>0592894843</p>
                 <div class="changePhone">
-                    <app-button [label]="phoneLabel"></app-button>
+                    <app-button [label]="phoneLabel" (onClick)="editPhone()"></app-button>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<div class="modal" *ngIf="showPhoneModal || showPassModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body" *ngIf="showPhoneModal">
+            <div class="header">
+                <h4>تغيير رقم الهاتف</h4>
+                <h1 (click)="closeModal()">×</h1>
+            </div>
+            <form class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>رقم الهاتف الجديد</label>
+                        <input type="number" class="form-control"/>
+                    </div>
+                    <div class="align margin-bottom">
+                     <app-button [label]="phoneLabel" (onClick)="successEditPhone()"></app-button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="modal-body" *ngIf="showPassModal">
+            <div class="header">
+                <h4>تغيير كلمة المرور</h4>
+                <h1 (click)="closeModal()">×</h1>
+            </div>
+            <form class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>كلمة المرور الحالية</label>
+                        <input type="number" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label>كلمة المرور الجديدة</label>
+                        <input type="number" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label>تأكيد كلمة المرور الجديدة</label>
+                        <input type="number" class="form-control"/>
+                    </div>
+                    <div class="align">
+                        <app-button [label]="passwordLabel" (onClick)="successEditPass()"></app-button>
+                    </div>
+                </div>
+            </form>
+        </div>
+      </div> 
+    </div>
+    <div class="row">
+        <div *ngIf="isEditPhone ||isEditPass " class="alert alert-success col-2" role="alert">
+            <p *ngIf="isEditPhone">تم تغيير رقم الهاتف</p>
+            <p *ngIf="isEditPass">تم تغيير كلمة المرور</p>
+        </div> 
+      </div>
+</div>
