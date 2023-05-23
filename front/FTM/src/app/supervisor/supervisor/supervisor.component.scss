@@ -1,0 +1,30 @@
+.page{
+    background-color: var(--content-color);
+}
+.container{
+    max-width: 867px;
+.header{
+    .navbar-brand{
+        margin: 0 0 0 18px;
+    }
+    .navbar-nav{
+        a{
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        .active{
+            border-bottom: 6px solid transparent;
+            border-image-source: url("../../../assets/images/border.png");
+            border-image-slice: 0 0 100% 0;
+        }
+    }
+    .signout{
+        margin-right: 27px;
+        button{
+            background-color: var(--primary-color);
+            color: var(--content-color);
+            font-weight: 500;
+        }
+    }
+}
+}

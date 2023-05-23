@@ -1,0 +1,35 @@
+<section class="home">
+    <div class="header">
+        <h3>أجندة التدريب</h3>
+    </div>
+    <div class="content">
+        <div>
+            <app-button [label]="btnLabel"></app-button>
+        </div>
+        <div class="row info">
+                <h6 class="col-3">عدد الشركات التدريبية</h6>
+                <div class="number col-1">10</div>
+                <h6 class="col-3">عدد طلبة التدريب</h6>
+                <div class="number col-1">54</div>
+        </div>
+
+        <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">اسم الفصل</th>
+                <th scope="col">سنة الفصل</th>
+                <th scope="col">حالة الفصل</th>
+                <th scope="col">الإجراءات</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let semester of semesters">
+                    <td>{{semester.semesterName}}</td>
+                    <td>{{semester.year}}</td>
+                    <td>{{semester.status}}</td>
+                    <td>{{semester.settings}}</td>
+                </tr>
+            </tbody>
+          </table>
+    </div>
+</section>

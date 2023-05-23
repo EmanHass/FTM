@@ -1,0 +1,36 @@
+.home{
+    margin: 50px 0;
+    .header{
+        color: var(--primary-color);
+        h3{
+            font-weight: bold;
+        }
+    }
+    .content{
+        margin-top: 25px;
+        .info{
+            align-items: center;
+            margin: 20px 0;
+        }
+        .companyNum{
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        .number{
+            background: var(--bg-color);
+            padding: 3px 15px;
+            font-size: 31px;
+            border-radius: 5px;
+            color: var(--content-color);
+            margin-right: 11px;
+        }
+        table{
+            text-align: center;
+            thead{
+                background-color: var(--primary-color);
+                color: var(--content-color);
+            }
+        }
+    }
+}
