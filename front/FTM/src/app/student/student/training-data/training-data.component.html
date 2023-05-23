@@ -39,8 +39,9 @@
             </div>
 
             <div class="changeCompany">
-                <app-button [label]="labelBtn"></app-button>
+                <app-button [label]="labelBtn" (onClick)="updateData()"></app-button>
             </div>
+            <app-std-edit *ngIf="modalStatus" (closedModal)="closedModel($event)" [comapnyData]="companyData"></app-std-edit>
         </div>
     </div>
 </section>

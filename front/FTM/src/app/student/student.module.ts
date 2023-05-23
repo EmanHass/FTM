@@ -9,6 +9,7 @@ import { TrainingDataComponent } from './student/training-data/training-data.com
 import { ReportComponent } from './student/report/report.component';
 import { SharedModulesModule } from '../shared-modules/shared-modules.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StdEditComponent } from './student/std-edit/std-edit.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ProfileComponent,
     HomeComponent,
     TrainingDataComponent,
-    ReportComponent
+    ReportComponent,
+    StdEditComponent
   ],
   imports: [
     CommonModule,

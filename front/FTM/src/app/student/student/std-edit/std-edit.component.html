@@ -1,0 +1,69 @@
+<div class="modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="header">
+            <h4>تعديل الشركة التدريبية</h4>
+            <h1 (click)="closeModal()">×</h1>
+          </div>
+          <form [formGroup]="updateCompanyData">
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label>اسم الشركة</label>
+                  <input type="text" class="form-control" formControlName="name"/>
+                </div>
+                <div class="form-group">
+                  <label>عنوان الشركة</label>
+                  <input type="text" class="form-control" formControlName="address"/>
+                </div>
+                <div class="form-group">
+                  <label>مجال الشركة</label>
+                  <input type="text" class="form-control" formControlName="field"/>
+                </div>
+                <div class="form-group">
+                  <label>تفاصيل عن الشركة</label>
+                  <textarea rows="4" cols="52" formControlName="description"></textarea>
+                </div>
+                <div class="update">
+                  <app-button [label]="labelBtn" (onClick)="update()"></app-button>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label>عدد أيام التدريب</label>
+                  <input type="text" class="form-control" formControlName="numDaysTraining"/>
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label>تاريخ بداية التدريب</label>
+                      <input type="date" class="form-control" formControlName="startTraining"/>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      <label>تاريخ نهاية التدريب</label>
+                      <input type="date" class="form-control" formControlName="endTraining"/>
+                    </div>                   
+                  </div>
+                </div>
+
+                <div class="acceptance-img">
+                  <label>إضافة ورقة قبول الشركة</label>
+                  <input type="file"/>
+                </div>
+              </div>
+            </div>
+        </form>
+        </div>
+      </div> 
+    </div>
+    <div class="row">
+      <div *ngIf="isUpdate" class="alert alert-success col-2" role="alert">
+        تم تعديل بيانات الشركة
+      </div> 
+    </div>
+
+</div>
