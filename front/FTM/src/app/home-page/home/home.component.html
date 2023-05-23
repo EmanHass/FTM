@@ -12,9 +12,7 @@
       <div class="row row-cols-1 row-cols-md-3 g-4">
           <div class="col" *ngFor="let data of trainingImportanceDtos; let i=index">
             <div class="card-icon" [class]="i==1?'icon-active':''">
-              <img *ngIf="i==0" src="{{imageSrc}}/{{data.image}}"/>
-              <img *ngIf="i==1" src="{{imageSrc}}/{{trainingImportanceDtos[2].image}}">
-              <img *ngIf="i==2" src="{{imageSrc}}/{{trainingImportanceDtos[1].image}}"/>
+              <img src="{{imageSrc}}/{{data.image}}"/>
               
             </div>
             <div [className]="i==1?'card active':'card'">
@@ -23,37 +21,6 @@
               </div>
             </div>
           </div>
-
-          <!-- <div class="col">
-            <div class="card-icon">
-              <img src="assets/icons/train-importance1.png"/>
-            </div>
-            <div class="card">
-              <div class="card-body">
-                <p class="card-text">إتاحة الفرصة للطلاب لكسب الخبرة العملية والتدريب والتعرف على سوق العمل قبل التخرج وتوجيه الطلاب على تحمل المسئولية والالتزام بالمواعيد وفقا لدوام المؤسسات الحكومية والخاصة. </p>            
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card-icon icon-active">
-              <img src="assets/icons/train-importance2.png"/>
-            </div>
-            <div class="card active">
-              <div class="card-body">
-                <p class="card-text">توجيه الطلاب على التعامل مع أفراد المجتمع والاستماع إلى آرائهم خارج الجامعة . تهيئة الطالب على إعداد وكتابة التقارير الفنية وتطوير مهاراته العلمية وتهيئته للعمل الميداني .</p>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card-icon">
-              <img src="assets/icons/train-importance3.png"/>
-            </div>
-            <div class="card">
-              <div class="card-body">
-                <p class="card-text">تزويد المؤسسات بالمعلومات عن نوعية الموارد البشرية المتوفرة التى ستساهم في تنمية المجتمع. إتاحة الفرصة لتلك المؤسسات تقويم أداء الطالب أثناء فترة التدريب ومعرفة مدى الاستفادة منه.</p>
-              </div>
-            </div>
-          </div> -->
         </div>
       </div>
   </section>
