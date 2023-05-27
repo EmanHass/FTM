@@ -1,0 +1,79 @@
+h1,h2,h3,h4,h5,h6,label{
+    color: var(--primary-color);
+}
+.company{
+    margin: 50px 0;
+    h3{
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+    .header{
+        .comapnt-btn{
+            display: flex;
+            gap: 5px;
+            margin-bottom: 20px;
+        }
+    }
+    table{
+        text-align: center;
+        border-collapse: collapse;
+        border: 1px solid #ddd;
+        border-radius: 1em 1em 0 0;
+        overflow: hidden;
+        thead{
+            background-color: var(--primary-color);
+            color: var(--content-color);
+            td{
+                font-weight: 500;
+                font-size: 18px;
+            }
+        }
+        svg{
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+    }
+}
+
+.modal{
+    display: block;
+    background: var(--bg-opacity);
+    .alert{
+        width: 18%;
+        padding: 10px;
+        margin: 20px;
+    }
+    .modal-dialog{
+        top: 15%;
+        max-width:800px
+    }
+    .modal-body{
+        padding: 15px 30px;
+        .header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            h1{
+                cursor: pointer;
+            }
+        }
+        .border-right{
+            border-right: 5px solid var(--bg-color);
+        }
+        .borderBottom{
+            border-bottom: 5px solid var(--bg-color);
+        }
+        form{
+            .form-group{
+                margin:20px 0;
+                label{
+                    margin-bottom: 5px;
+                }
+                input, textarea{
+                    width: 50%;
+                }
+            }
+        }
+
+    }
+}
