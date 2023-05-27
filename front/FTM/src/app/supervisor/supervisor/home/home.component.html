@@ -4,32 +4,170 @@
     </div>
     <div class="content">
         <div>
-            <app-button [label]="btnLabel"></app-button>
+            <app-button [label]="btnLabel" (onClick)="showAddModal()"></app-button>
         </div>
         <div class="row info">
-                <h6 class="col-3">عدد الشركات التدريبية</h6>
-                <div class="number col-1">10</div>
-                <h6 class="col-3">عدد طلبة التدريب</h6>
-                <div class="number col-1">54</div>
+                <h6 class="col-lg-3">عدد الشركات التدريبية</h6>
+                <div class="number col-md-1">10</div>
+                <h6 class="col-lg-3">عدد طلبة التدريب</h6>
+                <div class="number number2 col-md-1">54</div>
         </div>
 
         <table class="table table-bordered">
             <thead>
               <tr>
-                <th scope="col">اسم الفصل</th>
-                <th scope="col">سنة الفصل</th>
-                <th scope="col">حالة الفصل</th>
-                <th scope="col">الإجراءات</th>
+                <td scope="col">اسم الفصل</td>
+                <td scope="col">سنة الفصل</td>
+                <td scope="col">حالة الفصل</td>
+                <td scope="col">الإجراءات</td>
               </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let semester of semesters">
+                <tr *ngFor="let semester of semesters; let i=index;">
                     <td>{{semester.semesterName}}</td>
                     <td>{{semester.year}}</td>
                     <td>{{semester.status}}</td>
-                    <td>{{semester.settings}}</td>
+                    <td>
+                        <svg (click)="showPreviousSemester()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                          </svg>
+                          <svg *ngIf="i==0" (click)="showEditModal()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+                            <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
+                          </svg>
+                    </td>
+                    
                 </tr>
             </tbody>
           </table>
+    </div>
+</section>
+
+<!-- Add and Edit Agenda -- Modal -->
+<section>
+    <div class="modal" *ngIf="showModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body">
+                <div class="header">
+                    <h3 *ngIf="isAdd">إضافة أجندة التدريب</h3>
+                    <h3 *ngIf="isEdit">تعديل أجندة التدريب</h3>
+                    <h1 (click)="closeModal()">×</h1>
+                </div>
+
+                <form formGroup="agendaForm">
+                    <header>
+                        <div class="form-group">
+                            <label>اسم الفصل</label>
+                            <input type="text" formControlName="semesterName"/>
+                        </div>
+                        <div class="form-group">
+                            <label>سنة الفصل</label>
+                            <input type="text" formControlName="semesterYear"/>
+                        </div>
+                    </header>
+                    <div>
+                        <h4>أجندة الفصل الدراسي</h4>
+                        <div class="row agenda">
+                            <div class="col-5 start">
+                                <div  class="form-group">
+                                    <label>بداية تسجيل الطلبة للتدريب</label>
+                                    <input type="date" class="form-control" formControlName="startRegister"/>
+                                </div> 
+                                <div  class="form-group">
+                                    <label>بداية تدريب الطلبة</label>
+                                    <input type="date" class="form-control" formControlName="endRegister"/>
+                                </div>
+                                <div  class="form-group">
+                                    <label>بداية تسليم الطلبة لتقرير التدريب</label>
+                                    <input type="date" class="form-control" formControlName="startTraining"/>
+                                </div>                             
+                            </div>
+                            <div class="col-1"></div>
+                            <div class="col-5 end">
+                                <div  class="form-group">
+                                    <label>نهاية تسجيل الطلبة للتدريب</label>
+                                    <input type="date" class="form-control" formControlName="endTraining"/>
+                                </div> 
+                                <div  class="form-group">
+                                    <label>نهاية تدريب الطلبة</label>
+                                    <input type="date" class="form-control" formControlName="startSubmitReport"/>
+                                </div>
+                                <div  class="form-group">
+                                    <label>نهاية تسليم الطلبة لتقرير التدريب</label>
+                                    <input type="date" class="form-control" formControlName="endSubmitReport"/>
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="align">
+                            <app-button [label]="isAdd?add:edit" (onClick)="addingAgenda()"></app-button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+          </div> 
+        </div>
+    </div>
+</section>
+
+<!-- Show The data of Previous Semester -- Modal -->
+
+<section>
+    <div class="modal" *ngIf="previousStatus">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body">
+                <div class="dataSemester">
+                    <div class="header">
+                        <h2>بيانات الفصل الدراسي</h2>
+                        <h1 (click)="closeModal()">×</h1>
+                    </div>
+                    <table class="table">
+                        <tr class="borderBottom">
+                            <td><h6>اسم الفصل</h6></td>
+                            <td class="border-right">
+                                <div>
+                                    الفصل الصيفي
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="borderBottom">
+                            <td><h6>سنة الفصل</h6></td>
+                            <td class="border-right">2021/2022</td>
+                        </tr>
+                        <tr>
+                            <td><h6>حالة الفصل</h6></td>
+                            <td class="border-right">مؤرشف</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="agendaSemester">
+                    <h2>أجندة الفصل الدراسي</h2>
+                    <table class="table">
+                        <tr class="borderBottom">
+                            <td><h6>اسم الأجندة</h6></td>
+                            <td class="border-right text-center"><h6>تاريخ البداية</h6></td>
+                            <td class="border-right text-center"><h6>تاريخ النهاية</h6></td>
+                        </tr>
+                        <tr class="borderBottom">
+                            <td><h6>تسجيل الطلبة للتدريب</h6></td>
+                            <td class="border-right text-center">2022-06-2</td>
+                            <td class="border-right text-center">2022-06-15</td>
+                        </tr>
+                        <tr class="borderBottom">
+                            <td><h6>تدريب الطلبة</h6></td>
+                            <td class="border-right text-center">2022-06-20</td>
+                            <td class="border-right text-center">2022-07-2</td>
+                        </tr>
+                        <tr>
+                            <td><h6>تسليم الطلبة لتقرير التدريب</h6></td>
+                            <td class="border-right text-center">2022-08-14</td>
+                            <td class="border-right text-center">2022-08-17</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+          </div> 
+        </div>
     </div>
 </section>

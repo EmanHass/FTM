@@ -1,3 +1,6 @@
+h6,h4,h3,h2,h1{
+    color: var(--primary-color);
+}
 .home{
     margin: 50px 0;
     .header{
@@ -19,18 +22,94 @@
         }
         .number{
             background: var(--bg-color);
-            padding: 3px 15px;
+            text-align: center;
             font-size: 31px;
+            font-weight: bold;
             border-radius: 5px;
             color: var(--content-color);
-            margin-right: 11px;
+            margin-right: -5%;
+        }
+        .number2{
+            margin-right: -9%;
         }
         table{
             text-align: center;
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+            border-radius: 1em 1em 0 0;
+            overflow: hidden;
             thead{
                 background-color: var(--primary-color);
                 color: var(--content-color);
+                td{
+                    font-weight: 500;
+                    font-size: 18px;
+                }
+            }
+            svg{
+                color: var(--primary-color);
+                cursor: pointer;
             }
         }
+    }
+}
+.modal{
+    display: block;
+    background: var(--bg-opacity);
+    .alert{
+        width: 18%;
+        padding: 10px;
+        margin: 20px;
+    }
+    .modal-dialog{
+        top: 15%;
+        max-width:800px
+    }
+    .modal-body{
+        padding: 15px 30px;
+        .header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            h1{
+                cursor: pointer;
+            }
+        }
+        .border-right{
+            border-right: 5px solid var(--bg-color);
+        }
+        .borderBottom{
+            border-bottom: 5px solid var(--bg-color);
+        }
+        form{
+            header{
+                margin: 11px 0 26px;
+                label{
+                    font-weight: 500;
+                    margin-left: 10px;
+                }
+                div{
+                    margin-bottom: 14px;
+                    input{
+                        border: 2px solid var(--primary-color);
+                        border-radius: 5px;
+                    }
+                }
+            }
+            .agenda{
+                margin:20px 0;
+                input{
+                    border:none;
+                    margin:10px 0;
+                }
+            }
+            .end{
+                border-right: 3px solid var(--bg-color);
+            }
+            .align{
+                text-align: left;
+            }
+        }
+
     }
 }
