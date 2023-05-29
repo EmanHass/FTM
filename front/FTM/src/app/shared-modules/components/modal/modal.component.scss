@@ -1,12 +1,5 @@
 .modal{
-    display: block;
-    background: var(--bg-opacity);
     cursor: pointer;
-
-    .modal-dialog{
-        top: 15%;
-        max-width:800px
-    }
     .company-info{
         padding-right: 20px;
         .name{

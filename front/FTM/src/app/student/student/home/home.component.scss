@@ -1,10 +1,10 @@
 .home{
-    margin: 50px 0;
+    margin: var(--margin-top);
     .header{
         color: var(--primary-color);
     }
     .content{
-        margin-top: 50px;
+        margin: var(--margin-top);
         p{
             padding: 10px 0;
             background: #FFFFFF;

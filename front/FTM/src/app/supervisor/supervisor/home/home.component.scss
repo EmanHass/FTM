@@ -1,10 +1,6 @@
-h6,h4,h3,h2,h1{
-    color: var(--primary-color);
-}
 .home{
-    margin: 50px 0;
+    margin: var(--margin-top);
     .header{
-        color: var(--primary-color);
         h3{
             font-weight: bold;
         }
@@ -32,49 +28,10 @@ h6,h4,h3,h2,h1{
         .number2{
             margin-right: -9%;
         }
-        table{
-            text-align: center;
-            border-collapse: collapse;
-            border: 1px solid #ddd;
-            border-radius: 1em 1em 0 0;
-            overflow: hidden;
-            thead{
-                background-color: var(--primary-color);
-                color: var(--content-color);
-                td{
-                    font-weight: 500;
-                    font-size: 18px;
-                }
-            }
-            svg{
-                color: var(--primary-color);
-                cursor: pointer;
-            }
-        }
     }
 }
 .modal{
-    display: block;
-    background: var(--bg-opacity);
-    .alert{
-        width: 18%;
-        padding: 10px;
-        margin: 20px;
-    }
-    .modal-dialog{
-        top: 15%;
-        max-width:800px
-    }
     .modal-body{
-        padding: 15px 30px;
-        .header{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            h1{
-                cursor: pointer;
-            }
-        }
         .border-right{
             border-right: 5px solid var(--bg-color);
         }
@@ -105,9 +62,6 @@ h6,h4,h3,h2,h1{
             }
             .end{
                 border-right: 3px solid var(--bg-color);
-            }
-            .align{
-                text-align: left;
             }
         }
 

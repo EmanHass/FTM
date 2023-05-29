@@ -1,26 +1,6 @@
 .std-data{
-    margin: 50px 0;
-    h2{
-        color: var(--primary-color);
-    }
+    margin: var(--margin-top);
     table{
-        text-align: center;
-        border-collapse: collapse;
-        border: 1px solid #ddd;
-        border-radius: 1em 1em 0 0;
-        overflow: hidden;
         margin-top: 20px;
-        thead{
-            background-color: var(--primary-color);
-            color: var(--content-color);
-            td{
-                font-weight: 500;
-                font-size: 18px;
-            }
-        }
-        svg{
-            color: var(--primary-color);
-            cursor: pointer;
-        }
     }
 }

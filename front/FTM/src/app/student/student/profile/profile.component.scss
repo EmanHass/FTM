@@ -1,59 +1,15 @@
 .profile{
-    margin: 50px 0;
-    h2, h6{
-        color: var(--primary-color);
-    }
+    margin: var(--margin-top);
     .content{
         margin-right: 15px;
         margin-top: 30px;
         p{
             margin-top: 15px;
         }
-        .changePass, .changePhone{
-            text-align: left;
-        }
     }
 }
 .modal{
-    display: block;
-    background: var(--bg-opacity);
-    .alert{
-        width: 18%;
-        padding: 10px;
-        margin: 20px;
-    }
-    .modal-dialog{
-        top: 15%;
-        max-width:800px
-    }
     .modal-body{
-        padding: 15px 30px;
-        .header{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        h4,h1,label{
-            color: var(--primary-color);
-        }
-        h1{
-            font-size: 55px;
-            cursor: pointer;
-            font-weight: 500;
-        }
-        label{
-            font-weight: 500;
-            margin-bottom: 12px;
-        }
-        .form-group{
-            margin-bottom: 15px;
-            input{
-                border: none;
-            }
-        }
-        .align{
-            text-align: left;
-        }
         .margin-bottom{
             margin-bottom: 105px;
         }

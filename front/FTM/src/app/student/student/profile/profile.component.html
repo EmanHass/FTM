@@ -11,7 +11,7 @@
 
                 <h6>كلمة المرور</h6>
                 <p>********</p>
-                <div class="changePass">
+                <div class="alignText">
                     <app-button [label]="passwordLabel" (onClick)="editPassword()"></app-button>
                 </div>
             </div>
@@ -21,7 +21,7 @@
 
                 <h6>رقم الهاتف</h6>
                 <p>0592894843</p>
-                <div class="changePhone">
+                <div class="alignText">
                     <app-button [label]="phoneLabel" (onClick)="editPhone()"></app-button>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                         <label>رقم الهاتف الجديد</label>
                         <input type="number" class="form-control"/>
                     </div>
-                    <div class="align margin-bottom">
+                    <div class="alignText margin-bottom">
                      <app-button [label]="phoneLabel" (onClick)="successEditPhone()"></app-button>
                     </div>
                 </div>
