@@ -8,6 +8,7 @@ import { AddComponent } from './components/agenda/add/add.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ButtonComponent } from './components/button/button.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { ButtonComponent } from './components/button/button.component';
     EditComponent,
     AddComponent,
     ModalComponent,
-    ButtonComponent
+    ButtonComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,8 @@ import { ButtonComponent } from './components/button/button.component';
   ],
   exports:[
     ModalComponent,
-    ButtonComponent
+    ButtonComponent,
+    ProfileComponent
   ]
 })
 export class SharedModulesModule { }

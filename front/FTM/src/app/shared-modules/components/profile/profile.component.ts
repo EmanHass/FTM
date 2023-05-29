@@ -1,20 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-profile-student',
+  selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+
   passwordLabel:string='تغيير كلمة المرور';
   showPassModal:boolean=false;
   phoneLabel:string='تغيير رقم الهاتف';
   showPhoneModal:boolean=false;
   isEditPhone:boolean=false;
   isEditPass:boolean=false;
+  getStatus:string;
   constructor() { }
 
   ngOnInit(): void {
+    this.getStatus=localStorage.getItem("status");
   }
   closeModal(){
     this.showPassModal=false;
@@ -44,4 +47,5 @@ export class ProfileComponent implements OnInit {
       this.closeModal();
     },2000);
   }
+
 }

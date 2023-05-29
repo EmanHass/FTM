@@ -44,7 +44,6 @@ export class ModalComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.companyArr);
     // this.companyArr.find((i:any)=>i.id==this.id);
     this.companyInfo = this.companyArr.find((i:any)=>i.id==this.id);
     

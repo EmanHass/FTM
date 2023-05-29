@@ -1,0 +1,91 @@
+<section class="profile">
+    <h2>الملف الشخصي</h2>
+    <div class="content">
+        <div class="row">
+            <div class="col">
+                <h6>الإسم</h6>
+                <p *ngIf="getStatus =='student'">أسيل الودية</p>
+                <p *ngIf="getStatus =='supervisor'">يوسف أبو سلطان</p>
+
+                <h6>البريد الإلكتروني</h6>
+                <p *ngIf="getStatus =='student'">asil@gmail.com</p>
+                <p *ngIf="getStatus =='supervisor'">yousef@gmail.com</p>
+
+                <h6>كلمة المرور</h6>
+                <p>********</p>
+                <div class="alignText">
+                    <app-button [label]="passwordLabel" (onClick)="editPassword()"></app-button>
+                </div>
+            </div>
+            <div class="col">
+                <div *ngIf="getStatus === 'student'">
+                    <h6>الرقم الجامعي</h6>
+                    <p> 20180401</p>
+                </div>
+
+                <h6>رقم الهاتف</h6>
+                <p *ngIf="getStatus =='student'">0592894843</p>
+                <p *ngIf="getStatus =='supervisor'">059900900</p>
+                <div class="alignText">
+                    <app-button [label]="phoneLabel" (onClick)="editPhone()"></app-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal" *ngIf="showPhoneModal || showPassModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body" *ngIf="showPhoneModal">
+            <div class="header">
+                <h4>تغيير رقم الهاتف</h4>
+                <h1 (click)="closeModal()">×</h1>
+            </div>
+            <form class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>رقم الهاتف الجديد</label>
+                        <input type="number" class="form-control"/>
+                    </div>
+                    <div class="alignText margin-bottom">
+                     <app-button [label]="phoneLabel" (onClick)="successEditPhone()"></app-button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="modal-body" *ngIf="showPassModal">
+            <div class="header">
+                <h4>تغيير كلمة المرور</h4>
+                <h1 (click)="closeModal()">×</h1>
+            </div>
+            <form class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>كلمة المرور الحالية</label>
+                        <input type="number" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label>كلمة المرور الجديدة</label>
+                        <input type="number" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label>تأكيد كلمة المرور الجديدة</label>
+                        <input type="number" class="form-control"/>
+                    </div>
+                    <div class="align">
+                        <app-button [label]="passwordLabel" (onClick)="successEditPass()"></app-button>
+                    </div>
+                </div>
+            </form>
+        </div>
+      </div> 
+    </div>
+    <div class="row">
+        <div *ngIf="isEditPhone ||isEditPass " class="alert alert-success col-2" role="alert">
+            <p *ngIf="isEditPhone">تم تغيير رقم الهاتف</p>
+            <p *ngIf="isEditPass">تم تغيير كلمة المرور</p>
+        </div> 
+      </div>
+</div>
