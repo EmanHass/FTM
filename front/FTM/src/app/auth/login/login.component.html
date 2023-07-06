@@ -26,6 +26,9 @@
                         </div>
                         <div class="form-group col">
                             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="كلمة المرور" formControlName="password">
+                            <div class="forget-password">
+                                <p routerLink="/forgetpassword">هل نسيت كلمة المرور؟</p>
+                            </div>
                         </div> 
                         <button class="btn btn-primary submit" (click)="submit()" [routerLink]='isStudent?"/student":"/supervisor"'>تسجيل الدخول</button>                 
                 </form>
