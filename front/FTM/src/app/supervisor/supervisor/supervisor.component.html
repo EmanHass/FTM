@@ -38,7 +38,7 @@
                   <a class="nav-link" routerLink="studentdata" routerLinkActive="active"> بيانات الطلاب</a>
                 </div>
                 <div class="signout">
-                    <app-button [label]="labelButton" routerLink="/"></app-button>
+                    <app-button [label]="labelButton" (onClick)="logout()"></app-button>
                 </div>
               </div>
             </div>

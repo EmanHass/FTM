@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
+import { AccountService } from '../account.service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +13,8 @@ export class LoginComponent implements OnInit {
   isStudent:boolean=true;
   isSupervisor:boolean=false;
   loginForm: FormGroup;
-  constructor() {
+  errorMsg:string;
+  constructor(private authService:AuthService,private accountService:AccountService, private router:Router) {
      this.initializationFG();
    }
 
@@ -45,7 +49,7 @@ export class LoginComponent implements OnInit {
     this.isSupervisor=true;
     this.isStudent=false;
   }
-  submit(){
+  login(){
     if(this.isStudent){
       //check if student valid and then navigate his to his profile 
       localStorage.setItem('status','student');
@@ -53,6 +57,22 @@ export class LoginComponent implements OnInit {
       //if supervisor then check login info. and convert it to his profile
       localStorage.setItem('status','supervisor');
     }
+    this.authService.login(this.loginForm.value.email,this.loginForm.value.password).subscribe(
+      res=>{
+        this.accountService.setUserData(res);
+        
+        if(this.accountService.isAdminRole()){
+          this.router.navigate(["/supervisor"]);
+        }else if(this.accountService.isStudentRole()){
+          this.router.navigate(["/student"])
+        }else{
+          this.errorMsg="Invalid Email OR Password";
+        }
+      },
+      error=>{
+        this.errorMsg="Invalid Email OR Password";
+      }
+    );
   }
 
 }
