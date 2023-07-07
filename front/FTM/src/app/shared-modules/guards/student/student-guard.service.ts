@@ -8,6 +8,7 @@ import { AccountService } from 'src/app/auth/account.service';
 export class StudentGuardService implements CanActivate,CanLoad{
 
   constructor(private accountService:AccountService) { }
+  // to prevent user to access student Route if not student role
   canActivate(route:ActivatedRouteSnapshot, state:RouterStateSnapshot): boolean {
     if(this.accountService.isStudentRole()){
       let permission = route.data['permissions'];
@@ -19,6 +20,7 @@ export class StudentGuardService implements CanActivate,CanLoad{
     return false;
   }
 
+  // to prevent load module if not student role
   canLoad(route: Route): boolean{
     if(this.accountService.isStudentRole()){
       let permission = route.data['permissions'];
