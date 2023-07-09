@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AccountService } from 'src/app/auth/account.service';
 import { Training } from 'src/app/shared-modules/model-interface/homePage/training';
 import { HomePageService } from 'src/app/shared-modules/services/home-page.service';
 
@@ -9,7 +10,7 @@ import { HomePageService } from 'src/app/shared-modules/services/home-page.servi
 })
 export class HeaderComponent implements OnInit {
   trainingHeader:Training;
-  constructor(private homeService:HomePageService) { }
+  constructor(private homeService:HomePageService, public accountService: AccountService) { }
 
   ngOnInit(): void {
     this.homeService.getAll().subscribe(
