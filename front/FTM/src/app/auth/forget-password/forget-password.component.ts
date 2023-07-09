@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-forget-password',
@@ -11,7 +12,7 @@ export class ForgetPasswordComponent implements OnInit {
   isEmailVaild:boolean=false;
   errorMsg:boolean=false;
   forgetPasswordForm: FormGroup;
-  constructor() {
+  constructor(private authService:AuthService) {
      this.initializationFG();
    }
 
@@ -20,7 +21,7 @@ export class ForgetPasswordComponent implements OnInit {
       email: new FormControl('', [
         Validators.required,
         Validators.email,
-        this.customEmail(),
+        this.authService.customEmail()
       ]),  
       newPassword: new FormControl('', [Validators.required]),
       confirmPassword: new FormControl('', [Validators.required]),
@@ -36,6 +37,7 @@ export class ForgetPasswordComponent implements OnInit {
       return null;
     };
   }
+  
   ngOnInit(): void {
   }
   confirmEmail(){

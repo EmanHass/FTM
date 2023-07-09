@@ -32,6 +32,9 @@ export class AccountService {
   getUserId():number{
     return this.getUserData().id;
   }
+  getName():string{
+    return this.getUserData().name;
+  }
   isLogin():boolean{
     return this.getUserData() != null;
   }

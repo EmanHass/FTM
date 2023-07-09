@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -11,17 +12,22 @@ export class SignupComponent implements OnInit {
   isSupervisor:boolean=false;
   studentForm: FormGroup;
   supervisorForm: FormGroup;
-  checkId:boolean=false;
-  constructor() {
+  isIdExist:boolean=false;
+  errorMsg:boolean=false;
+  emailMsg:boolean=false;
+  passwordMsg:boolean=false;
+  errorId:boolean=false;
+  constructor(private authService:AuthService) {
     if(this.isStudent) this.initializationFGStudent();
     else this.initializationFGSupervisor();
   }
   initializationFGStudent(): void {
     this.studentForm = new FormGroup({
+      idStudentNumber: new FormControl('',[Validators.required]),
       email: new FormControl('', [
         Validators.required,
         Validators.email,
-        this.customEmail(),
+        this.authService.customEmail()
       ]),  
       password: new FormControl('', [Validators.required]),
       confirmPassword: new FormControl('', [Validators.required]),
@@ -36,27 +42,17 @@ export class SignupComponent implements OnInit {
     });
   }
   initializationFGSupervisor(): void {
-    this.studentForm = new FormGroup({
+    this.supervisorForm = new FormGroup({
       supervisorName: new FormControl('', [Validators.required]),
       phoneNumber: new FormControl('', [Validators.required]),
       email: new FormControl('', [
         Validators.required,
         Validators.email,
-        this.customEmail(),
+        this.authService.customEmail()
       ]),  
       password: new FormControl('', [Validators.required]),
       confirmPassword: new FormControl('', [Validators.required]),
     });
-  }
-  customEmail(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      const value = control.value;
-
-      if (value && !value.includes('.com')) {
-        return { emailCustom: true };
-      }
-      return null;
-    };
   }
   ngOnInit(): void {
   }
@@ -70,8 +66,37 @@ export class SignupComponent implements OnInit {
     this.isSupervisor=true;
     this.isStudent=false;
   }
-  signup(){
-    this.checkId=true;
+  checkId(){
+    if(this.studentForm.value.idStudentNumber){
+      this.errorMsg=false;
+      if(this.studentForm.value.idStudentNumber == 20180293){
+        this.errorId=false;
+        //check if id exist so he can complete register
+        this.isIdExist=true;
+      }else{
+        this.errorId=true;
+      }
+    }else{
+      this.errorMsg=true;
+    }
+
+
+
+    // if(this.studentForm.value.idStudentNumber && this.studentForm.value.idStudentNumber == 20180293){
+    //   this.isIdExist=true;
+    //   this.errorMsg=false;
+    // }else if(this.studentForm.value.idStudentNumber == 20180293){
+    //   this.errorId=false;
+    // }else{
+    //   this.errorMsg=true;
+    // }
+
+
+    // if(this.isStudent){
+    //   // (api)create method of data student to database 
+    // }else if(this.isSupervisor){
+    //   // (api)create method of supervisor data to database
+    // }
   }
 
 }

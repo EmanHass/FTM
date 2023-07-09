@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AbstractControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
 @Injectable({
@@ -28,5 +29,16 @@ export class AuthService {
 
   getStatus(){
     return localStorage.getItem("status");
+  }
+
+  customEmail(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
+
+      if (value && !value.includes('.com')) {
+        return { emailCustom: true };
+      }
+      return null;
+    };
   }
 }
