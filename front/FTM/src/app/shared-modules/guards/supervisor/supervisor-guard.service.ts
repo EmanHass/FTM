@@ -8,7 +8,14 @@ import { AccountService } from 'src/app/auth/account.service';
 export class SupervisorGuardService implements CanActivate,CanLoad {
 
   constructor(private accountService:AccountService) { }
-  canActivate(route:ActivatedRouteSnapshot, state:RouterStateSnapshot): boolean {
+  canActivate(route:ActivatedRouteSnapshot): any {
+      this.canActiveLoad(route);
+  }
+  canLoad(route: Route):any{
+    this.canActiveLoad(route);
+  }
+
+  canActiveLoad(route: Route):boolean{
     if(this.accountService.isAdminRole()){
       let permission = route.data['permissions'];
       if(this.accountService.hasPermission(permission)){
@@ -17,15 +24,5 @@ export class SupervisorGuardService implements CanActivate,CanLoad {
     }
     this.accountService.logout();
     return false;
-  }
-  canLoad(route: Route): boolean{
-    if(this.accountService.isAdminRole()){
-      let permission = route.data['permissions'];
-      if(this.accountService.hasPermission(permission)){
-        return true;
-      }
-    }
-    this.accountService.logout();
-    return false;   
   }
 }
