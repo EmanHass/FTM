@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiLink: "http://mohammedalattar-001-site1.ctempurl.com/api",
+  apiLink: "http://ftms2023-001-site1.btempurl.com/api",
   apiImage: "http://mohammedalattar-001-site1.ctempurl.com/"
 };
 
