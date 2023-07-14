@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AgendaService } from 'src/app/shared-modules/services/agenda.service';
 
 @Component({
   selector: 'app-home',
@@ -7,39 +8,52 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   agenda:any;
+  semesterName:string;
+  semesterYear:string;
   startAgenda:any;
   endAgenda:any;
-  constructor() { }
+  constructor(private agendaService:AgendaService) { }
 
   ngOnInit(): void {
-    this.agenda=[
-      {
-        title:'بداية تسجيل الطلبة للتدريب',
-        date:'2022-06-2'
-      },
-      {
-        title:'بداية تدريب الطلبة',
-        date:'2022-06-20'
-      },
-      {
-        title:'بداية تسليم الطلبة لتقرير التدريب',
-        date:'2022-08-14'
-      },
-      {
-        title:'نهاية تسجيل الطلبة للتدريب',
-        date:'2022-06-15'
-      },
-      {
-        title:'نهاية تدريب الطلبة',
-        date:'2022-07-2'
-      },
-      {
-        title:'نهاية تسليم الطلبة لتقرير التدريب',
-        date:'2022-08-17'
+
+    this.agendaService.getAgenda().subscribe(
+      (res:any)=>{
+        console.log(this.semesterName);
+        
+        const agenda = res?.find((i:any)=>i.statusSemester == true);
+        this.agenda=[
+          {
+            title:'بداية تسجيل الطلبة للتدريب',
+            date: agenda?.startStudentRegistration
+          },
+          {
+            title:'بداية تدريب الطلبة',
+            date:agenda?.startTraining
+          },
+          {
+            title:'بداية تسليم الطلبة لتقرير التدريب',
+            date:'2022-08-14'
+          },
+          {
+            title:'نهاية تسجيل الطلبة للتدريب',
+            date:agenda?.endStudentRegistration
+          },
+          {
+            title:'نهاية تدريب الطلبة',
+            date: agenda?.endTraining
+          },
+          {
+            title:'نهاية تسليم الطلبة لتقرير التدريب',
+            date:'2022-08-17'
+          }
+        ];
+        this.semesterName=agenda?.nameSemester;
+        this.semesterYear=agenda?.academicYear;
+        this.startAgenda=this.agenda.slice(0,3);
+        this.endAgenda=this.agenda.slice(3,this.agenda.length);
       }
-    ];
-    this.startAgenda=this.agenda.slice(0,3);
-    this.endAgenda=this.agenda.slice(3,this.agenda.length);
+    );
+
   }
 
 }
