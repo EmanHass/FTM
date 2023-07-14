@@ -3,7 +3,7 @@
       <div class="header">
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
           <div class="container-fluid">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" routerLink="/">
               <img src="assets/logo/logo.png" />
             </a>
             <button
@@ -38,7 +38,7 @@
                   <a class="nav-link" routerLink="studentdata" routerLinkActive="active"> بيانات الطلاب</a>
                 </div>
                 <div class="signout">
-                    <app-button [label]="labelButton" routerLink="/"></app-button>
+                    <app-button [label]="labelButton" (onClick)="logout()"></app-button>
                 </div>
               </div>
             </div>

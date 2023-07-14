@@ -45,26 +45,28 @@
                     <h1 (click)="closeModal()">×</h1>
                 </div>
 
-                <form>
+                <form [formGroup]="companyForm">
                     <div class="form-group">
                         <label>اسم الشركة</label>
-                        <input type="text" class="form-control"/>
+                        <input type="text" class="form-control" formControlName="companyName"/>
                     </div>
                     <div class="form-group">
                         <label>عنوان الشركة</label>
-                        <input type="text" class="form-control"/>
+                        <input type="text" class="form-control" formControlName="companyAddress"/>
                     </div>
                     <div class="form-group">
                         <label>مجال الشركة</label>
-                        <input type="text" class="form-control"/>
+                        <input type="text" class="form-control" formControlName="companyField"/>
                     </div>
                     <div class="form-group">
                         <label>تفاصيل عن الشركة</label>
-                        <textarea class="form-control"></textarea>
+                        <textarea class="form-control" formControlName="description"></textarea>
                     </div>
+                    <div class="invalid" *ngIf="companyForm.invalid && error">املأ كل الحقول</div>
 
                     <div class="text-center">
-                        <app-button [label]="isAdd?addBtn:editBtn" (onClick)="closeModal()"></app-button>
+                        <app-button *ngIf="isAdd" [label]="addBtn" (onClick)="addingCompany()"></app-button>
+                        <app-button *ngIf="isEdit" [label]="editBtn" (onClick)="editCompany()"></app-button>
                     </div>
                 </form>
             </div>

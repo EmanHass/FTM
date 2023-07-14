@@ -4,6 +4,7 @@ import { HomeComponent } from './student/home/home.component';
 import { ProfileComponent } from './student/profile/profile.component';
 import { TrainingDataComponent } from './student/training-data/training-data.component';
 import { ReportComponent } from './student/report/report.component';
+import { StudentGuardService } from '../shared-modules/guards/student/student-guard.service';
 
 const routes: Routes = [
   {
@@ -13,11 +14,13 @@ const routes: Routes = [
   },
   {
     path:'home',
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate:[StudentGuardService],
+    data:{permissions:'student'}
   },
   {
     path:'profile',
-    component: ProfileComponent
+    component: ProfileComponent,
   },
   {
     path:'trainingdata',

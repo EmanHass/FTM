@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
+import { AccountService } from '../account.service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +13,10 @@ export class LoginComponent implements OnInit {
   isStudent:boolean=true;
   isSupervisor:boolean=false;
   loginForm: FormGroup;
-  constructor() {
+  errorMsg:string;
+  msgEmail:boolean=false;
+  msgPassword:boolean=false;
+  constructor(private authService:AuthService,private accountService:AccountService, private router:Router) {
      this.initializationFG();
    }
 
@@ -19,20 +25,10 @@ export class LoginComponent implements OnInit {
       email: new FormControl('', [
         Validators.required,
         Validators.email,
-        this.customEmail(),
+        this.authService.customEmail()
       ]),  
-      password: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required, Validators.minLength(10)]),
     });
-  }
-  customEmail(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      const value = control.value;
-
-      if (value && !value.includes('.com')) {
-        return { emailCustom: true };
-      }
-      return null;
-    };
   }
   ngOnInit(): void {
   }
@@ -45,13 +41,37 @@ export class LoginComponent implements OnInit {
     this.isSupervisor=true;
     this.isStudent=false;
   }
-  submit(){
+  login(){    
     if(this.isStudent){
       //check if student valid and then navigate his to his profile 
       localStorage.setItem('status','student');
     }else{
       //if supervisor then check login info. and convert it to his profile
       localStorage.setItem('status','supervisor');
+    }
+
+    if(this.loginForm.get('email').errors || this.loginForm.get('password').errors){
+      this.msgEmail=true;
+      this.msgPassword=true;
+    }else{
+      this.msgEmail=false;
+      this.msgPassword=false;
+      this.authService.login(this.loginForm.value.email,this.loginForm.value.password).subscribe(
+        res=>{
+          this.accountService.setUserData(res);
+          
+          if(this.accountService.isAdminRole()){
+            this.router.navigate(["/supervisor"]);
+          }else if(this.accountService.isStudentRole()){
+            this.router.navigate(["/student"])
+          }else{
+            this.errorMsg="Invalid Email OR Password";
+          }
+        },
+        error=>{
+          this.errorMsg="Invalid Email OR Password";
+        }
+      );
     }
   }
 

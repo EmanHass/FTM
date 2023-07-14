@@ -42,11 +42,22 @@
                 <h4>تغيير رقم الهاتف</h4>
                 <h1 (click)="closeModal()">×</h1>
             </div>
-            <form class="row">
+            <form class="row" [formGroup]="phoneFrom">
                 <div class="col-6">
                     <div class="form-group">
                         <label>رقم الهاتف الجديد</label>
-                        <input type="number" class="form-control"/>
+                        <input type="text" class="form-control" formControlName="phoneNumber" placeholder="أدخل رقم الهاتف"/>
+                        <div class="invalid" *ngIf="phoneFrom.get('phoneNumber').errors?.['isNumberic']">
+                            please enter a number
+                          </div>
+                          <div class="invalid" *ngIf="phoneFrom.get('phoneNumber').errors?.['maxMinLengthC']">
+                              please enter valid phone number length :
+                              {{phoneFrom.get('phoneNumber').errors?.['min']}}
+                          </div>
+                          <div class="invalid" *ngIf="phoneFrom.get('phoneNumber').errors?.['startNumber']">
+                              please enter a number start with '059' or '056'
+                          </div>
+                          <div class="invalid" *ngIf="error">أدخل رقم الهاتف</div>
                     </div>
                     <div class="alignText margin-bottom">
                      <app-button [label]="phoneLabel" (onClick)="successEditPhone()"></app-button>
@@ -60,20 +71,23 @@
                 <h4>تغيير كلمة المرور</h4>
                 <h1 (click)="closeModal()">×</h1>
             </div>
-            <form class="row">
+            <form class="row" [formGroup]="passwordForm">
                 <div class="col-6">
                     <div class="form-group">
                         <label>كلمة المرور الحالية</label>
-                        <input type="number" class="form-control"/>
+                        <input type="number" class="form-control" formControlName="currentPassword"/>
                     </div>
                     <div class="form-group">
                         <label>كلمة المرور الجديدة</label>
-                        <input type="number" class="form-control"/>
+                        <input type="number" class="form-control" formControlName="password"/>
                     </div>
                     <div class="form-group">
                         <label>تأكيد كلمة المرور الجديدة</label>
-                        <input type="number" class="form-control"/>
+                        <input type="number" class="form-control" formControlName="confirmPassword"/>
                     </div>
+                    <div class="invalid" *ngIf="passwordForm.hasError('passwordMismatch')">أدخل كلمة مرور متطابقة</div>
+                    <div class="invalid" *ngIf="passwordForm.invalid && error">املأ الحقول</div>
+                    <div class="invalid" *ngIf="errorCurrentPass">خطأ في كلمة المرور الحالية</div>
                     <div class="align">
                         <app-button [label]="passwordLabel" (onClick)="successEditPass()"></app-button>
                     </div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AccountService } from 'src/app/auth/account.service';
 
 @Component({
   selector: 'app-student',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StudentComponent implements OnInit {
   labelButton:string='تسجيل الخروج';
-  constructor() { }
+  constructor(private accountService:AccountService, private router:Router) { }
 
   ngOnInit(): void {
+  }
+  logout():void{
+    this.accountService.logout();
   }
 
 }

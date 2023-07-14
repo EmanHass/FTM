@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-company',
@@ -10,9 +11,11 @@ export class CompanyComponent implements OnInit {
   addCompanyExcel:string='تحميل ملف اكسل';
   addBtn:string='إضافة';
   editBtn:string='تعديل';
+  companyForm:FormGroup;
   showModalStatus:boolean=false;
   isEdit:boolean=false;
   isAdd:boolean=true;
+  error:boolean=false;
   companies:any=[
     {
       name:'شركة جوال',
@@ -30,7 +33,14 @@ export class CompanyComponent implements OnInit {
       address:'غزة',
     }
   ];
-  constructor() { }
+  constructor() { 
+    this.companyForm= new FormGroup({
+      companyName: new FormControl('',Validators.required),
+      companyAddress: new FormControl('',Validators.required),
+      companyField: new FormControl('',Validators.required),
+      description: new FormControl('',Validators.required)
+    });
+  }
 
   ngOnInit(): void {
   }
@@ -41,6 +51,28 @@ export class CompanyComponent implements OnInit {
   }
   closeModal(){
     this.showModalStatus=false;
+    this.resetForm();
+  }
+  resetForm(){
+    this.companyForm.reset();
+  }
+  addingCompany(){
+    if(this.companyForm.valid){
+      // adding new company using post method
+      this.showModalStatus=false;
+      this.resetForm();
+    }else{
+      this.error=true;
+    }
+  }
+  editCompany(){
+    if(this.companyForm.valid){
+      // adding new company using post method
+      this.showModalStatus=false;
+      this.resetForm();
+    }else{
+      this.error=true;
+    }   
   }
   showEditModal(){
     this.isEdit=true;

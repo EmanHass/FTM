@@ -9,6 +9,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class ReportComponent implements OnInit {
   reportForm: FormGroup;
   labelBtn:string='تقييم';
+  error:boolean=false;
   constructor() {
      this.initializationFG();
    }
@@ -23,6 +24,13 @@ export class ReportComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+  submitReport(){
+    if(this.reportForm.valid){
+      // submit report for this student using id std
+    }else{
+      this.error=true;
+    }
   }
 
 }

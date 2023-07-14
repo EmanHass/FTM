@@ -62,8 +62,24 @@
     }
     .nav-link {
       padding-left: 18px;
-      padding-right: 0;
       color: var(--content-color);
+    }
+  }
+  .loggedin{
+    cursor: pointer;
+  }
+  .dropdown-menu{
+    background-color: #8DB4D2;
+    border: none;
+    .dropdown-item{
+      color: #FFFF;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .dropdown-divider{
+      border-top: 3px solid #FBFBFB;
     }
   }
 }

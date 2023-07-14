@@ -55,7 +55,7 @@
                     <h1 (click)="closeModal()">×</h1>
                 </div>
 
-                <form formGroup="agendaForm">
+                <form [formGroup]="agendaForm">
                     <header>
                         <div class="form-group">
                             <label>اسم الفصل</label>
@@ -76,22 +76,22 @@
                                 </div> 
                                 <div  class="form-group">
                                     <label>بداية تدريب الطلبة</label>
-                                    <input type="date" class="form-control" formControlName="endRegister"/>
+                                    <input type="date" class="form-control" formControlName="startTraining"/>
                                 </div>
                                 <div  class="form-group">
                                     <label>بداية تسليم الطلبة لتقرير التدريب</label>
-                                    <input type="date" class="form-control" formControlName="startTraining"/>
+                                    <input type="date" class="form-control" formControlName="startSubmitReport"/>
                                 </div>                             
                             </div>
                             <div class="col-1"></div>
                             <div class="col-5 end">
                                 <div  class="form-group">
                                     <label>نهاية تسجيل الطلبة للتدريب</label>
-                                    <input type="date" class="form-control" formControlName="endTraining"/>
+                                    <input type="date" class="form-control" formControlName="endRegister"/>
                                 </div> 
                                 <div  class="form-group">
                                     <label>نهاية تدريب الطلبة</label>
-                                    <input type="date" class="form-control" formControlName="startSubmitReport"/>
+                                    <input type="date" class="form-control" formControlName="endTraining"/>
                                 </div>
                                 <div  class="form-group">
                                     <label>نهاية تسليم الطلبة لتقرير التدريب</label>
@@ -100,7 +100,9 @@
                             </div>
                         </div>
                         <div class="alignText">
-                            <app-button [label]="isAdd?add:edit" (onClick)="addingAgenda()"></app-button>
+                            <div class="invalid" *ngIf="agendaForm.invalid && error">املأ كل الحقول</div>
+                            <app-button *ngIf="isAdd" [label]="add" (onClick)="addingAgenda()"></app-button>
+                            <app-button *ngIf="isEdit" [label]="edit" (onClick)="updateAgenda()"></app-button>
                         </div>
                     </div>
                 </form>

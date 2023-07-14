@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   isAdd:boolean=false;
   isEdit:boolean=false;
   previousStatus:boolean=false;
+  error:boolean=false;
   semesters:any=[
     {
       semesterName:'الفصل الدراسي الأول',
@@ -43,7 +44,7 @@ export class HomeComponent implements OnInit {
    this.agendaForm = new FormGroup({
      semesterName: new FormControl('', [Validators.required]),  
      semesterYear: new FormControl('', [Validators.required]),
-     startRegister: new FormControl('', [Validators.required]),
+     startRegister: new FormControl('',[Validators.required]),
      endRegister: new FormControl('', [Validators.required]),
      startTraining: new FormControl('', [Validators.required]),
      endTraining: new FormControl('', [Validators.required]),
@@ -63,15 +64,36 @@ export class HomeComponent implements OnInit {
     this.isEdit=true;
     this.isAdd=false;
     this.showModal=true;
+    this.resetForm();
   }
   closeModal(){
     this.showModal=false;
     this.previousStatus=false;
+    this.resetForm();
   }
-  addingAgenda(){
-    this.showModal=false;
+  addingAgenda(){    
+    if(this.agendaForm.valid){
+      // post method to adding new agenda
+      this.showModal=false;
+      this.resetForm();
+    }else{
+      this.error=true;
+    }
+  }
+  updateAgenda(){
+    if(this.agendaForm.valid){
+      // take values and use put method using id agenda to upate agenda
+      this.showModal=false;
+      this.resetForm();
+    }else{
+      this.error=true;
+    }
   }
   showPreviousSemester(){
     this.previousStatus=true;
+  }
+
+  resetForm(){
+    this.agendaForm.reset();
   }
 }

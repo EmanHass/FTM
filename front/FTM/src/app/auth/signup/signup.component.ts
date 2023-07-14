@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -11,21 +12,28 @@ export class SignupComponent implements OnInit {
   isSupervisor:boolean=false;
   studentForm: FormGroup;
   supervisorForm: FormGroup;
-  checkId:boolean=false;
-  constructor() {
-    if(this.isStudent) this.initializationFGStudent();
-    else this.initializationFGSupervisor();
+  isIdExist:boolean=false;
+  errorMsg:boolean=false;
+  emailMsg:boolean=false;
+  passwordMsg:boolean=false;
+  errorId:boolean=false;
+
+  constructor(private authService:AuthService) {
+  this.initializationFGStudent();
+  this.initializationFGSupervisor();
   }
+  
   initializationFGStudent(): void {
     this.studentForm = new FormGroup({
+      idStudentNumber: new FormControl('',[Validators.required]),
       email: new FormControl('', [
         Validators.required,
         Validators.email,
-        this.customEmail(),
+        this.authService.customEmail()
       ]),  
       password: new FormControl('', [Validators.required]),
       confirmPassword: new FormControl('', [Validators.required]),
-      phoneNumber: new FormControl('', [Validators.required]),
+      phoneNumber: new FormControl('', [Validators.required,this.authService.customValidationPhone(10, 10)]),
       companyName: new FormControl('', [Validators.required]),
       companyAddress: new FormControl('', [Validators.required]),
       typeOfTraining: new FormControl('', [Validators.required]),
@@ -33,32 +41,24 @@ export class SignupComponent implements OnInit {
       startTrainingDate: new FormControl('', [Validators.required]),
       endTrainingDate: new FormControl('', [Validators.required]),
       acceptancImg: new FormControl('', [Validators.required]),
-    });
+    },
+    this.authService.checkPassword());
   }
   initializationFGSupervisor(): void {
-    this.studentForm = new FormGroup({
+    this.supervisorForm = new FormGroup({
       supervisorName: new FormControl('', [Validators.required]),
-      phoneNumber: new FormControl('', [Validators.required]),
+      phoneNumber: new FormControl('', [Validators.required,this.authService.customValidationPhone(10, 10)]),
       email: new FormControl('', [
         Validators.required,
         Validators.email,
-        this.customEmail(),
+        this.authService.customEmail()
       ]),  
       password: new FormControl('', [Validators.required]),
       confirmPassword: new FormControl('', [Validators.required]),
-    });
+    },
+    this.authService.checkPassword());
   }
-  customEmail(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      const value = control.value;
-
-      if (value && !value.includes('.com')) {
-        return { emailCustom: true };
-      }
-      return null;
-    };
-  }
-  ngOnInit(): void {
+  ngOnInit(): void {    
   }
 
   showStudentForm(){
@@ -70,8 +70,33 @@ export class SignupComponent implements OnInit {
     this.isSupervisor=true;
     this.isStudent=false;
   }
+  checkId(){
+    if(this.studentForm.value.idStudentNumber){
+      this.errorMsg=false;
+      if(this.studentForm.value.idStudentNumber == 20180293){
+        this.errorId=false;
+        //check if id exist so he can complete register
+        this.isIdExist=true;
+      }else{
+        this.errorId=true;
+        setTimeout(()=>{
+          this.errorId=false;
+        },2000);
+      }
+    }else{
+      this.errorMsg=true;
+    }
+  }
   signup(){
-    this.checkId=true;
+
+    if(this.isStudent){
+      console.log('student', this.studentForm.value);
+      // (api)create method of data student to database 
+    }else if(this.isSupervisor){
+      console.log('supervisor', this.supervisorForm?.value);
+      
+      // (api)create method of supervisor data to database
+    }
   }
 
 }

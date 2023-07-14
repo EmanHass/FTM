@@ -2,5 +2,33 @@
     margin: var(--margin-top);
     table{
         margin-top: 20px;
+        .procedures{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .rating{
+            text-decoration: underline;
+            color: var(--primary-color);
+            font-weight: 500;
+            cursor: pointer;
+        }
+    }
+    p{
+        margin: 0;
+    }
+}
+
+.modal{
+    .company-data{
+        border-right: 3px solid #AFAFAF;
+    }
+    .dateTraining{
+        display: flex;
+        justify-content: space-between;
+    }
+    img{
+        margin-left: 15px;
+        width: 16px;
     }
 }

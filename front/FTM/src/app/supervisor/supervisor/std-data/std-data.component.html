@@ -16,12 +16,70 @@
                 <td>{{student?.email}}</td>
                 <td>{{student?.stdNum}}</td>
                 <td>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                  <div class="procedures">
+                      <svg (click)="openstdDataModal(student.id)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
                         <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
                         <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
                     </svg>
+                    <p class="rating" (click)="openRatingModal(student.id)">عرض التقييم</p>
+                  </div>
                 </td>              
             </tr>
         </tbody>
       </table>
+</section>
+
+<section class="studentData">
+  <div class="modal" *ngIf="showstdDataModal || showRatingModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+              <div class="header">
+                  <h2 *ngIf="showstdDataModal">بيانات الطالب</h2>
+                  <h2 *ngIf="showRatingModal">تقييم التدريب</h2>
+                  <h1 (click)="closeModal()">×</h1>
+              </div>
+              <div class="content row">
+                <div class="col" *ngIf="showstdDataModal">
+                  <h6>اسم الطالب</h6>
+                  <p>{{studentData?.name}}</p>
+                  <h6>الرقم الجامعي</h6>
+                  <p>{{studentData?.stdNum}}</p>
+                  <h6>البريدالإلكتروني</h6>
+                  <p>{{studentData?.email}}</p>
+                </div>
+
+                <div class="col" *ngIf="showRatingModal">
+                  <h6>اسم الطالب</h6>
+                  <p>{{studentData?.name}}</p>
+                  <h6>عدد المهام المنجزة بالتدريب </h6>
+                  <p>{{studentData?.numsTask}}</p>
+                  <h6>تقييم التدريب ووصفه</h6>
+                  <p>{{studentData?.ratingTraining}}</p>
+                </div>
+
+                <div class="col company-data">
+                  <h6>اسم الشركة</h6>
+                  <p>{{studentData?.companyName}}</p>
+                  <h6>مجال الشركة</h6>
+                  <p>{{studentData?.fieldTraining}}</p>
+                  <h6>عدد أيام التدريب</h6>
+                  <p>{{studentData?.numsDay}}</p>
+
+                  <div class="dateTraining">
+                    <div>
+                      <h6>تاريخ بداية التدريب</h6>
+                      <p><img src="assets/images/calender.png"/>{{studentData?.startTraingingDate}}</p>
+                    </div>
+                    <div>
+                      <h6>تاريخ نهاية التدريب</h6>
+                      <p><img src="assets/images/calender.png"/>{{studentData?.endTrainingDate}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div> 
+      </div>
+  </div>
 </section>

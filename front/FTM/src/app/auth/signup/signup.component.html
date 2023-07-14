@@ -21,22 +21,27 @@
             </div>
 
             <div *ngIf="isStudent">
-                <div *ngIf="!checkId" class="check-std-id">
-                    <form>
+                <div *ngIf="!isIdExist" class="check-std-id">
+                    <form [formGroup]="studentForm">
                         <div class="form-group">
-                        <input type="number" class="form-control" id="exampleInputEmail1" placeholder="الرقم الجامعي">
+                        <input type="number" class="form-control" id="exampleInputEmail1" placeholder="الرقم الجامعي" formControlName="idStudentNumber">
                         </div>
-                        <button class="btn btn-primary check-id" (click)="signup()">فحص وإكمال عملية تسجيل الإشتراك</button>
+                        <div class="invalid" *ngIf="!studentForm.get('idStudentNumber').value && errorMsg">أدخل رقمك الجامعي</div>
+                        <div class="invalid" *ngIf="errorId">غلط في رقمك الجامعي</div>
+                        <button class="btn btn-primary check-id" (click)="checkId()">فحص وإكمال عملية تسجيل الإشتراك</button>                        
                     </form>
                 </div>
 
-                <div *ngIf="checkId" class="signup-form">
+                <div *ngIf="isIdExist" class="signup-form">
                     <form [formGroup]="studentForm">
                     <div class="std-info">
                         <p>بيانات الطالب</p>                   
                             <div class="form-group">
                                 <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="البريد الإلكتروني" formControlName="email">
                             </div>
+                            <div class="invalid" *ngIf="studentForm.get('email').value && studentForm.get('email').errors">
+                                please enter a correct email that include "@xxxxxx"
+                              </div>
                             <div class="row">
                                 <div class="form-group col">
                                     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="كلمة المرور" formControlName="password">
@@ -44,9 +49,20 @@
                                 <div class="form-group col">
                                     <input type="password" class="form-control" id="exampleInputPassword" placeholder="تأكيد كلمة المرور" formControlName="confirmPassword">
                                 </div>
+                                <div class="invalid" *ngIf="studentForm.hasError('passwordMismatch')">أدخل كلمة مرور متطابقة</div>
                             </div>
                             <div class="form-group">
-                                <input type="number" class="form-control" placeholder="رقم الهاتف" formControlName="phoneNumber">
+                                <input type="text" class="form-control" placeholder="رقم الهاتف" formControlName="phoneNumber">
+                                <div class="invalid" *ngIf="studentForm.get('phoneNumber').errors?.['isNumberic']">
+                                  please enter a number
+                                </div>
+                                <div class="invalid" *ngIf="studentForm.get('phoneNumber').errors?.['maxMinLengthC']">
+                                    please enter valid phone number length :
+                                    {{studentForm.get('phoneNumber').errors?.['min']}}
+                                </div>
+                                <div class="invalid" *ngIf="studentForm.get('phoneNumber').errors?.['startNumber']">
+                                    please enter a number start with '059' or '056'
+                                </div>
                             </div>
                     
                     </div>
@@ -84,8 +100,7 @@
                                     <input type="file" id="acceptance-img" formControlName="acceptancImg">
                                 </div>
                             </div>
-
-                            <button class="btn btn-primary submit">تسجيل الإشتراك</button>
+                            <button class="btn btn-primary submit" (click)="signup()" [disabled]="studentForm.invalid">تسجيل الإشتراك</button>
                     </div>
                 </form>
                 </div>
@@ -99,10 +114,32 @@
                                 <input type="text" class="form-control" placeholder="اسم المشرف" formControlName="supervisorName">
                             </div>
                             <div class="form-group">
-                                <input type="number" class="form-control" placeholder="رقم الهاتف" formControlName="phoneNumber">
+                                <input type="text" class="form-control" placeholder="رقم الهاتف" formControlName="phoneNumber">
+                                <div
+                                class="invalid"
+                                *ngIf="supervisorForm.get('phoneNumber').errors?.['isNumberic']"
+                              >
+                                please enter a number
+                              </div>
+                              <div
+                                class="invalid"
+                                *ngIf="supervisorForm.get('phoneNumber').errors?.['startNumber']"
+                              >
+                                please enter a number start with '059' or '056'
+                              </div>
+                              <div
+                              class="invalid"
+                              *ngIf="supervisorForm.get('phoneNumber').errors?.['maxMinLengthC']"
+                            >
+                              please enter valid phone number length :
+                              {{supervisorForm.get('phoneNumber').errors?.['min']}}
+                            </div>
                             </div>                  
                             <div class="form-group">
                             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder=" البريد الإلكتروني" formControlName="email">
+                            </div>
+                            <div class="invalid" *ngIf="supervisorForm.get('email').value && supervisorForm.get('email').errors">
+                                please enter a correct email that include "@xxxxxx"
                             </div>
                             <div class="form-group">
                             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="كلمة المرور" formControlName="password">
@@ -110,7 +147,9 @@
                             <div class="form-group">
                                 <input type="password" class="form-control" id="exampleInputPassword" placeholder="تأكيد كلمة المرور" formControlName="confirmPassword">
                             </div>
-                            <button class="btn btn-primary submit">تسجيل الإشتراك</button>
+                            <div class="invalid" *ngIf="supervisorForm.hasError('passwordMismatch')">أدخل كلمة مرور متطابقة</div>
+
+                            <button class="btn btn-primary submit" (click)="signup()" [disabled]="supervisorForm.invalid">تسجيل الإشتراك</button>
                     </div>
                 </form>              
             </div>
