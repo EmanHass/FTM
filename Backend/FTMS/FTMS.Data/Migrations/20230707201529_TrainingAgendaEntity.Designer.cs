@@ -4,6 +4,7 @@ using FTMS.Data.DataLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FTMS.Data.Migrations
 {
     [DbContext(typeof(FTMSDbContext))]
-    partial class FTMSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230707201529_TrainingAgendaEntity")]
+    partial class TrainingAgendaEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,35 +24,6 @@ namespace FTMS.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("FTMS.Data.Model.ApiStudentInfoUniversity", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("NumHoursCompleted")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UniversityStudentNum")
-                        .IsRequired()
-                        .HasMaxLength(8)
-                        .HasColumnType("nvarchar(8)");
-
-                    b.HasKey("id");
-
-                    b.ToTable("ApiStudentInfoUniversities", (string)null);
-                });
 
             modelBuilder.Entity("FTMS.Data.Model.Training", b =>
                 {
@@ -86,7 +60,7 @@ namespace FTMS.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Informations", (string)null);
+                    b.ToTable("Informations");
 
                     b.HasDiscriminator<string>("TrainingType").HasValue("Training");
 
@@ -108,13 +82,13 @@ namespace FTMS.Data.Migrations
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime>("EndCompaniesRegistration")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("EndStudentRegistration")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("EndTraining")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("EndTrainingReport")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsDelete")
@@ -130,9 +104,6 @@ namespace FTMS.Data.Migrations
                     b.Property<DateTime>("StartTraining")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("StartTrainingReport")
-                        .HasColumnType("datetime2");
-
                     b.Property<bool>("StatusSemester")
                         .HasColumnType("bit");
 
@@ -141,7 +112,7 @@ namespace FTMS.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TrainingAgendas", (string)null);
+                    b.ToTable("TrainingAgendas");
                 });
 
             modelBuilder.Entity("FTMS.Data.Model.TrainingCompany", b =>
@@ -209,7 +180,7 @@ namespace FTMS.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TrainingCompanys", (string)null);
+                    b.ToTable("TrainingCompanys");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -276,10 +247,6 @@ namespace FTMS.Data.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -331,10 +298,6 @@ namespace FTMS.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
-
-                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -442,66 +405,6 @@ namespace FTMS.Data.Migrations
                     b.HasDiscriminator().HasValue("TrainingRequirement");
                 });
 
-            modelBuilder.Entity("FTMS.Data.Model.AppUser", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.Property<DateTime>("CreateAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdateAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasDiscriminator().HasValue("AppUser");
-                });
-
-            modelBuilder.Entity("FTMS.Data.Model.Student", b =>
-                {
-                    b.HasBaseType("FTMS.Data.Model.AppUser");
-
-                    b.Property<string>("AcceptanceImg")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AddressCompany")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NameTrainingCompany")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SupervisorId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("UniversityStudentNum")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasIndex("SupervisorId");
-
-                    b.HasDiscriminator().HasValue("Student");
-                });
-
-            modelBuilder.Entity("FTMS.Data.Model.Supervisor", b =>
-                {
-                    b.HasBaseType("FTMS.Data.Model.AppUser");
-
-                    b.HasDiscriminator().HasValue("Supervisor");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -551,22 +454,6 @@ namespace FTMS.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("FTMS.Data.Model.Student", b =>
-                {
-                    b.HasOne("FTMS.Data.Model.Supervisor", "Supervisor")
-                        .WithMany("Students")
-                        .HasForeignKey("SupervisorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Supervisor");
-                });
-
-            modelBuilder.Entity("FTMS.Data.Model.Supervisor", b =>
-                {
-                    b.Navigation("Students");
                 });
 #pragma warning restore 612, 618
         }
