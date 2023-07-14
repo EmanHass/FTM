@@ -8,11 +8,11 @@
             </div>
             <h6>تقييم التدريب ووصفه</h6>
             <div class="form-group">
-                <textarea form="ratingForm" rows="4" cols="52"></textarea>
+                <textarea form="ratingForm" rows="4" cols="52" formControlName="rating"></textarea>
             </div> 
-            
+            <div class="invalid" *ngIf="reportForm.invalid && error">املأ الحقول</div>
             <div class="submit">
-                <app-button [label]="labelBtn"></app-button>
+                <app-button [label]="labelBtn" (onClick)="submitReport()"></app-button>
             </div>
         </form>
     </div>
