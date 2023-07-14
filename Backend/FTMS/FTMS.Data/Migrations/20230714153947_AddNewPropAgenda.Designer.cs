@@ -4,6 +4,7 @@ using FTMS.Data.DataLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FTMS.Data.Migrations
 {
     [DbContext(typeof(FTMSDbContext))]
-    partial class FTMSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230714153947_AddNewPropAgenda")]
+    partial class AddNewPropAgenda
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,7 +51,7 @@ namespace FTMS.Data.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("ApiStudentInfoUniversities", (string)null);
+                    b.ToTable("ApiStudentInfoUniversities");
                 });
 
             modelBuilder.Entity("FTMS.Data.Model.Training", b =>
@@ -86,7 +89,7 @@ namespace FTMS.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Informations", (string)null);
+                    b.ToTable("Informations");
 
                     b.HasDiscriminator<string>("TrainingType").HasValue("Training");
 
@@ -141,7 +144,7 @@ namespace FTMS.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TrainingAgendas", (string)null);
+                    b.ToTable("TrainingAgendas");
                 });
 
             modelBuilder.Entity("FTMS.Data.Model.TrainingCompany", b =>
@@ -209,7 +212,7 @@ namespace FTMS.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TrainingCompanys", (string)null);
+                    b.ToTable("TrainingCompanys");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

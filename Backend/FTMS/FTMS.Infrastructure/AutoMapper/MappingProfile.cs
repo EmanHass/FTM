@@ -1,14 +1,10 @@
 ﻿using AutoMapper;
 using FTMS.Core.DTOS.Training;
+using FTMS.Core.DTOS.TrainingAgenda;
 using FTMS.Core.DTOS.TrainingCompany;
 using FTMS.Core.DTOS.TrainingImportance;
 using FTMS.Core.DTOS.TrainingRequirement;
 using FTMS.Data.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FTMS.Infrastructure.AutoMapper
 {
@@ -57,8 +53,9 @@ namespace FTMS.Infrastructure.AutoMapper
 
 
             #region Agenda
-            //Map Agenda 
-
+            CreateMap<TrainingAgenda, TrainingAgendaDto>().ReverseMap();
+            CreateMap<CreateTrainingAgendaDto, TrainingAgenda>().ReverseMap();
+            CreateMap<TrainingAgenda, UpdateTrainingAgendaDto>().ReverseMap();
             #endregion
 
 
