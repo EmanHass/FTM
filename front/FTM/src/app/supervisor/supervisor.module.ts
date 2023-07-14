@@ -8,6 +8,7 @@ import { ProfileComponent } from './supervisor/profile/profile.component';
 import { CompanyComponent } from './supervisor/company/company.component';
 import { StdDataComponent } from './supervisor/std-data/std-data.component';
 import { SharedModulesModule } from '../shared-modules/shared-modules.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { SharedModulesModule } from '../shared-modules/shared-modules.module';
   imports: [
     CommonModule,
     SupervisorRoutingModule,
-    SharedModulesModule
+    SharedModulesModule,
+    ReactiveFormsModule
   ]
 })
 export class SupervisorModule { }
