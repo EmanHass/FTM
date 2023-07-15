@@ -12,14 +12,14 @@ export class HomeComponent implements OnInit {
   semesterYear:string;
   startAgenda:any;
   endAgenda:any;
+  isLoading:boolean=false;
   constructor(private agendaService:AgendaService) { }
 
   ngOnInit(): void {
 
     this.agendaService.getAgenda().subscribe(
       (res:any)=>{
-        console.log(this.semesterName);
-        
+        this.isLoading=true;        
         const agenda = res?.find((i:any)=>i.statusSemester == true);
         this.agenda=[
           {

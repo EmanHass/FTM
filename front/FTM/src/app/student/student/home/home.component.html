@@ -3,7 +3,10 @@
         <h3>أجندة التدريب</h3>
         <h3>{{semesterName}} {{semesterYear}}</h3>
     </div>
-    <div class="content">
+    <div *ngIf="!isLoading">
+        <img src="../../../../assets/images/spinner.gif" width="50px"/>
+    </div>
+    <div class="content" *ngIf="isLoading">
         <div class="row">
             <div class="col start-training">
                 <div *ngFor="let data of startAgenda">
