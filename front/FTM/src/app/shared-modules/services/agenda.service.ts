@@ -22,4 +22,15 @@ export class AgendaService {
       }),
     });
   }
+
+  updateAgenda(id:number,updateData:any):Observable<any>{
+    return this.http.put(`${this.apiLink}/UpdateAgenda/${id}`,updateData,{
+      headers: new HttpHeaders({
+        'content-type': 'application/json',
+      }),
+    });
+  }
+  deleteAgenda(id:number):Observable<any>{
+    return this.http.delete(`${this.apiLink}/Delete/${id}`);
+  }
 }
