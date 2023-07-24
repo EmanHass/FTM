@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ButtonComponent } from './components/button/button.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AddComponent,
     ModalComponent,
     ButtonComponent,
-    ProfileComponent
+    ProfileComponent,
+    SpinnerComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +31,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   exports:[
     ModalComponent,
     ButtonComponent,
-    ProfileComponent
+    ProfileComponent,
+    SpinnerComponent
   ]
 })
 export class SharedModulesModule { }
