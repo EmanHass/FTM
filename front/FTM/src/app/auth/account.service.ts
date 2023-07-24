@@ -1,27 +1,41 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-
+import jwt_decode from 'jwt-decode';
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
 
   constructor(private router:Router) { }
-
+  decodeToken(token:any):any {
+    try {
+      return jwt_decode(token);
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      return null;
+    }
+  }
   setUserData(data:any):void{
     localStorage.setItem("User Data",JSON.stringify(data));
+    const decodedToken = this.decodeToken(data.token);
+
+    const role = decodedToken.Role;
+    localStorage.setItem('role',role);
   }
   getUserData():any{
     return JSON.parse(localStorage.getItem("User Data"));
   }
-  getUserRole():string{
-    return this.getUserData() && this.getUserData().role;
+  // getUserRole():string{
+  //   return this.getUserData() && this.getUserData().role;
+  // }
+  getRole():string{
+    return localStorage.getItem("role");
   }
   isAdminRole():boolean{
-    return this.getUserRole() == 'admin';
+    return this.getRole() == 'Supervisor';
   }
   isStudentRole():boolean{
-    return this.getUserRole() == 'student';
+    return this.getRole() == 'Student';
   }
   setUserToken(token:string):void{
     localStorage.setItem('token',token);
@@ -33,16 +47,46 @@ export class AccountService {
     return this.getUserData().id;
   }
   getName():string{
-    return this.getUserData().name;
+    return `${this.getUserData().firstName} ${this.getUserData().lastName}`;
+  }
+  getEmail():string{
+    return this.getUserData().email;
+  }
+  getUniNumber():string{
+    return this.getUserData().universityStudentNumber;
+  }
+  getPhone():string{
+    return this.getUserData().phoneNumber;
   }
   isLogin():boolean{
     return this.getUserData() != null;
   }
-  getPermissions():string[]{
-    return this.getUserData().permissions;
-  }
+  // getPermissions():string[]{
+  //   return this.getUserData().permissions;
+  // }
   hasPermission(permission:string):boolean{
-    return this.getPermissions().includes(permission);
+    return this.getRole().includes(permission);
+  }
+ get getSupervisorName():string{
+    return this.getUserData().supervisorName;
+  }
+ get getSupervisorEmail():string{
+    return this.getUserData().supervisorEmail;
+  }
+ get getSupervisorPhone():string{
+    return this.getUserData().supervisorPhoneNumber;
+  }
+  get getCompanyName():string{
+    return this.getUserData().nameTrainingCompany;
+  }
+  get getTrainingField():string{
+    return this.getUserData().trainingField;
+  }
+  get getStartTrain():string{
+    return this.getUserData().endTrain;
+  }
+  get getEndTrain():string{
+    return this.getUserData().startTrain;
   }
   clear():void{
     localStorage.clear();

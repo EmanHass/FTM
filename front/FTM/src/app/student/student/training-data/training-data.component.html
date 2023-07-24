@@ -5,43 +5,43 @@
             <h5>بيانات المشرف الأكاديمي</h5>
             <div class="data">
                 <h6>اسم المشرف الأكاديمي</h6>
-                <p>{{supervisorData.name}}</p>
+                <p>{{accountService.getSupervisorName}}</p>
 
                 <h6>البريد الإلكتروني</h6>
-                <p>{{supervisorData.email}}</p>
+                <p>{{accountService.getSupervisorEmail}}</p>
 
                 <h6>رقم الهاتف</h6>
-                <p>{{supervisorData.phone}}</p>
+                <p>{{accountService.getSupervisorPhone}}</p>
             </div>
         </div>
         <div class="col company-data">
             <h5>بيانات الشركة التدريبية</h5>
             <div class="data">
                 <h6>اسم الشركة</h6>
-                <p>{{companyData.name}}</p>
+                <p>{{accountService.getCompanyName}}</p>
 
                 <h6>مجال الشركة</h6>
-                <p>{{companyData.field}}</p>
+                <p>{{accountService.getTrainingField}}</p>
 
-                <h6>عدد أيام التدريب</h6>
-                <p>{{companyData.numDaysTraining}}</p>
+                <!-- <h6>عدد أيام التدريب</h6>
+                <p>{{companyData.numDaysTraining}}</p> -->
 
             </div>
             <div class="row">
                 <div class="col">
                     <h6>تاريخ بداية التدريب</h6>
-                    <p><img src="assets/images/calender.png"/> {{companyData.startTraining}}</p>
+                    <p><img src="assets/images/calender.png"/> {{accountService.getStartTrain}}</p>
                 </div>
                 <div class="col">
                     <h6>تاريخ نهاية التدريب</h6>
-                    <p><img src="assets/images/calender.png"/> {{companyData.endTraining}}</p>
+                    <p><img src="assets/images/calender.png"/> {{accountService.getEndTrain}}</p>
                 </div>
             </div>
 
             <div class="changeCompany">
                 <app-button [label]="labelBtn" (onClick)="updateData()"></app-button>
             </div>
-            <app-std-edit *ngIf="modalStatus" (closedModal)="closedModel($event)" [comapnyData]="companyData"></app-std-edit>
+            <app-std-edit *ngIf="modalStatus" (closedModal)="closedModel($event)"></app-std-edit>
         </div>
     </div>
 </section>

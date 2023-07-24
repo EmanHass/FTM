@@ -9,7 +9,7 @@ export class StudentGuardService implements CanActivate,CanLoad{
 
   constructor(private accountService:AccountService) { }
   // to prevent user to access student Route if not student role
-  canActivate(route:ActivatedRouteSnapshot): any {
+  canActivate(route:ActivatedRouteSnapshot): any {    
     this.canActiveLoad(route);
   }
 
@@ -19,10 +19,7 @@ export class StudentGuardService implements CanActivate,CanLoad{
   }
   canActiveLoad(route: Route):boolean{
     if(this.accountService.isStudentRole()){
-      let permission = route.data['permissions'];
-      if(this.accountService.hasPermission(permission)){
         return true;
-      }
     }
     this.accountService.logout();
     return false;

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { AccountService } from '../account.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -17,30 +19,31 @@ export class SignupComponent implements OnInit {
   emailMsg:boolean=false;
   passwordMsg:boolean=false;
   errorId:boolean=false;
+  isLoading:boolean=false;
 
-  constructor(private authService:AuthService) {
+  constructor(private authService:AuthService, private accountService:AccountService,private router:Router) {
   this.initializationFGStudent();
   this.initializationFGSupervisor();
   }
   
   initializationFGStudent(): void {
     this.studentForm = new FormGroup({
-      idStudentNumber: new FormControl('',[Validators.required]),
-      email: new FormControl('', [
+      UniversityStudentNum: new FormControl('',[Validators.required]),
+      Email: new FormControl('', [
         Validators.required,
         Validators.email,
         this.authService.customEmail()
       ]),  
-      password: new FormControl('', [Validators.required]),
-      confirmPassword: new FormControl('', [Validators.required]),
-      phoneNumber: new FormControl('', [Validators.required,this.authService.customValidationPhone(10, 10)]),
-      companyName: new FormControl('', [Validators.required]),
-      companyAddress: new FormControl('', [Validators.required]),
-      typeOfTraining: new FormControl('', [Validators.required]),
-      numOfdaysTraining: new FormControl('', [Validators.required]),
-      startTrainingDate: new FormControl('', [Validators.required]),
-      endTrainingDate: new FormControl('', [Validators.required]),
-      acceptancImg: new FormControl('', [Validators.required]),
+      Password: new FormControl('', [Validators.required]),
+      ConfirmPassword: new FormControl('', [Validators.required]),
+      PhoneNumber: new FormControl('', [Validators.required,this.authService.customValidationPhone(10, 10)]),
+      NameTrainingCompany: new FormControl('', [Validators.required]),
+      AddressCompany: new FormControl('', [Validators.required]),
+      TrainingField: new FormControl('', [Validators.required]),
+      // numOfdaysTraining: new FormControl('', [Validators.required]),
+      StartTrain: new FormControl('', [Validators.required]),
+      EndTrain: new FormControl('', [Validators.required]),
+      AcceptanceImg: new FormControl('', [Validators.required]),
     },
     this.authService.checkPassword());
   }
@@ -71,32 +74,59 @@ export class SignupComponent implements OnInit {
     this.isStudent=false;
   }
   checkId(){
-    if(this.studentForm.value.idStudentNumber){
+    const id=this.studentForm.value.UniversityStudentNum; 
+    if(id){
+      this.isLoading=true;
       this.errorMsg=false;
-      if(this.studentForm.value.idStudentNumber == 20180293){
-        this.errorId=false;
-        //check if id exist so he can complete register
-        this.isIdExist=true;
-      }else{
-        this.errorId=true;
-        setTimeout(()=>{
-          this.errorId=false;
-        },2000);
-      }
+      this.checkStdIdAPI(id);                    
     }else{
       this.errorMsg=true;
     }
   }
+  checkStdIdAPI(id:string):any{
+    this.authService.checkStdNum(id).subscribe(
+      res=>{
+        if(res){
+          this.isLoading=false;
+          this.errorId=false;
+          //check if id exist so he can complete register
+          this.isIdExist=true;
+          console.log(this.studentForm.value);
+          
+        }else{
+          this.errorId=true;
+          this.isLoading=false;
+          setTimeout(()=>{
+            this.errorId=false;
+          },2000);
+        }
+      }
+    )
+  }
   signup(){
 
     if(this.isStudent){
-      console.log('student', this.studentForm.value);
-      // (api)create method of data student to database 
+      console.log(this.studentForm.value);    
+      const formValues = { ...this.studentForm.value };
+      delete formValues.UniversityStudentNum;
+      this.authService.signup(formValues,this.studentForm.value.UniversityStudentNum).subscribe(
+        (res:any)=>{
+          console.log('success signup');
+          this.accountService.setUserData(res);
+          this.router.navigate(["/student"]);
+
+        },error=>{
+          console.log(error);
+          
+        }
+      ); 
     }else if(this.isSupervisor){
       console.log('supervisor', this.supervisorForm?.value);
       
       // (api)create method of supervisor data to database
     }
   }
+
+
 
 }

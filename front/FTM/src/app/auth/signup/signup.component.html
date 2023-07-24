@@ -24,11 +24,12 @@
                 <div *ngIf="!isIdExist" class="check-std-id">
                     <form [formGroup]="studentForm">
                         <div class="form-group">
-                        <input type="number" class="form-control" id="exampleInputEmail1" placeholder="الرقم الجامعي" formControlName="idStudentNumber">
+                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="الرقم الجامعي" formControlName="UniversityStudentNum">
                         </div>
-                        <div class="invalid" *ngIf="!studentForm.get('idStudentNumber').value && errorMsg">أدخل رقمك الجامعي</div>
+                        <div class="invalid" *ngIf="!studentForm.get('UniversityStudentNum').value && errorMsg">أدخل رقمك الجامعي</div>
                         <div class="invalid" *ngIf="errorId">غلط في رقمك الجامعي</div>
                         <button class="btn btn-primary check-id" (click)="checkId()">فحص وإكمال عملية تسجيل الإشتراك</button>                        
+                        <app-spinner *ngIf="isLoading"></app-spinner>
                     </form>
                 </div>
 
@@ -37,30 +38,30 @@
                     <div class="std-info">
                         <p>بيانات الطالب</p>                   
                             <div class="form-group">
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="البريد الإلكتروني" formControlName="email">
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="البريد الإلكتروني" formControlName="Email">
                             </div>
-                            <div class="invalid" *ngIf="studentForm.get('email').value && studentForm.get('email').errors">
+                            <div class="invalid" *ngIf="studentForm.get('Email').value && studentForm.get('Email').errors">
                                 please enter a correct email that include "@xxxxxx"
                               </div>
                             <div class="row">
                                 <div class="form-group col">
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="كلمة المرور" formControlName="password">
+                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="كلمة المرور" formControlName="Password">
                                 </div>
                                 <div class="form-group col">
-                                    <input type="password" class="form-control" id="exampleInputPassword" placeholder="تأكيد كلمة المرور" formControlName="confirmPassword">
+                                    <input type="password" class="form-control" id="exampleInputPassword" placeholder="تأكيد كلمة المرور" formControlName="ConfirmPassword">
                                 </div>
                                 <div class="invalid" *ngIf="studentForm.hasError('passwordMismatch')">أدخل كلمة مرور متطابقة</div>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="رقم الهاتف" formControlName="phoneNumber">
-                                <div class="invalid" *ngIf="studentForm.get('phoneNumber').errors?.['isNumberic']">
+                                <input type="text" class="form-control" placeholder="رقم الهاتف" formControlName="PhoneNumber">
+                                <div class="invalid" *ngIf="studentForm.get('PhoneNumber').errors?.['isNumberic']">
                                   please enter a number
                                 </div>
-                                <div class="invalid" *ngIf="studentForm.get('phoneNumber').errors?.['maxMinLengthC']">
+                                <div class="invalid" *ngIf="studentForm.get('PhoneNumber').errors?.['maxMinLengthC']">
                                     please enter valid phone number length :
-                                    {{studentForm.get('phoneNumber').errors?.['min']}}
+                                    {{studentForm.get('PhoneNumber').errors?.['min']}}
                                 </div>
-                                <div class="invalid" *ngIf="studentForm.get('phoneNumber').errors?.['startNumber']">
+                                <div class="invalid" *ngIf="studentForm.get('PhoneNumber').errors?.['startNumber']">
                                     please enter a number start with '059' or '056'
                                 </div>
                             </div>
@@ -70,34 +71,34 @@
                     <div class="training-info">
                         <p>بيانات التدريب</p>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="اسم الشركة" formControlName="companyName">
+                                <input type="text" class="form-control" placeholder="اسم الشركة" formControlName="NameTrainingCompany">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="عنوان الشركة" formControlName="companyAddress">
+                                <input type="text" class="form-control" placeholder="عنوان الشركة" formControlName="AddressCompany">
                             </div>
                             <div class="row">
                                 <div class="form-group col">
-                                    <input type="text" class="form-control"  placeholder="نوع التدريب" formControlName="typeOfTraining">
+                                    <input type="text" class="form-control"  placeholder="مجال التدريب" formControlName="TrainingField">
                                 </div>
-                                <div class="form-group col">
+                                <!-- <div class="form-group col">
                                     <input type="number" class="form-control" placeholder="عدد أيام التدريب" formControlName="numOfdaysTraining">
-                                </div>
+                                </div> -->
                             </div>
                             <div class="row">
                                 <div class="form-group col">
                                     <label for="start-date">تاريخ بداية التدريب</label>
-                                    <input type="date" id="start-date" class="form-control" formControlName="startTrainingDate">
+                                    <input type="date" id="start-date" class="form-control" formControlName="StartTrain">
                                 </div>
                                 <div class="form-group col">
                                     <label for="end-date">تاريخ نهاية التدريب</label>
-                                    <input type="date" id="end-date" class="form-control" formControlName="endTrainingDate">                            
+                                    <input type="date" id="end-date" class="form-control" formControlName="EndTrain">                            
                                 </div>
                             </div>
 
                             <div>
                                 <label for="acceptance-img" class="accept-img">إرفاق صورة الموافقة على التدريب</label>
                                 <div class="form-group">
-                                    <input type="file" id="acceptance-img" formControlName="acceptancImg">
+                                    <input type="file" id="acceptance-img" formControlName="AcceptanceImg">
                                 </div>
                             </div>
                             <button class="btn btn-primary submit" (click)="signup()" [disabled]="studentForm.invalid">تسجيل الإشتراك</button>

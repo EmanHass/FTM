@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AccountService } from 'src/app/auth/account.service';
 import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
@@ -19,7 +20,7 @@ export class ProfileComponent implements OnInit {
   getStatus:string;
   error:boolean=false;
   errorCurrentPass:boolean=false;
-  constructor(private authService:AuthService) { 
+  constructor(private authService:AuthService, public accountService:AccountService) { 
     this.initializationFGChangePassword();
     this.phoneFrom=new FormGroup({
       phoneNumber: new FormControl('', [Validators.required,this.authService.customValidationPhone(10, 10)]),

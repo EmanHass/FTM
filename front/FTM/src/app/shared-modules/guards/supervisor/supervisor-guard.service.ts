@@ -17,10 +17,7 @@ export class SupervisorGuardService implements CanActivate,CanLoad {
 
   canActiveLoad(route: Route):boolean{
     if(this.accountService.isAdminRole()){
-      let permission = route.data['permissions'];
-      if(this.accountService.hasPermission(permission)){
         return true;
-      }
     }
     this.accountService.logout();
     return false;

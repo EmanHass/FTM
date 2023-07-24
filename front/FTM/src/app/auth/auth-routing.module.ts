@@ -13,7 +13,6 @@ const routes: Routes = [
     loadChildren: ()=> import('../student/student.module').then(m=>m.StudentModule),
     canActivate:[StudentGuardService],
     canLoad:[StudentGuardService],
-    data:{permissions:'student'}
   },
   {
     path:'supervisor',
@@ -21,7 +20,6 @@ const routes: Routes = [
     loadChildren: ()=> import('../supervisor/supervisor.module').then(s=>s.SupervisorModule),
     canActivate:[SupervisorGuardService],
     canLoad:[SupervisorGuardService],
-    data:{permissions:'admin'}   
   },
   {
     path:'forgetpassword',

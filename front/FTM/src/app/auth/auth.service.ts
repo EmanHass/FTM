@@ -1,31 +1,45 @@
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AbstractControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Observable, of } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   data:any;
-  constructor() { }
+  apiLinkStd:string=`${environment.apiLink}/student/account`;
+  apiLinkSupervisor:string= `${environment.apiLink}/supervisor/account`;
+  constructor(private http: HttpClient) { }
 
   login(email:string, password:string):Observable<any>{
     // if email and password exist in app then return data (post method)
-
-    if(this.getStatus() == "student"){
-      // check if student then look for student information log in api
-      this.data= {
-        id:1, name:"إيمان حسونة", email:"eman@gmail.com", role:"student", permissions:['student','student.home'], token:'Ad44v8s874qrujnd'
-      }
-    }
-     // check if supervisor then look for supervisor information log in api
-     if(this.getStatus() == "supervisor"){
-      this.data= {
-        id:1, name:"يوسف أبو سلطان", email:"yousef@gmail.com", role:"admin", permissions:['admin','admin.home'], token:'ew45lfmvi71apok155asdw'
-      }
-    }
-    return of(this.data);
+    const parameters = { email:email, password:password };
+    
+   return this.getStatus() == "student"? this.http.post<any>(`${this.apiLinkStd}/loginStudent`, parameters):this.http.post<any>(`${this.apiLinkSupervisor}/loginSupervisor`, parameters);
   }
+
+  checkStdNum(id:string):Observable<any>{
+    let params = new HttpParams().set('UniversityStudentNum', id);
+    return this.http.post(`${this.apiLinkStd}/checkStudentNumber`,null,{
+      headers: new HttpHeaders({
+        'content-type': 'application/json',
+      }),
+      params: params
+    });
+  }
+
+  signup(data:any,id:any):Observable<any>{
+    let params = new HttpParams().set('UniversityStudentNum', id);
+    return this.http.post(`${this.apiLinkStd}/registerStudent`,data,{
+      headers: new HttpHeaders({
+        'content-type': 'application/json',
+      }),
+      params: params
+    });
+  }
+
 
   getStatus(){
     return localStorage.getItem("status");

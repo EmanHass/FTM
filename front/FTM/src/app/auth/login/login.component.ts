@@ -12,6 +12,7 @@ import { AccountService } from '../account.service';
 export class LoginComponent implements OnInit {
   isStudent:boolean=true;
   isSupervisor:boolean=false;
+  isLoading:boolean=false;
   loginForm: FormGroup;
   errorMsg:string;
   msgEmail:boolean=false;
@@ -27,7 +28,7 @@ export class LoginComponent implements OnInit {
         Validators.email,
         this.authService.customEmail()
       ]),  
-      password: new FormControl('', [Validators.required, Validators.minLength(10)]),
+      password: new FormControl('', [Validators.required, Validators.minLength(3)]),
     });
   }
   ngOnInit(): void {
@@ -41,7 +42,8 @@ export class LoginComponent implements OnInit {
     this.isSupervisor=true;
     this.isStudent=false;
   }
-  login(){    
+  login(){ 
+    this.errorMsg='';   
     if(this.isStudent){
       //check if student valid and then navigate his to his profile 
       localStorage.setItem('status','student');
@@ -56,20 +58,23 @@ export class LoginComponent implements OnInit {
     }else{
       this.msgEmail=false;
       this.msgPassword=false;
+      this.isLoading=true;
       this.authService.login(this.loginForm.value.email,this.loginForm.value.password).subscribe(
         res=>{
           this.accountService.setUserData(res);
+          this.isLoading=false;
           
           if(this.accountService.isAdminRole()){
             this.router.navigate(["/supervisor"]);
-          }else if(this.accountService.isStudentRole()){
-            this.router.navigate(["/student"])
+          }else if(this.accountService.isStudentRole()){            
+            this.router.navigate(["/student"]);
           }else{
             this.errorMsg="Invalid Email OR Password";
           }
         },
-        error=>{
-          this.errorMsg="Invalid Email OR Password";
+        error=>{          
+          this.errorMsg="خطأ في كلمة المرور أو الإيميل";
+          this.isLoading=false;
         }
       );
     }

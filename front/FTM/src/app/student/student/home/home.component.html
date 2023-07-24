@@ -3,9 +3,7 @@
         <h3>أجندة التدريب</h3>
         <h3>{{semesterName}} {{semesterYear}}</h3>
     </div>
-    <div *ngIf="!isLoading">
-        <img src="../../../../assets/images/spinner.gif" width="50px"/>
-    </div>
+    <app-spinner *ngIf="!isLoading"></app-spinner>
     <div class="content" *ngIf="isLoading">
         <div class="row">
             <div class="col start-training">

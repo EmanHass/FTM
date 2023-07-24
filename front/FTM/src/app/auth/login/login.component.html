@@ -38,7 +38,9 @@
                                 <p routerLink="/forgetpassword">هل نسيت كلمة المرور؟</p>
                             </div>
                         </div> 
-                        <button class="btn btn-primary submit" (click)="login()">تسجيل الدخول</button>                 
+                        <div *ngIf="errorMsg" class="invalid">{{errorMsg}}</div>
+                        <button class="btn btn-primary submit" (click)="login()">تسجيل الدخول</button> 
+                        <app-spinner *ngIf="isLoading"></app-spinner>                
                 </form>
             </div>
         </div>
