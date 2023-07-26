@@ -38,30 +38,30 @@
                     <div class="std-info">
                         <p>بيانات الطالب</p>                   
                             <div class="form-group">
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="البريد الإلكتروني" formControlName="Email">
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="البريد الإلكتروني" formControlName="email">
                             </div>
-                            <div class="invalid" *ngIf="studentForm.get('Email').value && studentForm.get('Email').errors">
+                            <div class="invalid" *ngIf="studentForm.get('email').value && studentForm.get('email').errors">
                                 please enter a correct email that include "@xxxxxx"
                               </div>
                             <div class="row">
                                 <div class="form-group col">
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="كلمة المرور" formControlName="Password">
+                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="كلمة المرور" formControlName="password">
                                 </div>
                                 <div class="form-group col">
-                                    <input type="password" class="form-control" id="exampleInputPassword" placeholder="تأكيد كلمة المرور" formControlName="ConfirmPassword">
+                                    <input type="password" class="form-control" id="exampleInputPassword" placeholder="تأكيد كلمة المرور" formControlName="confirmPassword">
                                 </div>
                                 <div class="invalid" *ngIf="studentForm.hasError('passwordMismatch')">أدخل كلمة مرور متطابقة</div>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="رقم الهاتف" formControlName="PhoneNumber">
-                                <div class="invalid" *ngIf="studentForm.get('PhoneNumber').errors?.['isNumberic']">
+                                <input type="text" class="form-control" placeholder="رقم الهاتف" formControlName="phoneNumber">
+                                <div class="invalid" *ngIf="studentForm.get('phoneNumber').errors?.['isNumberic']">
                                   please enter a number
                                 </div>
-                                <div class="invalid" *ngIf="studentForm.get('PhoneNumber').errors?.['maxMinLengthC']">
+                                <div class="invalid" *ngIf="studentForm.get('phoneNumber').errors?.['maxMinLengthC']">
                                     please enter valid phone number length :
-                                    {{studentForm.get('PhoneNumber').errors?.['min']}}
+                                    {{studentForm.get('phoneNumber').errors?.['min']}}
                                 </div>
-                                <div class="invalid" *ngIf="studentForm.get('PhoneNumber').errors?.['startNumber']">
+                                <div class="invalid" *ngIf="studentForm.get('phoneNumber').errors?.['startNumber']">
                                     please enter a number start with '059' or '056'
                                 </div>
                             </div>
@@ -71,14 +71,14 @@
                     <div class="training-info">
                         <p>بيانات التدريب</p>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="اسم الشركة" formControlName="NameTrainingCompany">
+                                <input type="text" class="form-control" placeholder="اسم الشركة" formControlName="nameTrainingCompany">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="عنوان الشركة" formControlName="AddressCompany">
+                                <input type="text" class="form-control" placeholder="عنوان الشركة" formControlName="addressCompany">
                             </div>
                             <div class="row">
                                 <div class="form-group col">
-                                    <input type="text" class="form-control"  placeholder="مجال التدريب" formControlName="TrainingField">
+                                    <input type="text" class="form-control"  placeholder="مجال التدريب" formControlName="trainingField">
                                 </div>
                                 <!-- <div class="form-group col">
                                     <input type="number" class="form-control" placeholder="عدد أيام التدريب" formControlName="numOfdaysTraining">
@@ -87,18 +87,18 @@
                             <div class="row">
                                 <div class="form-group col">
                                     <label for="start-date">تاريخ بداية التدريب</label>
-                                    <input type="date" id="start-date" class="form-control" formControlName="StartTrain">
+                                    <input type="date" id="start-date" class="form-control" formControlName="startTrain">
                                 </div>
                                 <div class="form-group col">
                                     <label for="end-date">تاريخ نهاية التدريب</label>
-                                    <input type="date" id="end-date" class="form-control" formControlName="EndTrain">                            
+                                    <input type="date" id="end-date" class="form-control" formControlName="endTrain">                            
                                 </div>
                             </div>
 
                             <div>
                                 <label for="acceptance-img" class="accept-img">إرفاق صورة الموافقة على التدريب</label>
                                 <div class="form-group">
-                                    <input type="file" id="acceptance-img" formControlName="AcceptanceImg">
+                                    <input type="file" id="acceptance-img" formControlName="acceptanceImg">
                                 </div>
                             </div>
                             <button class="btn btn-primary submit" (click)="signup()" [disabled]="studentForm.invalid">تسجيل الإشتراك</button>

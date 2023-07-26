@@ -29,21 +29,21 @@ export class SignupComponent implements OnInit {
   initializationFGStudent(): void {
     this.studentForm = new FormGroup({
       UniversityStudentNum: new FormControl('',[Validators.required]),
-      Email: new FormControl('', [
+      email: new FormControl('', [
         Validators.required,
         Validators.email,
         this.authService.customEmail()
       ]),  
-      Password: new FormControl('', [Validators.required]),
-      ConfirmPassword: new FormControl('', [Validators.required]),
-      PhoneNumber: new FormControl('', [Validators.required,this.authService.customValidationPhone(10, 10)]),
-      NameTrainingCompany: new FormControl('', [Validators.required]),
-      AddressCompany: new FormControl('', [Validators.required]),
-      TrainingField: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required]),
+      confirmPassword: new FormControl('', [Validators.required]),
+      phoneNumber: new FormControl('', [Validators.required,this.authService.customValidationPhone(10, 10)]),
+      nameTrainingCompany: new FormControl('', [Validators.required]),
+      addressCompany: new FormControl('', [Validators.required]),
+      trainingField: new FormControl('', [Validators.required]),
       // numOfdaysTraining: new FormControl('', [Validators.required]),
-      StartTrain: new FormControl('', [Validators.required]),
-      EndTrain: new FormControl('', [Validators.required]),
-      AcceptanceImg: new FormControl('', [Validators.required]),
+      startTrain: new FormControl('', [Validators.required]),
+      endTrain: new FormControl('', [Validators.required]),
+      acceptanceImg: new FormControl('', [Validators.required]),
     },
     this.authService.checkPassword());
   }
