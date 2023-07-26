@@ -58,6 +58,10 @@ export class AccountService {
   getPhone():string{
     return this.getUserData().phoneNumber;
   }
+  setPhone(newPhoneNumber:string):void{
+    const userData={...this.getUserData(),phoneNumber:newPhoneNumber};
+    localStorage.setItem("User Data",JSON.stringify(userData));
+  }
   isLogin():boolean{
     return this.getUserData() != null;
   }
@@ -87,6 +91,12 @@ export class AccountService {
   }
   get getEndTrain():string{
     return this.getUserData().startTrain;
+  }
+  get getAddressCompany():string{
+    return this.getUserData().addressCompany;
+  }
+  get getAcceptanceImg():string{
+    return this.getUserData().acceptanceImg;
   }
   clear():void{
     localStorage.clear();

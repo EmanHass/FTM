@@ -103,7 +103,7 @@ export class HomeComponent implements OnInit {
   updateAgenda(){
     if(this.agendaForm.valid){      
       // take values and use put method using id agenda to upate agenda
-      this.agendaService.updateAgenda(this.id,this.agendaForm.value).subscribe(
+      this.agendaService.updateAgenda(this.id,{...this.agendaForm.value,id:this.id,statusSemester:true}).subscribe(
         (res:any)=>{
           console.log('update success');
           this.getAgenda();

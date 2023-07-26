@@ -57,7 +57,7 @@
                           <div class="invalid" *ngIf="phoneFrom.get('phoneNumber').errors?.['startNumber']">
                               please enter a number start with '059' or '056'
                           </div>
-                          <div class="invalid" *ngIf="error">أدخل رقم الهاتف</div>
+                          <div class="invalid" *ngIf="!phoneFrom.get('phoneNumber').value && error">أدخل رقم الهاتف</div>
                     </div>
                     <div class="alignText margin-bottom">
                      <app-button [label]="phoneLabel" (onClick)="successEditPhone()"></app-button>

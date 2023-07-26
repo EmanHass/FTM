@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from 'src/app/auth/account.service';
 import { AuthService } from 'src/app/auth/auth.service';
+import { ProfileService } from '../../services/profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -14,13 +15,14 @@ export class ProfileComponent implements OnInit {
   passwordLabel:string='تغيير كلمة المرور';
   showPassModal:boolean=false;
   phoneLabel:string='تغيير رقم الهاتف';
+  phoneNumber:string;
   showPhoneModal:boolean=false;
   isEditPhone:boolean=false;
   isEditPass:boolean=false;
   getStatus:string;
   error:boolean=false;
   errorCurrentPass:boolean=false;
-  constructor(private authService:AuthService, public accountService:AccountService) { 
+  constructor(private authService:AuthService, public accountService:AccountService, private prfileService:ProfileService) { 
     this.initializationFGChangePassword();
     this.phoneFrom=new FormGroup({
       phoneNumber: new FormControl('', [Validators.required,this.authService.customValidationPhone(10, 10)]),
@@ -28,6 +30,7 @@ export class ProfileComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getStatus=localStorage.getItem("status");
+    this.phoneNumber=this.accountService.getPhone();
   }
 
   initializationFGChangePassword(): void {
@@ -77,20 +80,30 @@ export class ProfileComponent implements OnInit {
       }
 
   }
-  successEditPhone(){
+  successEditPhone(){    
     if(this.phoneFrom.valid){
+      const phoneNumber=this.phoneFrom.value.phoneNumber;
       if(this.authService.getStatus() == 'student'){
         // update method to update phone number for student
+        this.prfileService.changePhoneNumer(phoneNumber).subscribe(
+          (res:any)=>{
+            this.accountService.setPhone(res.phoneNunber);
+            this.error=false;
+            this.isEditPhone=true;
+            this.isEditPass=false;
+            setTimeout(()=>{
+              this.closeModal();
+              this.phoneFrom.reset();
+            },2000);            
+          },
+          error=>{
+            console.log(error);
+            
+          }
+        );
       }else{
         // update method to update phone for supervisor
       }
-      this.error=false;
-      this.isEditPhone=true;
-      this.isEditPass=false;
-      setTimeout(()=>{
-        this.closeModal();
-        this.phoneFrom.reset();
-      },2000);
     }else{
       this.error=true;
     }

@@ -1,7 +1,8 @@
 <section class="std-data">
     <h2>الطلاب المتدربين</h2>
 
-    <table class="table table-bordered">
+    <app-spinner *ngIf="isLoading"></app-spinner>
+    <table class="table table-bordered" *ngIf="!isLoading">
         <thead>
           <tr>
             <td scope="col">اسم الطالب</td>
@@ -12,9 +13,9 @@
         </thead>
         <tbody>
             <tr *ngFor="let student of students; let i=index;">
-                <td>{{student?.name}}</td>
+                <td>{{student?.firstName}} {{student?.lastName}}</td>
                 <td>{{student?.email}}</td>
-                <td>{{student?.stdNum}}</td>
+                <td>{{student?.universityStudentNum}}</td>
                 <td>
                   <div class="procedures">
                       <svg (click)="openstdDataModal(student.id)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
@@ -42,16 +43,16 @@
               <div class="content row">
                 <div class="col" *ngIf="showstdDataModal">
                   <h6>اسم الطالب</h6>
-                  <p>{{studentData?.name}}</p>
+                  <p>{{studentData?.firstName}} {{studentData?.lastName}}</p>
                   <h6>الرقم الجامعي</h6>
-                  <p>{{studentData?.stdNum}}</p>
+                  <p>{{studentData?.universityStudentNum}}</p>
                   <h6>البريدالإلكتروني</h6>
                   <p>{{studentData?.email}}</p>
                 </div>
 
                 <div class="col" *ngIf="showRatingModal">
                   <h6>اسم الطالب</h6>
-                  <p>{{studentData?.name}}</p>
+                  <p>{{studentData?.firstName}} {{studentData?.lastName}}</p>
                   <h6>عدد المهام المنجزة بالتدريب </h6>
                   <p>{{studentData?.numsTask}}</p>
                   <h6>تقييم التدريب ووصفه</h6>
@@ -60,20 +61,20 @@
 
                 <div class="col company-data">
                   <h6>اسم الشركة</h6>
-                  <p>{{studentData?.companyName}}</p>
-                  <h6>مجال الشركة</h6>
-                  <p>{{studentData?.fieldTraining}}</p>
-                  <h6>عدد أيام التدريب</h6>
-                  <p>{{studentData?.numsDay}}</p>
+                  <p>{{studentData?.nameTrainingCompany}}</p>
+                  <h6>مجال التدريب</h6>
+                  <p>{{studentData?.trainingField}}</p>
+                  <!-- <h6>عدد أيام التدريب</h6>
+                  <p>{{studentData?.numsDay}}</p> -->
 
                   <div class="dateTraining">
                     <div>
                       <h6>تاريخ بداية التدريب</h6>
-                      <p><img src="assets/images/calender.png"/>{{studentData?.startTraingingDate}}</p>
+                      <p><img src="assets/images/calender.png"/>{{studentData?.startTrain}}</p>
                     </div>
                     <div>
                       <h6>تاريخ نهاية التدريب</h6>
-                      <p><img src="assets/images/calender.png"/>{{studentData?.endTrainingDate}}</p>
+                      <p><img src="assets/images/calender.png"/>{{studentData?.endTrain}}</p>
                     </div>
                   </div>
                 </div>

@@ -14,16 +14,17 @@ export class TrainingDataComponent implements OnInit {
   //     email:'yousef@gmail.com',
   //     phone:'0592894843'
   //   }
-  // companyData:any=
-  //   {
-  //     name:'شركة جوال الفلسطينية',
-  //     field:'التصميم والبرمجة',
-  //     address:'غزة، دوار أبو مازن',
-  //     description:'جوال هي أول شركة اتصالات فلسطينية متخصصة في الاتصالات اللاسلكية، وتدير أعمالها في الضفة الغربية وقطاع غزة، وهي إحدى شركات مجموعة الإتصالات الفلسطينية.',
-  //     numDaysTraining:'29 يوم',
-  //     startTraining:'2022-06-20',
-  //     endTraining:'2022-08-02'
-  //   }
+  companyData:any=
+    {
+      NameTrainingCompany:this.accountService.getCompanyName,
+      TrainingField:this.accountService.getTrainingField,
+      AddressCompany:this.accountService.getAddressCompany,
+      AcceptanceImg:this.accountService.getAcceptanceImg,
+      // description:'جوال هي أول شركة اتصالات فلسطينية متخصصة في الاتصالات اللاسلكية، وتدير أعمالها في الضفة الغربية وقطاع غزة، وهي إحدى شركات مجموعة الإتصالات الفلسطينية.',
+      // numDaysTraining:'29 يوم',
+      StartTrain:this.accountService.getStartTrain,
+      EndTrain:this.accountService.getEndTrain
+    }
     labelBtn:string='تعديل';
   constructor(public accountService:AccountService) { }
 

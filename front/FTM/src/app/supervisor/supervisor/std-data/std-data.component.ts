@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SupervisorService } from '../../supervisor.service';
+import { AccountService } from 'src/app/auth/account.service';
 
 @Component({
   selector: 'app-std-data',
@@ -6,56 +8,38 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./std-data.component.scss']
 })
 export class StdDataComponent implements OnInit {
-  students:any=[
-    {
-      name:'أسيل الوديه',
-      email:'asil@gmail.com',
-      stdNum:20180401,
-      id:1,
-      companyName:"شركة جوال الفلسطينية",
-      fieldTraining:"البرمجة والتصميم",
-      numsDay:"29يوم",
-      startTraingingDate:"2022-06-20",
-      endTrainingDate:"2022-08-02",
-      numsTask:"7مهام",
-      ratingTraining:"التدريب ممتاز ويوجد متابعة مستمرة من مسؤولي بالتدريب"
-    },
-    {
-      name:'إيمان حسونة',
-      email:'eman@gmail.com',
-      stdNum:20180293,
-      id:2,
-      companyName:"شركة جوال الفلسطينية",
-      fieldTraining:"البرمجة والتصميم",
-      numsDay:"29يوم",
-      startTraingingDate:"2022-06-20",
-      endTrainingDate:"2022-08-02",
-      numsTask:"7مهام",
-      ratingTraining:"التدريب ممتاز ويوجد متابعة مستمرة من مسؤولي بالتدريب"
-    },
-    {
-      name:'محمد العطار',
-      email:'mohammed@gmail.com',
-      stdNum:2018254,
-      id:3,
-      companyName:"شركة جوال الفلسطينية",
-      fieldTraining:"البرمجة والتصميم",
-      numsDay:"29يوم",
-      startTraingingDate:"2022-06-20",
-      endTrainingDate:"2022-08-02",
-      numsTask:"7مهام",
-      ratingTraining:"التدريب ممتاز ويوجد متابعة مستمرة من مسؤولي بالتدريب"
-    }
-  ];
+  students:any;
   studentData:any;
   showstdDataModal:boolean=false;
   showRatingModal:boolean=false;
-  constructor() { }
+  isLoading:boolean=true;
+  supervisorId:number;
+  constructor(public superVisorService:SupervisorService,private accountService:AccountService) { }
 
   ngOnInit(): void {
+
+    this.supervisorId=this.accountService.getUserId();
+    this.superVisorService.getStdList(this.supervisorId).subscribe(
+      (res:any)=>{
+        this.isLoading=false;
+        this.students=res;
+        
+      },error=>{
+        console.log(error);
+        
+      }
+    );
   }
-  openModal(id:number){
-    this.studentData=this.students.find((i:any)=>i.id==id);
+  openModal(stdId:number){    
+    this.superVisorService.getStdById(this.supervisorId,stdId).subscribe(
+      (res:any)=>{
+        this.studentData=res;                
+      },
+      error=>{
+        console.log(error);
+        
+      }
+    );
   }
   openstdDataModal(id:number){
     this.openModal(id);

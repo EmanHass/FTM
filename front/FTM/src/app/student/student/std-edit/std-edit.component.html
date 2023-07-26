@@ -11,48 +11,48 @@
               <div class="col">
                 <div class="form-group">
                   <label>اسم الشركة</label>
-                  <input type="text" class="form-control" formControlName="name"/>
+                  <input type="text" class="form-control" formControlName="NameTrainingCompany"/>
                 </div>
                 <div class="form-group">
                   <label>عنوان الشركة</label>
-                  <input type="text" class="form-control" formControlName="address"/>
+                  <input type="text" class="form-control" formControlName="AddressCompany"/>
                 </div>
                 <div class="form-group">
                   <label>مجال الشركة</label>
-                  <input type="text" class="form-control" formControlName="field"/>
+                  <input type="text" class="form-control" formControlName="TrainingField"/>
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label>تفاصيل عن الشركة</label>
                   <textarea rows="4" cols="52" formControlName="description"></textarea>
-                </div>
+                </div> -->
                 <div class="alignText">
                   <app-button [label]="labelBtn" (onClick)="update()"></app-button>
                 </div>
               </div>
               <div class="col">
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label>عدد أيام التدريب</label>
                   <input type="text" class="form-control" formControlName="numDaysTraining"/>
-                </div>
+                </div> -->
 
                 <div class="row">
                   <div class="col">
                     <div class="form-group">
                       <label>تاريخ بداية التدريب</label>
-                      <input type="date" class="form-control" formControlName="startTraining"/>
+                      <input type="date" class="form-control" formControlName="StartTrain" value="{{updateCompanyData.value.startTraining  | date:'yyyy-MM-dd' }}"/>
                     </div>
                   </div>
                   <div class="col">
                     <div class="form-group">
                       <label>تاريخ نهاية التدريب</label>
-                      <input type="date" class="form-control" formControlName="endTraining"/>
+                      <input type="date" class="form-control" formControlName="EndTrain" value="{{updateCompanyData.value.endTraining  | date:'yyyy-MM-dd' }}"/>
                     </div>                   
                   </div>
                 </div>
 
                 <div class="acceptance-img">
                   <label>إضافة ورقة قبول الشركة</label>
-                  <input type="file"/>
+                  <input type="file" (change)="onFileSelected($event)"/>
                 </div>
               </div>
             </div>

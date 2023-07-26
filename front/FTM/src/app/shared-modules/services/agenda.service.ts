@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -24,10 +24,13 @@ export class AgendaService {
   }
 
   updateAgenda(id:number,updateData:any):Observable<any>{
+    let params = new HttpParams().set('id', id);
+
     return this.http.put(`${this.apiLink}/UpdateAgenda/${id}`,updateData,{
       headers: new HttpHeaders({
         'content-type': 'application/json',
       }),
+      params: params
     });
   }
   deleteAgenda(id:number):Observable<any>{
