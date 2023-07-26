@@ -20,6 +20,8 @@ export class SignupComponent implements OnInit {
   passwordMsg:boolean=false;
   errorId:boolean=false;
   isLoading:boolean=false;
+  firstName:string;
+  lastName:string;
 
   constructor(private authService:AuthService, private accountService:AccountService,private router:Router) {
   this.initializationFGStudent();
@@ -85,8 +87,11 @@ export class SignupComponent implements OnInit {
   }
   checkStdIdAPI(id:string):any{
     this.authService.checkStdNum(id).subscribe(
-      res=>{
+      (res:any)=>{
         if(res){
+          console.log('res',res);
+          this.firstName=res.firstName;
+          this.lastName=res.lastName;
           this.isLoading=false;
           this.errorId=false;
           //check if id exist so he can complete register
@@ -107,8 +112,10 @@ export class SignupComponent implements OnInit {
 
     if(this.isStudent){
       console.log(this.studentForm.value);    
-      const formValues = { ...this.studentForm.value };
+      const formValues = { ...this.studentForm.value, firstName:this.firstName, lastName:this.lastName };
       delete formValues.UniversityStudentNum;
+      console.log('send vlaues...',formValues);
+      
       this.authService.signup(formValues,this.studentForm.value.UniversityStudentNum).subscribe(
         (res:any)=>{
           console.log('success signup');
