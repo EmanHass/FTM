@@ -46,6 +46,8 @@ export class SignupComponent implements OnInit {
       startTrain: new FormControl('', [Validators.required]),
       endTrain: new FormControl('', [Validators.required]),
       acceptanceImg: new FormControl('', [Validators.required]),
+      FirstName: new FormControl(this.firstName,[Validators.required]),
+      LastName: new FormControl(this.lastName,[Validators.required])
     },
     this.authService.checkPassword());
   }
@@ -115,8 +117,9 @@ export class SignupComponent implements OnInit {
       const formValues = { ...this.studentForm.value, firstName:this.firstName, lastName:this.lastName };
       delete formValues.UniversityStudentNum;
       console.log('send vlaues...',formValues);
+      console.log('studentForm',this.studentForm.value);
       
-      this.authService.signup(formValues,this.studentForm.value.UniversityStudentNum).subscribe(
+      this.authService.signup(this.studentForm.value,this.studentForm.value.UniversityStudentNum).subscribe(
         (res:any)=>{
           console.log('success signup');
           this.accountService.setUserData(res);

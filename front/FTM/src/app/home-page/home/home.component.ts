@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
 export class HomeComponent implements OnInit {
   idImg:any;
   modalStatus=false;
-  imageSrc=`${environment.apiImage}/images/`;
+  imageSrc=`${environment.apiImage}`;
   requirements:TrainingRequirement[];
   trainingImportanceDtos:TrainingImportance[];
   company:Company;

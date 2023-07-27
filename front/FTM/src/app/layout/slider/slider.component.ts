@@ -12,7 +12,7 @@ export class SliderComponent implements OnInit {
   @Input() companyArr:any;
   @Output() companyId:EventEmitter<number>=new EventEmitter<number>;
   @Output() modalStatus:EventEmitter<boolean>=new EventEmitter<boolean>;
-  imageSrc=`${environment.apiImage}/images/`;
+  imageSrc=`${environment.apiImage}`;
 
   config: SwiperOptions = {
     pagination: { 
@@ -21,11 +21,10 @@ export class SliderComponent implements OnInit {
       type: 'bullets',
     },
     spaceBetween: 15,
-    slidesPerView: 'auto',
+    slidesPerView: 3,
       autoplay: {
        delay: 3000,
       },
-      loop: true,
   };
   constructor() { }
 
@@ -36,6 +35,5 @@ export class SliderComponent implements OnInit {
     this.modalStatus.emit(true);
     this.id= idImg;
     this.companyId.emit(this.id);
-    console.log('modal open clicked', idImg); 
   }
 }
