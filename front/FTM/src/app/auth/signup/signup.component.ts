@@ -22,6 +22,7 @@ export class SignupComponent implements OnInit {
   isLoading:boolean=false;
   firstName:string;
   lastName:string;
+  selectedFile:string;
 
   constructor(private authService:AuthService, private accountService:AccountService,private router:Router) {
   this.initializationFGStudent();
@@ -45,9 +46,7 @@ export class SignupComponent implements OnInit {
       // numOfdaysTraining: new FormControl('', [Validators.required]),
       startTrain: new FormControl('', [Validators.required]),
       endTrain: new FormControl('', [Validators.required]),
-      acceptanceImg: new FormControl('', [Validators.required]),
-      FirstName: new FormControl(this.firstName,[Validators.required]),
-      LastName: new FormControl(this.lastName,[Validators.required])
+      acceptanceImg: new FormControl(this.selectedFile, [Validators.required]),
     },
     this.authService.checkPassword());
   }
@@ -137,6 +136,14 @@ export class SignupComponent implements OnInit {
     }
   }
 
-
+  onFileSelected(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    if (inputElement.files && inputElement.files.length > 0) {
+      this.selectedFile = inputElement.files[0].name;
+      // this.selectedFile=`${this.srcImg}/${this.selectedFile}`;
+      console.log(this.selectedFile);
+      
+    }
+  }
 
 }

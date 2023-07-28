@@ -104,7 +104,7 @@
                             <div>
                                 <label for="acceptance-img" class="accept-img">إرفاق صورة الموافقة على التدريب</label>
                                 <div class="form-group">
-                                    <input type="file" id="acceptance-img" formControlName="acceptanceImg">
+                                    <input type="file" id="acceptance-img" (change)="onFileSelected($event)">
                                 </div>
                             </div>
                             <button class="btn btn-primary submit" (click)="signup()">تسجيل الإشتراك</button>

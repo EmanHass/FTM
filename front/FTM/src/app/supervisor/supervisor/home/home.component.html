@@ -2,18 +2,18 @@
     <div class="header">
         <h3>أجندة التدريب</h3>
     </div>
-    <div class="content">
+    <app-spinner *ngIf="isLoading"></app-spinner>
+    <div class="content" *ngIf="!isLoading">
         <div>
             <app-button [label]="btnLabel" (onClick)="showAddModal()"></app-button>
         </div>
         <div class="row info">
                 <h6 class="col-lg-3">عدد الشركات التدريبية</h6>
-                <div class="number col-md-1">10</div>
+                <div class="number col-md-1">{{numsCompnay}}</div>
                 <h6 class="col-lg-3">عدد طلبة التدريب</h6>
-                <div class="number number2 col-md-1">54</div>
+                <div class="number number2 col-md-1">{{numsStudent}}</div>
         </div>
-        <app-spinner *ngIf="isLoading"></app-spinner>
-        <table class="table table-bordered" *ngIf="!isLoading">
+        <table class="table table-bordered">
             <thead>
               <tr>
                 <td scope="col">اسم الفصل</td>

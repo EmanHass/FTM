@@ -87,10 +87,10 @@ export class AccountService {
     return this.getUserData().trainingField;
   }
   get getStartTrain():string{
-    return this.getUserData().endTrain;
+    return this.getUserData().startTrain;
   }
   get getEndTrain():string{
-    return this.getUserData().startTrain;
+    return this.getUserData().endTrain;
   }
   get getAddressCompany():string{
     return this.getUserData().addressCompany;

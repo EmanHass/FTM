@@ -45,4 +45,7 @@ export class SupervisorService {
   deleteCompanyById(id:number): Observable<any>{
     return this.http.delete(`${this.apiCompany}/Delete/${id}`);
   }
+  updateCompany(company:any,id:any): Observable<any>{
+    return this.http.put<any>(`${this.apiCompany}/UpdateRequirement/${id}`,company);
+  }
 }

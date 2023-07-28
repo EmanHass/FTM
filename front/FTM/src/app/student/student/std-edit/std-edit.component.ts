@@ -31,7 +31,7 @@ export class StdEditComponent implements OnInit {
       TrainingField: new FormControl('', [Validators.required]),
       AcceptanceImg: new FormControl('',[Validators.required]),
       // description: new FormControl('', [Validators.required]),
-      // numDaysTraining: new FormControl('', [Validators.required]),
+      numDaysTraining: new FormControl('', [Validators.required]),
       StartTrain: new FormControl('', [Validators.required]),
       EndTrain: new FormControl('', [Validators.required]),
     });

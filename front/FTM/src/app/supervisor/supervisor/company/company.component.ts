@@ -31,8 +31,8 @@ export class CompanyComponent implements OnInit {
       description: new FormControl('',Validators.required),
       linkCompany: new FormControl('',[Validators.required]),
       phoneNumber: new FormControl('',[Validators.required]),
-      logoCompany: new FormControl('',[Validators.required]),
-      companyCapacity: new FormControl('',[Validators.required]),
+      logoCompany: new FormControl(this.selectedFile,[Validators.required]),
+      companyCapacity: new FormControl(20,[Validators.required]),
     });
   }
 
@@ -43,7 +43,7 @@ export class CompanyComponent implements OnInit {
     this.supervisorService.getCompanyList().subscribe(
       (res:any)=>{
         this.companies=res;
-        this.isLoading=false;
+        this.isLoading=false;   
       },
       error=>{
         console.log(error);
@@ -64,8 +64,19 @@ export class CompanyComponent implements OnInit {
     this.companyForm.reset();
   }
   addingCompany(){
+    console.log(this.companyForm.value);
     if(this.companyForm.valid){
       // adding new company using post method
+      
+      this.supervisorService.addNewCompany(this.companyForm.value).subscribe(
+        (res:any)=>{
+          console.log(res);
+          
+        },error=>{
+          console.log(error);
+          
+        }
+      );
       this.showModalStatus=false;
       this.resetForm();
     }else{
@@ -75,6 +86,15 @@ export class CompanyComponent implements OnInit {
   editCompany(){
     if(this.companyForm.valid){
       // adding new company using post method
+      this.supervisorService.updateCompany({...this.companyForm.value,id:this.idEdit},this.idEdit).subscribe(
+        (res:any)=>{
+          console.log(res);
+          
+        },error=>{
+          console.log(error);
+          
+        }
+      );
       this.showModalStatus=false;
       this.resetForm();
     }else{
@@ -111,7 +131,9 @@ export class CompanyComponent implements OnInit {
   onFileSelected(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     if (inputElement.files && inputElement.files.length > 0) {
+      
       this.selectedFile = inputElement.files[0].name;
+      this.companyForm.patchValue({logoCompany:this.selectedFile});
       // this.selectedFile=`${this.srcImg}/${this.selectedFile}`;
       console.log(this.selectedFile);
       

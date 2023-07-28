@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SupervisorService } from '../../supervisor.service';
 import { AccountService } from 'src/app/auth/account.service';
+import { ComputeDayService } from 'src/app/shared-modules/services/compute-day.service';
 
 @Component({
   selector: 'app-std-data',
@@ -14,7 +15,9 @@ export class StdDataComponent implements OnInit {
   showRatingModal:boolean=false;
   isLoading:boolean=true;
   supervisorId:number;
-  constructor(public superVisorService:SupervisorService,private accountService:AccountService) { }
+  numsDayOfTrain:number;
+  modalLoading:boolean=false;
+  constructor(public superVisorService:SupervisorService,private accountService:AccountService, private computeDayService:ComputeDayService) { }
 
   ngOnInit(): void {
 
@@ -22,8 +25,7 @@ export class StdDataComponent implements OnInit {
     this.superVisorService.getStdList(this.supervisorId).subscribe(
       (res:any)=>{
         this.isLoading=false;
-        this.students=res;
-        
+        this.students=res;        
       },error=>{
         console.log(error);
         
@@ -31,9 +33,12 @@ export class StdDataComponent implements OnInit {
     );
   }
   openModal(stdId:number){    
+    this.modalLoading=false;
     this.superVisorService.getStdById(this.supervisorId,stdId).subscribe(
       (res:any)=>{
-        this.studentData=res;                
+        this.modalLoading=true;
+        this.studentData=res; 
+        this.numsDayOfTrain=this.computeDayService.getDaysDifference(res.startTrain,res.endTrain);             
       },
       error=>{
         console.log(error);

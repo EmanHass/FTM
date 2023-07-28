@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from 'src/app/auth/account.service';
+import { ComputeDayService } from 'src/app/shared-modules/services/compute-day.service';
 
 @Component({
   selector: 'app-training-data',
@@ -8,27 +9,21 @@ import { AccountService } from 'src/app/auth/account.service';
 })
 export class TrainingDataComponent implements OnInit {
   modalStatus:boolean=false;
-  // supervisorData:any=
-  //   {
-  //     name:'يوسف أبو سلطان',
-  //     email:'yousef@gmail.com',
-  //     phone:'0592894843'
-  //   }
   companyData:any=
     {
       NameTrainingCompany:this.accountService.getCompanyName,
       TrainingField:this.accountService.getTrainingField,
       AddressCompany:this.accountService.getAddressCompany,
       AcceptanceImg:this.accountService.getAcceptanceImg,
-      // description:'جوال هي أول شركة اتصالات فلسطينية متخصصة في الاتصالات اللاسلكية، وتدير أعمالها في الضفة الغربية وقطاع غزة، وهي إحدى شركات مجموعة الإتصالات الفلسطينية.',
-      // numDaysTraining:'29 يوم',
+      numDaysTraining:'',
       StartTrain:this.accountService.getStartTrain,
       EndTrain:this.accountService.getEndTrain
     }
     labelBtn:string='تعديل';
-  constructor(public accountService:AccountService) { }
+  constructor(public accountService:AccountService, private computeDayService:ComputeDayService) { }
 
   ngOnInit(): void {
+    this.companyData.numDaysTraining=this.computeDayService.getDaysDifference(this.companyData.StartTrain, this.companyData.EndTrain);
   }
   updateData(){
     this.modalStatus=true;  

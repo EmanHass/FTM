@@ -34,7 +34,8 @@
   <div class="modal" *ngIf="showstdDataModal || showRatingModal">
       <div class="modal-dialog">
         <div class="modal-content">
-          <div class="modal-body">
+          <app-spinner *ngIf="!modalLoading"></app-spinner>
+          <div class="modal-body" *ngIf="modalLoading">
               <div class="header">
                   <h2 *ngIf="showstdDataModal">بيانات الطالب</h2>
                   <h2 *ngIf="showRatingModal">تقييم التدريب</h2>
@@ -64,8 +65,8 @@
                   <p>{{studentData?.nameTrainingCompany}}</p>
                   <h6>مجال التدريب</h6>
                   <p>{{studentData?.trainingField}}</p>
-                  <!-- <h6>عدد أيام التدريب</h6>
-                  <p>{{studentData?.numsDay}}</p> -->
+                  <h6>عدد أيام التدريب</h6>
+                  <p>{{numsDayOfTrain}}يوم</p>
 
                   <div class="dateTraining">
                     <div>

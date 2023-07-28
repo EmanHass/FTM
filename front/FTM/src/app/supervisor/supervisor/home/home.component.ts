@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AgendaService } from 'src/app/shared-modules/services/agenda.service';
 import { formatDate } from '@angular/common';
+import { SupervisorService } from '../../supervisor.service';
+import { AccountService } from 'src/app/auth/account.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -21,8 +23,10 @@ export class HomeComponent implements OnInit {
   id:number;
   semesters:any=[];
   detailsSemseter:any=[];
-
-  constructor(private agendaService:AgendaService) {
+  numsCompnay:string;
+  numsStudent:string;
+  supervisorId:number;
+  constructor(private agendaService:AgendaService, private supervisorService:SupervisorService, private accountService:AccountService) {
     this.initializationFG();
   }
 
@@ -44,6 +48,26 @@ export class HomeComponent implements OnInit {
     // this.agendaService.deleteAgenda(6).subscribe((res:any)=>{
     //   console.log('delete success');    
     // });
+    this.supervisorId=this.accountService.getUserId();
+    this.supervisorService.getStdList(this.supervisorId).subscribe(
+      (res:any)=>{
+        this.numsStudent= res.length;
+        
+      },error=>{
+        console.log(error);
+        
+      }
+    );
+
+    this.supervisorService.getCompanyList().subscribe(
+      (res:any)=>{
+        this.numsCompnay=res.length;
+      },
+      error=>{
+        console.log(error);
+        
+      }
+    );
   }
   getAgenda(){
     this.agendaService.getAgenda().subscribe(
