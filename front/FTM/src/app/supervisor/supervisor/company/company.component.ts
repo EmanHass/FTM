@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SupervisorService } from '../../supervisor.service';
+import { HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-company',
@@ -8,11 +9,14 @@ import { SupervisorService } from '../../supervisor.service';
   styleUrls: ['./company.component.scss']
 })
 export class CompanyComponent implements OnInit {
+  formType = 'create';
+  buttonLabel = 'انشاء';
   addCompany:string='إضافة شركة تدريبية';
   addCompanyExcel:string='تحميل ملف اكسل';
   addBtn:string='إضافة';
   editBtn:string='تعديل';
   companyForm:FormGroup;
+  logoInput:FormControl;
   showModalStatus:boolean=false;
   isEdit:boolean=false;
   isAdd:boolean=true;
@@ -22,7 +26,14 @@ export class CompanyComponent implements OnInit {
   isDeleted:boolean=false;
   isLoading:boolean=true;
   selectedFile:string;
+  progressValue: string = '';
   constructor(private supervisorService:SupervisorService) { 
+    
+  }
+
+  ngOnInit(): void {
+    this.logoInput = new FormControl('', [Validators.required]);
+
     this.companyForm= new FormGroup({
       name: new FormControl('',Validators.required),
       email:new FormControl('',[Validators.required]),
@@ -31,13 +42,50 @@ export class CompanyComponent implements OnInit {
       description: new FormControl('',Validators.required),
       linkCompany: new FormControl('',[Validators.required]),
       phoneNumber: new FormControl('',[Validators.required]),
-      logoCompany: new FormControl(this.selectedFile,[Validators.required]),
-      companyCapacity: new FormControl(20,[Validators.required]),
+      logoCompany: this.logoInput,
+      file: new FormControl(''),
+      companyCapacity: new FormControl('',[Validators.required]),
     });
+    
+    this.getListCompany();
+  }
+  HandleOnSubmit() {
+    if (this.formType == 'create') {
+      this.CreateCompany();
+    }  
+
+    this.ResetForm();
+  }
+  ResetForm() {
+    this.formType = 'create';
+    this.buttonLabel = 'انشاء';
+    
+    this.progressValue = '0%';
+    this.companyForm.reset();
+
+     
   }
 
-  ngOnInit(): void {
-    this.getListCompany();
+  private  CreateCompany() {
+    this.supervisorService.addCompany1(this.companyForm.value)
+      .subscribe({
+        next: (res) => {
+          if (res.type == HttpEventType.UploadProgress) {
+            if (res.total) {
+              //not equal to null update progress
+              this.progressValue =
+                Math.round(100 * (res.loaded / res.total)) + '%';
+            }
+          }
+
+          if (res.type == HttpEventType.Response && res.body != null) {
+            console.log(res.body)
+          }
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
   }
   getListCompany(){
     this.supervisorService.getCompanyList().subscribe(
@@ -127,7 +175,15 @@ export class CompanyComponent implements OnInit {
       }
     );
   }
-
+  HandleFileInputChange(event: Event) {
+    const target = event.target as HTMLInputElement;
+    const files = target.files!;
+    if (files.length > 0) {
+      // file exist
+      this.logoInput.setValue(files[0]);
+    }
+    console.log('file input changed : ' + files);
+  }
   onFileSelected(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     if (inputElement.files && inputElement.files.length > 0) {

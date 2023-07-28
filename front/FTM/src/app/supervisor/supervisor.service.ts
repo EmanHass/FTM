@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { ICreateCompany } from '../shared-modules/model-interface/homePage/company';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,26 @@ export class SupervisorService {
       })
     });
   }
+ 
+ public addCompany1(createCompany:ICreateCompany){
+  let formData=new FormData;
+  formData.append('Name',createCompany.name);
+  formData.append('Description',createCompany.description);
+  formData.append('Email',createCompany.email);
+  formData.append('PhoneNumber',createCompany.phoneNumber);
+  formData.append('LinkCompany',createCompany.linkCompany);
+  formData.append('Address',createCompany.address);
+  formData.append('LogoCompany',createCompany.logoCompany);
+  formData.append('CompanyCapacity',createCompany.companyCapacity.toString());
+  formData.append('FieldsOfTrainings',createCompany.fieldsOfTrainings);
+
+  return this.http.post<any>(`${this.apiCompany}/AddCompany`, formData, {
+    reportProgress: true,
+    observe: 'events',
+  });
+
+ }
+
 
   addNewCompany(company:any): Observable<any>{
     return this.http.post<any>(`${this.apiCompany}/AddCompany`,company);
