@@ -111,7 +111,7 @@ export class HomeComponent implements OnInit {
   addingAgenda(){    
     if(this.agendaForm.valid){      
       // post method to adding new agenda      
-      this.agendaService.addAgenda(this.agendaForm.value).subscribe(
+      this.agendaService.addAgenda({...this.agendaForm.value,statusSemester:true}).subscribe(
         (res) => { 
           this.getAgenda();        
         },

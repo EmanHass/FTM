@@ -37,6 +37,9 @@
         }
         .borderBottom{
             border-bottom: 5px solid var(--bg-color);
+            .padding{
+                padding-left: 73px;
+            }
         }
         form{
             header{
