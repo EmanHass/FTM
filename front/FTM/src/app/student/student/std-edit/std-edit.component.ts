@@ -18,7 +18,7 @@ export class StdEditComponent implements OnInit {
   isUpdate:boolean=false;
   modalStatus:boolean=false;
   id:any;
-  selectedFile:string;
+  selectedFile:File;
   srcImg:string=environment.apiImage;
   constructor(private studentService:StudentService, private accountService:AccountService) {
      this.initializationFG();
@@ -30,7 +30,6 @@ export class StdEditComponent implements OnInit {
       AddressCompany: new FormControl('', [Validators.required]),
       TrainingField: new FormControl('', [Validators.required]),
       AcceptanceImg: new FormControl('',[Validators.required]),
-      // description: new FormControl('', [Validators.required]),
       numDaysTraining: new FormControl('', [Validators.required]),
       StartTrain: new FormControl('', [Validators.required]),
       EndTrain: new FormControl('', [Validators.required]),
@@ -42,6 +41,19 @@ export class StdEditComponent implements OnInit {
     const startTrainingDate= formatDate(this.comapnyData.StartTrain,'yyyy-MM-dd', 'en');
     const endTrainingDate =  formatDate(this.comapnyData.EndTrain,'yyyy-MM-dd', 'en');
     this.updateCompanyData.setValue({...this.comapnyData,StartTrain:startTrainingDate,EndTrain:endTrainingDate});
+  }
+  UpdateDataToLocalStorage(){
+    const user = this.accountService.getUserData();
+    this.accountService.setUserData(
+      {
+        ...user,
+        addressCompany:this.updateCompanyData.value.AddressCompany,
+        endTrain:this.updateCompanyData.value.EndTrain,
+        startTrain:this.updateCompanyData.value.StartTrain,
+        nameTrainingCompany:this.updateCompanyData.value.NameTrainingCompany,
+        trainingField:this.updateCompanyData.value.TrainingField,
+        acceptanceImg: this.updateCompanyData.value.AcceptanceImg,  
+     })
   }
   closeModal():void{
     this.closedModal.emit(this.modalStatus);
@@ -55,26 +67,26 @@ export class StdEditComponent implements OnInit {
       this.studentService.updateCompanyInfo(newInfo).subscribe(
         (res:any)=>{
           console.log(res);
-          
+          this.isUpdate=true;
+          this.UpdateDataToLocalStorage();
+          setTimeout(() => {
+            this.isUpdate = false;
+            this.closeModal();
+          }, 2000);
         },
-        error=>{
+        (error:any)=>{
           console.log(error);
           
         }
       );
     }
-    // this.isUpdate=true;
-    //   setTimeout(() => {
-    //     this.isUpdate = false;
-    //     this.closeModal();
-    //   }, 2000);
   }
 
   onFileSelected(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     if (inputElement.files && inputElement.files.length > 0) {
-      this.selectedFile = inputElement.files[0].name;
-      // this.selectedFile=`${this.srcImg}/${this.selectedFile}`;
+      this.selectedFile = inputElement.files[0];
+      this.updateCompanyData.patchValue({AcceptanceImg:this.selectedFile});
       console.log(this.selectedFile);
       
     }

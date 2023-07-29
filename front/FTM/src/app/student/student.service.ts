@@ -10,11 +10,19 @@ export class StudentService {
   apiLink=environment.apiLink+"/student/account";
 
   constructor(private http: HttpClient) { }
-  updateCompanyInfo(trainingInfo:any): Observable<any[]>{
-    return this.http.post<any[]>(`${this.apiLink}/updateCompanyInformation`,trainingInfo,{
-      headers: new HttpHeaders({
-        'content-type': 'application/json',
-      })
+  updateCompanyInfo(trainingInfo:any): any{
+    let formData=new FormData;
+    formData.append('UserId',trainingInfo.UserId);
+    formData.append('NameTrainingCompany',trainingInfo.NameTrainingCompany);
+    formData.append('AddressCompany',trainingInfo.AddressCompany);
+    formData.append('AcceptanceImg',trainingInfo.AcceptanceImg);
+    formData.append('TrainingField',trainingInfo.TrainingField);
+    formData.append('StartTrain',trainingInfo.StartTrain);
+    formData.append('EndTrain',trainingInfo.EndTrain);
+
+    return this.http.put<any[]>(`${this.apiLink}/updateCompanyInformation`,formData,{
+      reportProgress: true,
+      observe: 'events',
     });
   }
 }
