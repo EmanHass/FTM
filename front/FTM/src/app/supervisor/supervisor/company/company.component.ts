@@ -49,13 +49,15 @@ export class CompanyComponent implements OnInit {
     
     this.getListCompany();
   }
-  HandleOnSubmit() {
-    if (this.formType == 'create') {
-      this.CreateCompany();
-    }  
+  // HandleOnSubmit() {
+  //   if (this.formType == 'create') {
+  //     this.CreateCompany();
+  //     console.log(this.formType);
+      
+  //   }  
 
-    this.ResetForm();
-  }
+  //   this.ResetForm();
+  // }
   ResetForm() {
     this.formType = 'create';
     this.buttonLabel = 'انشاء';
@@ -66,8 +68,8 @@ export class CompanyComponent implements OnInit {
      
   }
 
-  private  CreateCompany() {
-    this.supervisorService.addCompany1(this.companyForm.value)
+ private CreateCompany() {
+    this.supervisorService.addNewCompany(this.companyForm.value)
       .subscribe({
         next: (res) => {
           if (res.type == HttpEventType.UploadProgress) {
@@ -90,6 +92,8 @@ export class CompanyComponent implements OnInit {
   getListCompany(){
     this.supervisorService.getCompanyList().subscribe(
       (res:any)=>{
+        console.log('list company',res);
+        
         this.companies=res;
         this.isLoading=false;   
       },
@@ -115,16 +119,7 @@ export class CompanyComponent implements OnInit {
     console.log(this.companyForm.value);
     if(this.companyForm.valid){
       // adding new company using post method
-      
-      this.supervisorService.addNewCompany(this.companyForm.value).subscribe(
-        (res:any)=>{
-          console.log(res);
-          
-        },error=>{
-          console.log(error);
-          
-        }
-      );
+      this.CreateCompany();
       this.showModalStatus=false;
       this.resetForm();
     }else{
@@ -134,15 +129,26 @@ export class CompanyComponent implements OnInit {
   editCompany(){
     if(this.companyForm.valid){
       // adding new company using post method
-      this.supervisorService.updateCompany({...this.companyForm.value,id:this.idEdit},this.idEdit).subscribe(
-        (res:any)=>{
-          console.log(res);
-          
-        },error=>{
-          console.log(error);
-          
-        }
-      );
+      console.log('update form',this.companyForm.value);
+      
+      this.supervisorService.updateCompany(this.companyForm.value,this.idEdit).subscribe({
+        next: (res) => {
+          if (res.type == HttpEventType.UploadProgress) {
+            if (res.total) {
+              //not equal to null update progress
+              this.progressValue =
+                Math.round(100 * (res.loaded / res.total)) + '%';
+            }
+          }
+
+          if (res.type == HttpEventType.Response && res.body != null) {
+            console.log(res.body)
+          }
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
       this.showModalStatus=false;
       this.resetForm();
     }else{
@@ -157,7 +163,7 @@ export class CompanyComponent implements OnInit {
 
     const updateCompany= this.companies.find((i:any)=>i.id==id);
     delete updateCompany.id;
-    this.companyForm.setValue(updateCompany);
+    this.companyForm.setValue({...updateCompany,file:''});
     }
   deleteCompany(id:number){
     this.supervisorService.deleteCompanyById(id).subscribe(
@@ -182,17 +188,6 @@ export class CompanyComponent implements OnInit {
       // file exist
       this.logoInput.setValue(files[0]);
     }
-    console.log('file input changed : ' + files);
-  }
-  onFileSelected(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    if (inputElement.files && inputElement.files.length > 0) {
-      
-      this.selectedFile = inputElement.files[0].name;
-      this.companyForm.patchValue({logoCompany:this.selectedFile});
-      // this.selectedFile=`${this.srcImg}/${this.selectedFile}`;
-      console.log(this.selectedFile);
-      
-    }
+    console.log('file input changed : ' + files,this.logoInput.value);
   }
 }

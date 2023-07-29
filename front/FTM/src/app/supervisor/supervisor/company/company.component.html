@@ -49,7 +49,7 @@
                     <h1 (click)="closeModal()">×</h1>
                 </div>
 
-                <form [formGroup]="companyForm"(ngSubmit)="HandleOnSubmit()" >
+                <form [formGroup]="companyForm">
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
@@ -99,10 +99,10 @@
                     <div class="invalid" *ngIf="companyForm.invalid && error">املأ كل الحقول</div>
 
                     <div class="text-center">
-                        <button [disabled]="!companyForm.valid" type="submit"
-                        class="btn btn-success">{{buttonLabel}}</button>
-                        <!-- <app-button *ngIf="isAdd" [label]="addBtn" (onClick)="CreateCompany()"></app-button>
-                        <app-button *ngIf="isEdit" [label]="editBtn" (onClick)="editCompany()"></app-button> -->
+                        <!-- <button [disabled]="!companyForm.valid" type="submit"
+                        class="btn btn-success">{{buttonLabel}}</button> -->
+                        <app-button *ngIf="isAdd" [label]="addBtn" (onClick)="addingCompany()"></app-button>
+                        <app-button *ngIf="isEdit" [label]="editBtn" (onClick)="editCompany()"></app-button>
                     </div>
                 </form>
             </div>

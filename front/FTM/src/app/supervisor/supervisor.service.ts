@@ -40,7 +40,7 @@ export class SupervisorService {
     });
   }
  
- public addCompany1(createCompany:ICreateCompany){
+ public addNewCompany(createCompany:ICreateCompany):Observable<any>{
   let formData=new FormData;
   formData.append('Name',createCompany.name);
   formData.append('Description',createCompany.description);
@@ -58,15 +58,24 @@ export class SupervisorService {
   });
 
  }
-
-
-  addNewCompany(company:any): Observable<any>{
-    return this.http.post<any>(`${this.apiCompany}/AddCompany`,company);
-  }
   deleteCompanyById(id:number): Observable<any>{
     return this.http.delete(`${this.apiCompany}/Delete/${id}`);
   }
   updateCompany(company:any,id:any): Observable<any>{
-    return this.http.put<any>(`${this.apiCompany}/UpdateRequirement/${id}`,company);
+    let formData=new FormData;
+    formData.append('Id',id);
+    formData.append('Name',company.name);
+    formData.append('Description',company.description);
+    formData.append('Email',company.email);
+    formData.append('PhoneNumber',company.phoneNumber);
+    formData.append('LinkCompany',company.linkCompany);
+    formData.append('Address',company.address);
+    formData.append('NewLogo',company.logoCompany);
+    // formData.append('CompanyCapacity',company.companyCapacity.toString());
+    formData.append('FieldsOfTrainings',company.fieldsOfTrainings);
+    return this.http.put<any>(`${this.apiCompany}/UpdateRequirement/${id}`,formData,{
+      reportProgress: true,
+      observe: 'events',
+    });
   }
 }
