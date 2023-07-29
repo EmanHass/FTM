@@ -23,6 +23,7 @@ export class CompanyComponent implements OnInit {
   error:boolean=false;
   companies:any;
   idEdit:number;
+  isAdded:boolean=false;
   isDeleted:boolean=false;
   isLoading:boolean=true;
   selectedFile:string;
@@ -120,8 +121,13 @@ export class CompanyComponent implements OnInit {
     if(this.companyForm.valid){
       // adding new company using post method
       this.CreateCompany();
-      this.showModalStatus=false;
+      this.isAdded=true;
+      setTimeout(()=>{
+        this.isAdded=false;
+        this.showModalStatus=false;
+      },2000)
       this.resetForm();
+      this.getListCompany();
     }else{
       this.error=true;
     }
