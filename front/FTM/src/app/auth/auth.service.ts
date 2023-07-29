@@ -30,13 +30,26 @@ export class AuthService {
     });
   }
 
-  signup(data:any,id:any):Observable<any>{
-    let params = new HttpParams().set('UniversityStudentNum', id);
-    return this.http.post(`${this.apiLinkStd}/registerStudent`,data,{
-      headers: new HttpHeaders({
-        'content-type': 'application/json',
-      }),
-      params: params
+  signup(data:any):Observable<any>{
+    let formData=new FormData;
+    formData.append('Email',data.email);
+    formData.append('Password',data.password);
+    formData.append('ConfirmPassword',data.confirmPassword);
+    formData.append('PhoneNumber',data.phoneNumber);
+    formData.append('NameTrainingCompany',data.nameTrainingCompany);
+    formData.append('AddressCompany',data.addressCompany);
+    formData.append('TrainingField',data.trainingField);
+    formData.append('StartTrain',data.startTrain);
+    formData.append('EndTrain',data.endTrain);
+    formData.append('AcceptanceImg',data.acceptanceImg);
+    formData.append('FirstName',data.firstName);
+    formData.append('LastName',data.lastName);
+    let params = new HttpParams().set('UniversityStudentNum', data.id);
+
+    return this.http.post(`${this.apiLinkStd}/registerStudent`,formData,{
+      params: params,
+      reportProgress: true,
+      observe: 'events',
     });
   }
 

@@ -22,7 +22,7 @@ export class SignupComponent implements OnInit {
   isLoading:boolean=false;
   firstName:string;
   lastName:string;
-  selectedFile:string;
+  selectedFile:File;
 
   constructor(private authService:AuthService, private accountService:AccountService,private router:Router) {
   this.initializationFGStudent();
@@ -46,7 +46,9 @@ export class SignupComponent implements OnInit {
       // numOfdaysTraining: new FormControl('', [Validators.required]),
       startTrain: new FormControl('', [Validators.required]),
       endTrain: new FormControl('', [Validators.required]),
-      acceptanceImg: new FormControl(this.selectedFile, [Validators.required]),
+      acceptanceImg: new FormControl('', [Validators.required]),
+      firstName: new FormControl('',[Validators.required]),
+      lastName: new FormControl('',[Validators.required]),
     },
     this.authService.checkPassword());
   }
@@ -90,9 +92,11 @@ export class SignupComponent implements OnInit {
     this.authService.checkStdNum(id).subscribe(
       (res:any)=>{
         if(res){
-          console.log('res',res);
+          console.log('checkId',res);
           this.firstName=res.firstName;
           this.lastName=res.lastName;
+          this.studentForm.value.firstName=this.firstName;
+          this.studentForm.value.lastName=this.lastName;
           this.isLoading=false;
           this.errorId=false;
           //check if id exist so he can complete register
@@ -113,16 +117,16 @@ export class SignupComponent implements OnInit {
 
     if(this.isStudent){
       console.log(this.studentForm.value);    
-      const formValues = { ...this.studentForm.value, firstName:this.firstName, lastName:this.lastName };
-      delete formValues.UniversityStudentNum;
-      console.log('send vlaues...',formValues);
-      console.log('studentForm',this.studentForm.value);
+      // const formValues = { ...this.studentForm.value, firstName:this.firstName, lastName:this.lastName };
+      // delete formValues.UniversityStudentNum;
+      // console.log('send vlaues...',formValues);
+      // console.log('studentForm',this.studentForm.value);
       
-      this.authService.signup(this.studentForm.value,this.studentForm.value.UniversityStudentNum).subscribe(
+      this.authService.signup(this.studentForm.value).subscribe(
         (res:any)=>{
-          console.log('success signup');
-          this.accountService.setUserData(res);
-          this.router.navigate(["/student"]);
+          console.log('success signup',res);
+          // this.accountService.setUserData(res);
+          // this.router.navigate(["/student"]);
 
         },error=>{
           console.log(error);
@@ -139,8 +143,8 @@ export class SignupComponent implements OnInit {
   onFileSelected(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     if (inputElement.files && inputElement.files.length > 0) {
-      this.selectedFile = inputElement.files[0].name;
-      // this.selectedFile=`${this.srcImg}/${this.selectedFile}`;
+      this.selectedFile = inputElement.files[0];
+      this.studentForm.value.acceptanceImg = this.selectedFile;
       console.log(this.selectedFile);
       
     }
