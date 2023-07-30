@@ -1,1 +1,1 @@
-<button type="button" class="btn btn-light" (click)="clickEvent($event)">{{label}}</button>
+<button type="button" class="btn btn-light" (click)="clickEvent($event)" [ngClass]="isStyle?'width':''">{{label}}</button>
