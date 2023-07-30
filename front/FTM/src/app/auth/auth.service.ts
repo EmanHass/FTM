@@ -30,7 +30,7 @@ export class AuthService {
     });
   }
 
-  signup(data:any):Observable<any>{
+  signup(data:any):any{
     let formData=new FormData;
     formData.append('Email',data.email);
     formData.append('Password',data.password);
@@ -44,7 +44,9 @@ export class AuthService {
     formData.append('AcceptanceImg',data.acceptanceImg);
     formData.append('FirstName',data.firstName);
     formData.append('LastName',data.lastName);
-    let params = new HttpParams().set('UniversityStudentNum', data.id);
+    let params = new HttpParams().set('UniversityStudentNum', data.UniversityStudentNum);
+    console.log(typeof data.UniversityStudentNum);
+    
 
     return this.http.post(`${this.apiLinkStd}/registerStudent`,formData,{
       params: params,

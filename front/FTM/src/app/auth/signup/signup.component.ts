@@ -95,8 +95,8 @@ export class SignupComponent implements OnInit {
           console.log('checkId',res);
           this.firstName=res.firstName;
           this.lastName=res.lastName;
-          this.studentForm.value.firstName=this.firstName;
-          this.studentForm.value.lastName=this.lastName;
+          this.studentForm.value.firstName=res.firstName;
+          this.studentForm.value.lastName=res.lastName;
           this.isLoading=false;
           this.errorId=false;
           //check if id exist so he can complete register
@@ -117,18 +117,18 @@ export class SignupComponent implements OnInit {
 
     if(this.isStudent){
       console.log(this.studentForm.value);    
-      // const formValues = { ...this.studentForm.value, firstName:this.firstName, lastName:this.lastName };
+      const formValues = { ...this.studentForm.value, firstName:this.firstName, lastName:this.lastName };
       // delete formValues.UniversityStudentNum;
-      // console.log('send vlaues...',formValues);
+      console.log('send vlaues...',formValues);
       // console.log('studentForm',this.studentForm.value);
       
-      this.authService.signup(this.studentForm.value).subscribe(
+      this.authService.signup(formValues).subscribe(
         (res:any)=>{
           console.log('success signup',res);
           // this.accountService.setUserData(res);
           // this.router.navigate(["/student"]);
 
-        },error=>{
+        },(error:any)=>{
           console.log(error);
           
         }
