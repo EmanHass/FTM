@@ -139,17 +139,9 @@ export class CompanyComponent implements OnInit {
       
       this.supervisorService.updateCompany(this.companyForm.value,this.idEdit).subscribe({
         next: (res) => {
-          if (res.type == HttpEventType.UploadProgress) {
-            if (res.total) {
-              //not equal to null update progress
-              this.progressValue =
-                Math.round(100 * (res.loaded / res.total)) + '%';
-            }
-          }
-
-          if (res.type == HttpEventType.Response && res.body != null) {
-            console.log(res.body)
-          }
+          console.log('res update',res);
+          this.getListCompany();
+          
         },
         error: (err) => {
           console.log(err);
