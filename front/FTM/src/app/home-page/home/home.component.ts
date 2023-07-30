@@ -17,7 +17,8 @@ export class HomeComponent implements OnInit {
   requirements:TrainingRequirement[];
   trainingImportanceDtos:TrainingImportance[];
   company:Company;
-  isLoading:boolean=false;
+  isLoading:boolean=true;
+  isLoadingPage:boolean=true;
   constructor(private homeService:HomePageService) { }
 
   ngOnInit(): void {
@@ -26,7 +27,7 @@ export class HomeComponent implements OnInit {
        this.requirements= res.trainingRequirementDtos;       
        this.trainingImportanceDtos= res.trainingImportanceDtos; 
        this.company= res.companyDtos;
-       this.isLoading=true;              
+       this.isLoadingPage=false;             
       }
     );   
   }

@@ -1,4 +1,5 @@
-<div class="home">
+<app-spinner *ngIf="isLoadingPage"></app-spinner>
+<div class="home" *ngIf="!isLoadingPage">
   <!-- Hero Section -->
   <app-header></app-header>
 
