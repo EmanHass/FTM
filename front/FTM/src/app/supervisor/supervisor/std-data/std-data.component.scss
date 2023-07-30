@@ -26,9 +26,16 @@
     .dateTraining{
         display: flex;
         justify-content: space-between;
+        img{
+            margin-left: 15px;
+            width: 16px;
+        }
     }
-    img{
-        margin-left: 15px;
-        width: 16px;
-    }
+}
+.acceptanceImg{
+    width: 100%;
+}
+.close{
+    display: flex;
+    justify-content: flex-end;
 }

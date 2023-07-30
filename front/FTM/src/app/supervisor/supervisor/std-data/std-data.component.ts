@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SupervisorService } from '../../supervisor.service';
 import { AccountService } from 'src/app/auth/account.service';
 import { ComputeDayService } from 'src/app/shared-modules/services/compute-day.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-std-data',
@@ -17,6 +18,11 @@ export class StdDataComponent implements OnInit {
   supervisorId:number;
   numsDayOfTrain:number;
   modalLoading:boolean=false;
+  btnLabel='عرض ورقة قبول الشركة';
+  showImgModal:boolean=false;
+  acceptanceImg:string;
+  apiImg=environment.apiImage;
+
   constructor(public superVisorService:SupervisorService,private accountService:AccountService, private computeDayService:ComputeDayService) { }
 
   ngOnInit(): void {
@@ -37,7 +43,7 @@ export class StdDataComponent implements OnInit {
     this.superVisorService.getStdById(this.supervisorId,stdId).subscribe(
       (res:any)=>{
         this.modalLoading=true;
-        this.studentData=res; 
+        this.studentData=res;      
         this.numsDayOfTrain=this.computeDayService.getDaysDifference(res.startTrain,res.endTrain);             
       },
       error=>{
@@ -59,4 +65,13 @@ export class StdDataComponent implements OnInit {
     this.showRatingModal=false;
   }
 
+  showAcceptanceImg(event:any){
+    this.showImgModal=true;
+    console.log(this.studentData.acceptanceImg);
+    
+    this.acceptanceImg=`${this.apiImg}/${this.studentData.acceptanceImg}`;
+  }
+  closeImgModal(){
+    this.showImgModal=false;
+  }
 }

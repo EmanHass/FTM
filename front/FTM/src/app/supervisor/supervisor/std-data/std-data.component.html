@@ -49,6 +49,10 @@
                   <p>{{studentData?.universityStudentNum}}</p>
                   <h6>البريدالإلكتروني</h6>
                   <p>{{studentData?.email}}</p>
+
+                  <app-button [label]="btnLabel" [isStyle]="true" (onClick)="showAcceptanceImg($event)"></app-button>
+                  <div>
+                  </div>
                 </div>
 
                 <div class="col" *ngIf="showRatingModal">
@@ -85,3 +89,17 @@
       </div>
   </div>
 </section>
+
+
+<div class="modal" *ngIf="showImgModal">
+  <div class="modal-dialog">
+    <div class="modal-content">      
+      <div class="modal-body">
+        <h1 (click)="closeImgModal()" class="close">×</h1>
+        <div>
+          <img src="{{acceptanceImg}}" class="acceptanceImg"/>
+        </div>
+      </div>
+    </div> 
+  </div>
+</div>
