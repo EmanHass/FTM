@@ -73,9 +73,13 @@ export class SupervisorService {
     formData.append('NewLogo',company.logoCompany);
     // formData.append('CompanyCapacity',company.companyCapacity.toString());
     formData.append('FieldsOfTrainings',company.fieldsOfTrainings);
+
     return this.http.put<any>(`${this.apiCompany}/UpdateRequirement/${id}`,formData,{
       reportProgress: true,
       observe: 'events',
+      headers: new HttpHeaders({
+        'content-type': 'application/json',
+      })
     });
   }
 }
