@@ -22,6 +22,7 @@ export class StdDataComponent implements OnInit {
   showImgModal:boolean=false;
   acceptanceImg:string;
   apiImg=environment.apiImage;
+  ratingData:any;
 
   constructor(public superVisorService:SupervisorService,private accountService:AccountService, private computeDayService:ComputeDayService) { }
 
@@ -57,8 +58,20 @@ export class StdDataComponent implements OnInit {
     this.showstdDataModal=true;
   }
   openRatingModal(id:number){
+    this.ratingData='';
     this.openModal(id);
     this.showRatingModal=true;
+    this.superVisorService.getRatingReport(id).subscribe(
+      (res=>{
+        console.log(res);
+        this.ratingData=res;
+        
+      }),
+      error=>{
+        console.log(error);
+        
+      }
+    );
   }
   closeModal(){
     this.showstdDataModal=false;

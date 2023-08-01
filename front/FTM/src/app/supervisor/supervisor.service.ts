@@ -82,4 +82,8 @@ export class SupervisorService {
       })
     });
   }
+
+  getRatingReport(id:number): Observable<any>{
+    return this.http.get(`${this.apiLink}/endReport/getEndTrainingReport/?studentId=${id}`);
+  }
 }

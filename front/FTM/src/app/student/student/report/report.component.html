@@ -4,11 +4,11 @@
         <form [formGroup]="reportForm" id="ratingForm">
             <h6>عدد المهام المنجزة بالتدريب</h6>
             <div class="form-group numTasks">
-                <input type="text" class="form-control" formControlName="NumTasks">
+                <input type="text" class="form-control" formControlName="numTasksCompleted">
             </div>
             <h6>تقييم التدريب ووصفه</h6>
             <div class="form-group">
-                <textarea form="ratingForm" rows="4" cols="52" formControlName="rating"></textarea>
+                <textarea form="ratingForm" rows="4" cols="52" formControlName="trainingEvaluationAndDescription"></textarea>
             </div> 
             <div class="invalid" *ngIf="reportForm.invalid && error">املأ الحقول</div>
             <div class="submit">

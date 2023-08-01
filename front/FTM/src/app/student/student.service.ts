@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class StudentService {
   apiLink=environment.apiLink+"/student/account";
+  ratingApiLink=environment.apiLink+"/student/endReport/addEndReport"
 
   constructor(private http: HttpClient) { }
   updateCompanyInfo(trainingInfo:any): any{
@@ -24,5 +25,9 @@ export class StudentService {
       reportProgress: true,
       observe: 'events',
     });
+  }
+
+  addRating(data:any): Observable<any>{
+    return this.http.post<any[]>(this.ratingApiLink,data);
   }
 }

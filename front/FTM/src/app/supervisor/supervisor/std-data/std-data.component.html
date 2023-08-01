@@ -59,9 +59,9 @@
                   <h6>اسم الطالب</h6>
                   <p>{{studentData?.firstName}} {{studentData?.lastName}}</p>
                   <h6>عدد المهام المنجزة بالتدريب </h6>
-                  <p>{{studentData?.numsTask}}</p>
+                  <p>{{ratingData?ratingData?.numTasksCompleted+" مهام":'لم يتم التقييم بعد'}}</p>
                   <h6>تقييم التدريب ووصفه</h6>
-                  <p>{{studentData?.ratingTraining}}</p>
+                  <p>{{ratingData?ratingData?.trainingEvaluationAndDescription:'لم يتم التقييم بعد'}}</p>
                 </div>
 
                 <div class="col company-data">
@@ -70,7 +70,7 @@
                   <h6>مجال التدريب</h6>
                   <p>{{studentData?.trainingField}}</p>
                   <h6>عدد أيام التدريب</h6>
-                  <p>{{numsDayOfTrain}}يوم</p>
+                  <p>{{numsDayOfTrain}} يوم</p>
 
                   <div class="dateTraining">
                     <div>
