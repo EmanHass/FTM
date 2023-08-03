@@ -118,21 +118,14 @@ export class SignupComponent implements OnInit {
     if(this.isStudent){
       console.log(this.studentForm.value);    
       const formValues = { ...this.studentForm.value, firstName:this.firstName, lastName:this.lastName };
-      // delete formValues.UniversityStudentNum;
-      console.log('send vlaues...',formValues);
-      // console.log('studentForm',this.studentForm.value);
-      
       this.authService.signup(formValues).subscribe(
         (res:any)=>{
-          console.log('success signup',res);
-          // this.accountService.setUserData(res);
-          // this.router.navigate(["/student"]);
-
+          console.log('success signup',res.body);
         },(error:any)=>{
-          console.log(error);
-          
+          console.log(error);        
         }
       ); 
+      this.router.navigate(["/login"]); // After Sign in then convert him to login page
     }else if(this.isSupervisor){
       console.log('supervisor', this.supervisorForm?.value);
       
