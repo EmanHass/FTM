@@ -1,0 +1,245 @@
+<style>
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        height: 97%;
+    }
+
+    /* The Close Button */
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+</style>
+<div id="DocumentParentDiv">
+<legend class='section-title show-bar'>Documents</legend>
+<div id="DocumentDiv">
+    <table class='table table-striped table-fluid'>
+        <thead>
+            <tr style="width:100%">
+                <th style="width:40%">Document Title</th>
+                <th style="width:20%">Preview / Download</th>
+                <th style="width:40%">Uploaded On</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% fetchxml feed %}
+            <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
+                <entity name="annotation">
+                    <attribute name="subject" />
+                    <attribute name="createdon" />
+                    <attribute name="notetext" />
+                    <attribute name="filename" />
+                    <attribute name="annotationid" />
+                    <attribute name="isdocument" />
+                    <attribute name="documentbody" />
+                    <attribute name="filesize" />
+                    <attribute name="mimetype" />
+                    <order attribute="subject" descending="false" />
+                    <filter type="and">
+                        <condition attribute="isdocument" operator="eq" value="1" />
+                    </filter>
+                    <link-entity name="tmf_invoiceapproval" from="tmf_invoiceapprovalid" to="objectid" link-type="inner" alias="aa">
+                        <filter type="and">
+                            <condition attribute="tmf_invoiceapprovalid" operator="eq" uitype="tmf_invoiceapproval" value="{{ request.params.id }}" />
+                        </filter>
+                    </link-entity>
+                </entity>
+            </fetch>
+            {% endfetchxml %}
+            {% for item in feed.results.entities %}
+
+            <tr style="width:100%">
+                <td style='vertical-align: top;width:20% '>{{ item.filename | escape }}</td>
+                <td style='vertical-align: top; text-align: center;width:20% '>
+                    <a onclick="ShowModalPopup('{{ item.id }}', '{{ item.documentbody }}', '{{ item.mimetype }}', '{{ item.filename }}')" id="click">
+                        <img alt='Click here to preview' src='download_icon-280x280.png' style='width: 20px; height: 20px; cursor:pointer'>
+                    </a>
+                    <div id="{{ item.id }}" class="modal">
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                            <span class="close" onclick="Close('{{ item.id }}')">&times;</span>
+                            <div style="width:100%; height: 100%" id="iframe_{{ item.id }}"></div>
+                        </div>
+                    </div>
+                </td>
+                <td style='vertical-align: top;width:40% '>{{ item.createdon | date: 'f' }}</td>
+            </tr>
+            {% endfor %}`
+
+        </tbody>
+    </table>
+</div>
+<div class="mx-auto">
+    <br />
+    <br />
+    <br />
+</div>
+</div>
+<script>
+
+    function b64toBlob(b64Data, contentType, sliceSize) {
+        contentType = contentType || '';
+        sliceSize = sliceSize || 512;
+
+        var byteCharacters = atob(b64Data);
+        var byteArrays = [];
+
+        for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+            var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+            var byteNumbers = new Array(slice.length);
+            for (var i = 0; i < slice.length; i++) {
+                byteNumbers[i] = slice.charCodeAt(i);
+            }
+
+            var byteArray = new Uint8Array(byteNumbers);
+
+            byteArrays.push(byteArray);
+        }
+
+        var blob = new Blob(byteArrays, { type: contentType });
+        return blob;
+    }
+ 
+ function get_browser_info(){
+    var ua=navigator.userAgent,tem,M=ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || []; 
+    if(/trident/i.test(M[1])){
+        tem=/\brv[ :]+(\d+)/g.exec(ua) || []; 
+        return {name:'IE',version:(tem[1]||'')};
+        }   
+    if(M[1]==='Chrome'){
+        tem=ua.match(/\bOPR\/(\d+)/)
+        if(tem!=null)   {return {name:'Opera', version:tem[1]};}
+        }   
+    M=M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
+    if((tem=ua.match(/version\/(\d+)/i))!=null) {M.splice(1,1,tem[1]);}
+    return {
+      name: M[0],
+      version: M[1]
+    };
+ }
+
+    function Close(modalid) {
+        document.getElementById(modalid).style.display = "none"
+    }
+    var modId = "";
+    // Get the modal
+    function ShowModalPopup(modalid, byteVal, mimetype, filename) {
+        debugger;
+
+        var fileExtension = filename.replace(/^.*\./, '');
+        var blob = b64toBlob(byteVal, mimetype)
+        var objectURL = URL.createObjectURL(blob);
+        if (fileExtension != "pdf") {
+   var browser=get_browser_info();
+            if (browser.name == 'IE' && window.navigator && window.navigator.msSaveOrOpenBlob) {
+               window.navigator.msSaveOrOpenBlob(blob);
+               return;
+           }
+     else{
+      var a = window.document.createElement("a");
+                a.href = window.URL.createObjectURL(blob, { type: mimetype });
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();  // IE: "Access is denied"; see: https://connect.microsoft.com/IE/feedback/details/797361/ie-10-treats-blob-url-as-cross-origin-and-denies-access
+                document.body.removeChild(a);
+     }
+    }
+       else {
+       
+
+           if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+               window.navigator.msSaveOrOpenBlob(blob);
+               return;
+           }
+           else {
+
+               if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                   window.navigator.msSaveOrOpenBlob(blob);
+                   return;
+               }
+               else {
+                   modId = modalid;
+                   var modal = document.getElementById(modalid);
+                   modal.style.display = "block";
+                   // When the user clicks on <span> (x), close the modal
+                   window.onclick = function (event) {
+                       if (event.target == modal) {
+                           modal.style.display = "none";
+                       }
+                   }
+
+                   var iframe = document.createElement('embed');
+                   iframe.className = 'sample-iframe';
+                   iframe.src = objectURL;
+                   iframe.type = "application/pdf";
+                   iframe.style.width = "100%";
+                   iframe.style.height = "95%";
+
+                   var iframe_div = document.getElementById("iframe_" + modalid);
+                   iframe_div.appendChild(iframe);
+               }
+           }
+       }
+    }
+
+    var span = document.getElementsByClassName("close")[0];
+    span.onclick = function () {
+        document.getElementById(modId).style.display = "none";
+    }
+    // When the user clicks anywhere outside of the modal, close it
+
+</script>
+
+
+///////////////////////////
+{% fetchxml feed %}
+<fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
+  <entity name="annotation">
+    <attribute name="subject" />
+    <attribute name="notetext" />
+    <attribute name="filename" />
+    <attribute name="annotationid" />
+    <order attribute="subject" descending="false" />
+    <filter type="and">
+      <condition attribute="isdocument" operator="eq" value="1" />
+    </filter>
+    <link-entity name="new_timesheet" from="new_timesheetid" to="objectid" link-type="inner" alias="ab">
+      <filter type="and">
+        <condition attribute="new_invoiceid" operator="eq" uitype="new_invoice" value="{{invoiceid}}" />
+      </filter>
+    </link-entity>
+  </entity>
+</fetch>
+
+
+
+{% endfetchxml %}

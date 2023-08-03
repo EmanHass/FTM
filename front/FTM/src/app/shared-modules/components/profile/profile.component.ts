@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
   getStatus:string;
   error:boolean=false;
   errorCurrentPass:boolean=false;
-  constructor(private authService:AuthService, public accountService:AccountService, private prfileService:ProfileService) { 
+  constructor(private authService:AuthService, public accountService:AccountService, private profileService:ProfileService) { 
     this.initializationFGChangePassword();
     this.phoneFrom=new FormGroup({
       phoneNumber: new FormControl('', [Validators.required,this.authService.customValidationPhone(10, 10)]),
@@ -85,7 +85,7 @@ export class ProfileComponent implements OnInit {
       const phoneNumber=this.phoneFrom.value.phoneNumber;
       if(this.authService.getStatus() == 'student'){
         // update method to update phone number for student
-        this.prfileService.changePhoneNumer(phoneNumber).subscribe(
+        this.profileService.changePhoneNumer(phoneNumber).subscribe(
           (res:any)=>{
             this.accountService.setPhone(res.phoneNunber);
             this.error=false;
@@ -109,18 +109,24 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  checkUserPassword():boolean{
-    const currentPAssword=this.passwordForm.value.currentPassword;
+  checkUserPassword():any{
+    const currentPassword=this.passwordForm.value.currentPassword;
     if(this.authService.getStatus() == 'student'){
       // check if current password correct (check from api to student)
-      if( currentPAssword == '123456'){
-        return true;
-      }else{
-        return false;
-      }
+       this.profileService.changePaswword(this.passwordForm.value).subscribe(
+        (res:any)=>{
+          console.log(res);
+          return true;
+          
+        },
+        (error:any)=>{
+          console.log(error);
+          return false;
+        }
+       );
     }else{
       // check if current password correct (check from api to supervisor)
-      if( currentPAssword == '456'){
+      if( currentPassword == '456'){
         return true;
       }else{
         return false;

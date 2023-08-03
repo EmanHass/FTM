@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { AbstractControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { AccountService } from './account.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ export class AuthService {
   data:any;
   apiLinkStd:string=`${environment.apiLink}/student/account`;
   apiLinkSupervisor:string= `${environment.apiLink}/supervisor/account`;
-  constructor(private http: HttpClient) { }
+  apiAccount:string=`${environment.apiLink}/account/`;
+  constructor(private http: HttpClient, private accountService:AccountService) { }
 
   login(email:string, password:string):Observable<any>{
     // if email and password exist in app then return data (post method)
@@ -55,6 +57,20 @@ export class AuthService {
     });
   }
 
+  checkEmail(email:string):Observable<any>{
+    return this.http.post(`${environment.apiLink}/account/forgetPassword?email=${email}`,null);
+  }
+
+  confirmPasswordReset(dataReset:any):Observable<any>{
+    const token=this.accountService.getUserToken();
+    const data={
+      "Email":dataReset.email,
+      "Token":token,
+      "NewPassword":dataReset.password
+    }
+
+    return this.http.post<any>(`${this.apiAccount}/confirmPasswordReset?Email=${data.Email}&Token=${data.Token}&NewPassword=${data.NewPassword}`,null);
+  }
 
   getStatus(){
     return localStorage.getItem("status");

@@ -75,15 +75,15 @@
                 <div class="col-6">
                     <div class="form-group">
                         <label>كلمة المرور الحالية</label>
-                        <input type="number" class="form-control" formControlName="currentPassword"/>
+                        <input type="text" class="form-control" formControlName="currentPassword"/>
                     </div>
                     <div class="form-group">
                         <label>كلمة المرور الجديدة</label>
-                        <input type="number" class="form-control" formControlName="password"/>
+                        <input type="text" class="form-control" formControlName="password"/>
                     </div>
                     <div class="form-group">
                         <label>تأكيد كلمة المرور الجديدة</label>
-                        <input type="number" class="form-control" formControlName="confirmPassword"/>
+                        <input type="text" class="form-control" formControlName="confirmPassword"/>
                     </div>
                     <div class="invalid" *ngIf="passwordForm.hasError('passwordMismatch')">أدخل كلمة مرور متطابقة</div>
                     <div class="invalid" *ngIf="passwordForm.invalid && error">املأ الحقول</div>

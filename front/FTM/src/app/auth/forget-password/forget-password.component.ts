@@ -48,12 +48,27 @@ export class ForgetPasswordComponent implements OnInit {
 
     }else{
       // if email valid then redirect to change password
-      this.isEmailVaild=true;
-      this.errorMsg=false;
+      this.authService.checkEmail(this.forgetPasswordForm.value.email).subscribe(
+        (res:any)=>{
+          console.log(res); 
+          this.isEmailVaild=true;
+          this.errorMsg=false;        
+        }, error=>{
+          console.log(error);          
+        }
+      );
     }
   }
 
   passwordReset(){
-
+    this.authService.confirmPasswordReset(this.forgetPasswordForm.value).subscribe(
+      (res:any)=>{
+        console.log(res);       
+      },
+      error=>{
+        console.log(error);
+        
+      }
+    );
   }
 }
