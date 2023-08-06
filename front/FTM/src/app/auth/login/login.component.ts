@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
         Validators.email,
         this.authService.customEmail()
       ]),  
-      password: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     });
   }
   ngOnInit(): void {

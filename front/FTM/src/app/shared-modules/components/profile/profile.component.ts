@@ -36,7 +36,7 @@ export class ProfileComponent implements OnInit {
   initializationFGChangePassword(): void {
     this.passwordForm = new FormGroup({
       currentPassword: new FormControl('',[Validators.required]),
-      password: new FormControl('',[Validators.required]),
+      password: new FormControl('',[Validators.required,Validators.minLength(6)]),
       confirmPassword: new FormControl('',[Validators.required]),
     },
     this.authService.checkPassword());

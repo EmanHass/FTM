@@ -80,6 +80,7 @@
                     <div class="form-group">
                         <label>كلمة المرور الجديدة</label>
                         <input type="password" class="form-control" formControlName="password"/>
+                        <p class="invalid" *ngIf="passwordForm.get('password').value && passwordForm.get('password').errors">الرجاء إدخال كلمة مرور من 6 حروف وأرقام</p>
                     </div>
                     <div class="form-group">
                         <label>تأكيد كلمة المرور الجديدة</label>

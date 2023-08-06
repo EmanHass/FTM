@@ -23,9 +23,10 @@ export class ForgetPasswordComponent implements OnInit {
         Validators.email,
         this.authService.customEmail()
       ]),  
-      newPassword: new FormControl('', [Validators.required]),
+      newPassword: new FormControl('', [Validators.required,Validators.minLength(6)]),
       confirmPassword: new FormControl('', [Validators.required]),
-    });
+    },
+    this.authService.checkPassword());
   }
   customEmail(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {

@@ -62,6 +62,12 @@ export class SupervisorService {
     return this.http.delete(`${this.apiCompany}/Delete/${id}`);
   }
   updateCompany(company:any,id:any): Observable<any>{
+    console.log('id',id);
+    console.log('company',company);
+    
+    console.log('address',company.address);
+    
+    
     let formData=new FormData;
     formData.append('Id',id);
     formData.append('Name',company.name);
@@ -70,8 +76,8 @@ export class SupervisorService {
     formData.append('PhoneNumber',company.phoneNumber);
     formData.append('LinkCompany',company.linkCompany);
     formData.append('Address',company.address);
-    formData.append('NewLogo',company.logoCompany);
-    // formData.append('CompanyCapacity',company.companyCapacity.toString());
+    formData.append('CompanyCapacity',company.companyCapacity);
+    formData.append('LogoCompany',company.logoCompany);
     formData.append('FieldsOfTrainings',company.fieldsOfTrainings);
 
     return this.http.put<any>(`${this.apiCompany}/UpdateRequirement/${id}`,formData,{

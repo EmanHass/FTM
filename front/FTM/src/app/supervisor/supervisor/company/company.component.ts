@@ -84,6 +84,7 @@ export class CompanyComponent implements OnInit {
           if (res.type == HttpEventType.Response && res.body != null) {
             console.log(res.body)
           }
+          this.getListCompany();
         },
         error: (err) => {
           console.log(err);
@@ -92,9 +93,9 @@ export class CompanyComponent implements OnInit {
   }
   getListCompany(){
     this.supervisorService.getCompanyList().subscribe(
-      (res:any)=>{
+      (res:any)=>{     
         console.log('list company',res);
-        
+           
         this.companies=res;
         this.isLoading=false;   
       },
@@ -117,7 +118,7 @@ export class CompanyComponent implements OnInit {
     this.companyForm.reset();
   }
   addingCompany(){
-    console.log(this.companyForm.value);
+    console.log('adding new company',this.companyForm.value);
     if(this.companyForm.valid){
       // adding new company using post method
       this.CreateCompany();
@@ -139,6 +140,19 @@ export class CompanyComponent implements OnInit {
       
       this.supervisorService.updateCompany(this.companyForm.value,this.idEdit).subscribe({
         next: (res) => {
+          if (res.type == HttpEventType.UploadProgress) {
+            if (res.total) {
+              //not equal to null update progress
+              this.progressValue =
+                Math.round(100 * (res.loaded / res.total)) + '%';
+            }
+          }
+
+          if (res.type == HttpEventType.Response && res.body != null) {
+            console.log(res.body)
+          }
+
+
           console.log('res update',res);
           this.getListCompany();
           
@@ -186,6 +200,5 @@ export class CompanyComponent implements OnInit {
       // file exist
       this.logoInput.setValue(files[0]);
     }
-    console.log('file input changed : ' + files,this.logoInput.value);
   }
 }

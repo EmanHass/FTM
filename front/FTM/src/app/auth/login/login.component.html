@@ -32,7 +32,7 @@
                         <div class="form-group col">
                             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="كلمة المرور" formControlName="password">
                             <div class="invalid" *ngIf="!loginForm.get('password').value && msgEmail">أدخل كلمة المرور </div>
-                            <div class="invalid" *ngIf="loginForm.get('password').value && loginForm.get('password').errors">أدخل كلمة قوية طولها على الأقل 10</div>
+                            <div class="invalid" *ngIf="loginForm.get('password').value && loginForm.get('password').errors">أدخل كلمة مكونة من 6 أرقام وحروف</div>
 
                             <div class="forget-password">
                                 <p routerLink="/forgetpassword">هل نسيت كلمة المرور؟</p>
