@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
           },
           {
             title:'بداية تسليم الطلبة لتقرير التدريب',
-            date:'2022-08-14'
+            date:agenda?.startTrainingReport
           },
           {
             title:'نهاية تسجيل الطلبة للتدريب',
@@ -44,13 +44,16 @@ export class HomeComponent implements OnInit {
           },
           {
             title:'نهاية تسليم الطلبة لتقرير التدريب',
-            date:'2022-08-17'
+            date:agenda?.endTrainingReport
           }
         ];
         this.semesterName=agenda?.nameSemester;
         this.semesterYear=agenda?.academicYear;
         this.startAgenda=this.agenda.slice(0,3);
         this.endAgenda=this.agenda.slice(3,this.agenda.length);
+        console.log('start',this.startAgenda);
+        console.log('start',this.endAgenda);
+        
       }
     );
 
