@@ -85,7 +85,7 @@ export class ProfileComponent implements OnInit {
       const phoneNumber=this.phoneFrom.value.phoneNumber;
       if(this.authService.getStatus() == 'student'){
         // update method to update phone number for student
-        this.profileService.changePhoneNumer(phoneNumber).subscribe(
+        this.profileService.changePhoneNumerStd(phoneNumber).subscribe(
           (res:any)=>{
             this.accountService.setPhone(res.phoneNunber);
             this.error=false;
@@ -103,6 +103,22 @@ export class ProfileComponent implements OnInit {
         );
       }else{
         // update method to update phone for supervisor
+        this.profileService.changePhoneNumerSupervisor(phoneNumber).subscribe(
+          (res:any)=>{
+            this.accountService.setPhone(res.phoneNunber);
+            this.error=false;
+            this.isEditPhone=true;
+            this.isEditPass=false;
+            setTimeout(()=>{
+              this.closeModal();
+              this.phoneFrom.reset();
+            },2000);            
+          },
+          error=>{
+            console.log(error);
+            
+          }
+        );
       }
     }else{
       this.error=true;
@@ -113,7 +129,7 @@ export class ProfileComponent implements OnInit {
     const currentPassword=this.passwordForm.value.currentPassword;
     if(this.authService.getStatus() == 'student'){
       // check if current password correct (check from api to student)
-       this.profileService.changePaswword(this.passwordForm.value).subscribe(
+       this.profileService.changePaswwordStd(this.passwordForm.value).subscribe(
         (res:any)=>{
           console.log(res);
           return true;
@@ -126,11 +142,17 @@ export class ProfileComponent implements OnInit {
        );
     }else{
       // check if current password correct (check from api to supervisor)
-      if( currentPassword == '456'){
-        return true;
-      }else{
-        return false;
-      } 
+      this.profileService.changePasswordSupervisor(this.passwordForm.value).subscribe(
+        (res:any)=>{
+          console.log(res);
+          return true;
+          
+        },
+        (error:any)=>{
+          console.log(error);
+          return false;
+        }
+       );
       }
   }
 }
