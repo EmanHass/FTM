@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AccountService } from 'src/app/auth/account.service';
-import { environment } from 'src/environments/environment';
+import { AccountService } from '../../auth/account.service';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'

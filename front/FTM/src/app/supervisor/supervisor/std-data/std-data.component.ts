@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SupervisorService } from '../../supervisor.service';
-import { AccountService } from 'src/app/auth/account.service';
-import { ComputeDayService } from 'src/app/shared-modules/services/compute-day.service';
-import { environment } from 'src/environments/environment';
+import { AccountService } from '../../../auth/account.service';
+import { ComputeDayService } from '../../../shared-modules/services/compute-day.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-std-data',

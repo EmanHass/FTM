@@ -2,8 +2,8 @@ import { formatDate } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { StudentService } from '../../student.service';
-import { AccountService } from 'src/app/auth/account.service';
-import { environment } from 'src/environments/environment';
+import { AccountService } from '../../../auth/account.service';
+import { environment } from '../../../../app/../environments/environment';
 
 @Component({
   selector: 'app-std-edit',

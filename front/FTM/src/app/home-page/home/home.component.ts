@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { TrainingImportance } from 'src/app/shared-modules/model-interface/homePage/training-importance';
 import { TrainingRequirement } from 'src/app/shared-modules/model-interface/homePage/training-req';
 import { HomePageService } from 'src/app/shared-modules/services/home-page.service';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-home',

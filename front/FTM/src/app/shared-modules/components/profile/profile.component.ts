@@ -60,7 +60,7 @@ export class ProfileComponent implements OnInit {
   }
   successEditPass(){    
       if(this.passwordForm.valid){
-        if(this.checkUserPassword()){ // check from api if current password correct
+        if(!this.checkUserPassword()){ // check from api if current password correct
           this.isEditPass=true;
           this.isEditPhone=false;
           this.errorCurrentPass=false;
@@ -70,7 +70,7 @@ export class ProfileComponent implements OnInit {
           },2000);
 
         }else{
-          this.errorCurrentPass=true;
+          this.errorCurrentPass=false;
         } 
       }else{
         this.error=true;

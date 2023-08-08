@@ -12,7 +12,6 @@ export class CompanyComponent implements OnInit {
   formType = 'create';
   buttonLabel = 'انشاء';
   addCompany:string='إضافة شركة تدريبية';
-  addCompanyExcel:string='تحميل ملف اكسل';
   addBtn:string='إضافة';
   editBtn:string='تعديل';
   companyForm:FormGroup;
