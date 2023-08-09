@@ -45,8 +45,6 @@ export class SignupComponent implements OnInit {
       startTrain: new FormControl('', [Validators.required]),
       endTrain: new FormControl('', [Validators.required]),
       acceptanceImg: new FormControl('', [Validators.required]),
-      firstName: new FormControl('',[Validators.required]),
-      lastName: new FormControl('',[Validators.required]),
     },
     this.authService.checkPassword());
   }
@@ -79,8 +77,6 @@ export class SignupComponent implements OnInit {
           console.log('checkId',res);
           this.firstName=res.firstName;
           this.lastName=res.lastName;
-          this.studentForm.value.firstName=res.firstName;
-          this.studentForm.value.lastName=res.lastName;
           this.isLoading=false;
           this.errorId=false;
           //check if id exist so he can complete register
@@ -105,9 +101,13 @@ export class SignupComponent implements OnInit {
     )
   }
   signup(){
-      console.log(this.studentForm.value);   
-      if(this.studentForm.value.valid){
-        const formValues = { ...this.studentForm.value, firstName:this.firstName, lastName:this.lastName };
+      console.log('Signup form',this.studentForm.value);  
+      const formValues = {...this.studentForm.value,firstName:this.firstName, lastName:this.lastName};
+      console.log('formdata',formValues);      
+ 
+      // if(this.studentForm.value.valid){
+
+        
         this.authService.signup(formValues).subscribe(
           (res:any)=>{
             console.log('success signup',res.body);
@@ -116,9 +116,9 @@ export class SignupComponent implements OnInit {
             console.log(error);        
           }
         ); 
-      } else{
-        this.errorMsg=true;
-      }
+      // } else{
+      //   this.errorMsg=true;
+      // }
   }
 
   onFileSelected(event: Event) {

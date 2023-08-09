@@ -11,6 +11,7 @@
                 <textarea form="ratingForm" rows="4" cols="52" formControlName="trainingEvaluationAndDescription"></textarea>
             </div> 
             <div class="invalid" *ngIf="reportForm.invalid && error">املأ الحقول</div>
+            <div class="alert alert-success col-6" *ngIf="reportForm.valid && msg">تم التقييم</div>
             <div class="submit">
                 <app-button [label]="labelBtn" (onClick)="submitReport()"></app-button>
             </div>

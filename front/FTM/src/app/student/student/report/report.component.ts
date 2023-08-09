@@ -13,6 +13,7 @@ export class ReportComponent implements OnInit {
   labelBtn:string='تقييم';
   error:boolean=false;
   stdId:number;
+  msg:boolean=false;
   constructor(private accountService:AccountService, private studentService:StudentService) {
      this.initializationFG();
    }
@@ -35,10 +36,12 @@ export class ReportComponent implements OnInit {
       this.studentService.addRating({...this.reportForm.value,studentId:this.stdId.toString()}).subscribe(
         (res:any)=>{
           console.log(res);
+          this.msg=true;
           
         },
         error=>{
           console.log(error);
+          this.msg=false;
           
         }
       );
